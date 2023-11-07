@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using UNO_Spielprojekt.MainMenu;
 
 namespace UNO_Spielprojekt
 {
@@ -9,7 +10,7 @@ namespace UNO_Spielprojekt
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainVM();
+            MainFrame.Navigate(new MainMenu.MainMenu());
         }
     }
 }
