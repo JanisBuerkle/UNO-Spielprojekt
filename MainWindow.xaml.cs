@@ -9,6 +9,7 @@ namespace UNO_Spielprojekt
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainVM();
         }
     }
 }
