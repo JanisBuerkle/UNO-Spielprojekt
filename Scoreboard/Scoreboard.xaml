@@ -11,6 +11,22 @@
             <ImageBrush ImageSource="C:\Users\bks\Downloads\Eiche_natur_Breitlamelle_-_Ansicht_von_oben.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <TextBox Grid.Row="0" Background="Gray" HorizontalContentAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard"/>
+        <ListBox Grid.Row="1">
+             <ListBoxItem FontSize="40" Content="1. Janis | 5 Siege" />
+             <ListBoxItem FontSize="40" Content="2. Vlas | 4 Siege" />
+             <ListBoxItem FontSize="40" Content="3. Peter | 2 Siege" />
+       </ListBox>
+        
+        
         <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\Home.png" Stretch="Fill">

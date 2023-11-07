@@ -12,9 +12,9 @@
         </Grid.Background>
         
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Button Height="100" Width="300" Margin="0,0,0,10" Click="StartButtonClicked">Spielen</Button>
-            <Button Height="100" Width="300" Margin="0,0,0,10" Click="ScoreboardButtonClicked">Scoreboard</Button>
-            <Button Height="100" Width="300" Margin="0,0,0,10" Click="ExitButtonClicked">Beenden</Button> 
+            <Button Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold" Click="StartButtonClicked" Style="{StaticResource MyButtonStyle}">Spielen</Button>
+            <Button Height="100" Width="500" Margin="0,0,0,10" FontSize="67" FontWeight="Bold" Click="ScoreboardButtonClicked" Style="{StaticResource MyButtonStyle}">Scoreboard</Button>
+            <Button Height="100" Width="500" Margin="0,0,0,10" FontSize="70" FontWeight="Bold" Click="ExitButtonClicked" Style="{StaticResource MyButtonStyle}">Beenden</Button> 
         </StackPanel>
         
         <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
