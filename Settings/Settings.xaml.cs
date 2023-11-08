@@ -11,7 +11,7 @@ public partial class Settings : Page
         InitializeComponent();
     }
 
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    private void HomeButtonClicked(object sender, RoutedEventArgs e)
     {
         NavigationService.Navigate(new MainMenu.MainMenu());
     }

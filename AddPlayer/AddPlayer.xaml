@@ -4,35 +4,67 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="AddPlayer" 
+      Title="AddPlayer"
       Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\Downloads\Eiche_natur_Breitlamelle_-_Ansicht_von_oben.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
-        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray" FontSize="50" FontWeight="Bold"  Text="Spieler hinzufügen">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
+
+        <Border Grid.Column="1" Margin="0,20,0,0" Padding="5" BorderThickness="1" BorderBrush="Gray" Background="Gray"
+                CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock FontSize="50" FontWeight="Bold" Text=" Spieler hinzufügen "></TextBlock>
+        </Border>
+
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Button Height="100" Width="100" HorizontalAlignment="Right"
+                    VerticalAlignment="Center" Margin="0,10,10,0" Click="PlusClicked"
+                    Style="{StaticResource MyButtonStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\plus.png"
+                                Stretch="Fill">
+                    </ImageBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Height="100" Width="100" HorizontalAlignment="Right"
+                    VerticalAlignment="Center" Margin="0,10,10,0" Click="MinusClicked"
+                    Style="{StaticResource MyButtonStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\minus.png"
+                                Stretch="Fill">
+                    </ImageBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Name="TextFieldStackPanel">
+        </StackPanel>
+
+        <Button Name="WeiterButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
+                VerticalAlignment="Bottom" Margin="0,0,0,200"
+                Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
+                Click="WeiterButtonClicked"
+                Style="{StaticResource MyButtonStyle}" Visibility="Hidden">
+        </Button>
+
+        <Button Grid.Row="0" Grid.Column="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="10,10,0,0" BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\Home.png" Stretch="Fill">
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
                 </ImageBrush>
             </Button.Background>
         </Button>
-        
     </Grid>
 </Page>

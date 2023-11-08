@@ -4,32 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="Scoreboard" 
+      Title="Scoreboard"
       Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\Downloads\Eiche_natur_Breitlamelle_-_Ansicht_von_oben.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        <TextBox Grid.Row="0" Background="Gray" HorizontalContentAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard"/>
-        <ListBox Grid.Row="1">
-             <ListBoxItem FontSize="40" Content="1. Janis | 5 Siege" />
-             <ListBoxItem FontSize="40" Content="2. Vlas | 4 Siege" />
-             <ListBoxItem FontSize="40" Content="3. Peter | 2 Siege" />
-       </ListBox>
-        
-        
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
+
+        <TextBlock Grid.Column="1" Grid.Row="0" Background="Gray" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard" />
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <ListBox Background="Transparent" BorderBrush="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Background" Value="Gray" />
+                        <Setter Property="Margin" Value="1" />
+                    </Style>
+                </ListBox.Resources>
+                <ListBoxItem FontSize="50" Content="1. Janis | 5 Siege" />
+                <ListBoxItem FontSize="50" Content="2. Vlas  | 4 Siege" />
+                <ListBoxItem FontSize="50" Content="3. Peter | 2 Siege" />
+            </ListBox>
+        </StackPanel>
+
+        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
+                BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\Home.png" Stretch="Fill">
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
                 </ImageBrush>
             </Button.Background>
         </Button>

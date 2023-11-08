@@ -8,7 +8,7 @@
       Background="Chocolate" Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\Downloads\Eiche_natur_Breitlamelle_-_Ansicht_von_oben.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >

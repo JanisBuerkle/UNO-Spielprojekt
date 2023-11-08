@@ -8,12 +8,12 @@
       Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\Downloads\Eiche_natur_Breitlamelle_-_Ansicht_von_oben.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
+        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\Home.png" Stretch="Fill">
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
                 </ImageBrush>
             </Button.Background>
         </Button>
