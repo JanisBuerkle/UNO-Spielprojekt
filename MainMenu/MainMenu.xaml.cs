@@ -29,6 +29,6 @@ public partial class MainMenu : Page
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-            NavigationService.Navigate(new Settings.Settings());
+            NavigationService.Navigate(new Setting.Settings());
     }
 }
