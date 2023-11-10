@@ -67,12 +67,16 @@
 
     <ItemGroup>
       <EmbeddedResource Update="Resources\Resource.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
+        <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Resource.en-us.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
+        <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Resource.en-us.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Resource.de-de.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resource.de-de.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -86,6 +90,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Resource.en-us.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Resource.de-de.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resource.de-de.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -1,34 +1,45 @@
 ﻿using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using UNO_Spielprojekt.AddPlayer;
+using UNO_Spielprojekt.Localization;
 
-namespace UNO_Spielprojekt.MainMenu;
-
-public partial class MainMenu : Page
+namespace UNO_Spielprojekt.MainMenu
 {
-    public MainMenu()
+    public partial class MainMenu : Page
     {
-        InitializeComponent(); 
-    }
+        public MainMenu()
+        {
+            InitializeComponent();
+            SetLanguage(new System.Globalization.CultureInfo("en-US"));
+        }
 
-    private void StartButtonClicked(object sender, RoutedEventArgs e)
-    {
-        NavigationService.Navigate(new AddPlayer.AddPlayer());
-    }
+        private void SetLanguage(System.Globalization.CultureInfo culture)
+        {
+            LocalizationManager.SetLanguage(culture);
+            StartButton.Content = LocalizationManager.GetLocalizedString("Play");
+            ScoreboardButton.Content = LocalizationManager.GetLocalizedString("Scoreboard");
+            ExitButton.Content = LocalizationManager.GetLocalizedString("Exit");
+        }
 
-    private void ScoreboardButtonClicked(object sender, RoutedEventArgs e)
-    {
-        NavigationService.Navigate(new Scoreboard.Scoreboard());
-    }
-    private void ExitButtonClicked(object sender, RoutedEventArgs e)
-    {
-        Thread.Sleep(100);
-        System.Windows.Application.Current.Shutdown();
-    }
+        private void StartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainMenu());
+        }
 
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
+        private void ScoreboardButtonClicked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Scoreboard.Scoreboard());
+        }
+
+        private void ExitButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Thread.Sleep(100);
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
             NavigationService.Navigate(new Setting.Settings());
+        }
     }
 }

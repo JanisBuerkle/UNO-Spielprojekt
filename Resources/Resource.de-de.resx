@@ -1,4 +1,11 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -11,13 +18,25 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Button" xml:space="preserve">
-        <value>Klicke</value>
-    </data>
-    <data name="Label" xml:space="preserve">
-        <value>Gebe deinen Namen ein:</value>
-    </data>
     <data name="Header" xml:space="preserve">
         <value>Einstellungen</value>
+    </data>
+    <data name="Play" xml:space="preserve">
+        <value>Spielen</value>
+    </data>
+    <data name="Exit" xml:space="preserve">
+        <value>Beenden</value>
+    </data>
+    <data name="AddPlayerHeader" xml:space="preserve">
+        <value>Spieler hinzufügen</value>
+    </data>
+    <data name="AddPlayerNextButton" xml:space="preserve">
+        <value>Weiter</value>
+    </data>
+    <data name="RulesHeaderWelcome" xml:space="preserve">
+        <value>Willkommen bei UNO</value>
+    </data>
+    <data name="Scoreboard" xml:space="preserve">
+        <value>Scoreboard</value>
     </data>
 </root>
