@@ -21,22 +21,22 @@ public partial class Rules : Page
                 TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0];
                 break;
             case 2:
-                TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0] + " und " + playerData.PlayerName[1];
+                TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0] + " & " + playerData.PlayerName[1];
                 break;
             case 3:
                 TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0] + ", " + playerData.PlayerName[1] +
-                                 " und " +
+                                 " & " +
                                  playerData.PlayerName[2];
                 break;
             case 4:
                 TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0] + ", " + playerData.PlayerName[1] +
                                  ", " +
-                                 playerData.PlayerName[2] + " und " + playerData.PlayerName[3];
+                                 playerData.PlayerName[2] + " & " + playerData.PlayerName[3];
                 break;
             case 5:
                 TextBlock.Text = "Willkommen bei UNO " + playerData.PlayerName[0] + ", " + playerData.PlayerName[1] +
                                  ", " +
-                                 playerData.PlayerName[2] + ", " + playerData.PlayerName[3] + " und " +
+                                 playerData.PlayerName[2] + ", " + playerData.PlayerName[3] + " & " +
                                  playerData.PlayerName[4];
                 break;
         }

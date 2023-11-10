@@ -60,11 +60,29 @@ namespace UNO_Spielprojekt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click.
+        ///   Looks up a localized string similar to Add Players.
         /// </summary>
-        internal static string Button {
+        internal static string AddPlayerHeader {
             get {
-                return ResourceManager.GetString("Button", resourceCulture);
+                return ResourceManager.GetString("AddPlayerHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string AddPlayerNextButton {
+            get {
+                return ResourceManager.GetString("AddPlayerNextButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
         
@@ -78,11 +96,29 @@ namespace UNO_Spielprojekt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert Your Name.
+        ///   Looks up a localized string similar to Play.
         /// </summary>
-        internal static string Label {
+        internal static string Play {
             get {
-                return ResourceManager.GetString("Label", resourceCulture);
+                return ResourceManager.GetString("Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to UNO.
+        /// </summary>
+        internal static string RulesHeaderWelcome {
+            get {
+                return ResourceManager.GetString("RulesHeaderWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scoreboard.
+        /// </summary>
+        internal static string Scoreboard {
+            get {
+                return ResourceManager.GetString("Scoreboard", resourceCulture);
             }
         }
     }

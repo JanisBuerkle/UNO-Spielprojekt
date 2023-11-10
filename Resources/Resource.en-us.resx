@@ -18,13 +18,25 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Button" xml:space="preserve">
-        <value>Click</value>
-    </data>
     <data name="Header" xml:space="preserve">
         <value>Settings</value>
     </data>
-    <data name="Label" xml:space="preserve">
-        <value>Insert Your Name</value>
+    <data name="Play" xml:space="preserve">
+        <value>Play</value>
+    </data>
+    <data name="Exit" xml:space="preserve">
+        <value>Exit</value>
+    </data>
+    <data name="AddPlayerHeader" xml:space="preserve">
+        <value>Add Players</value>
+    </data>
+    <data name="AddPlayerNextButton" xml:space="preserve">
+        <value>Next</value>
+    </data>
+    <data name="RulesHeaderWelcome" xml:space="preserve">
+        <value>Welcome to UNO</value>
+    </data>
+    <data name="Scoreboard" xml:space="preserve">
+        <value>Scoreboard</value>
     </data>
 </root>
