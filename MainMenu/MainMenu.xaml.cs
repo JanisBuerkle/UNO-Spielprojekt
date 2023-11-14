@@ -10,36 +10,39 @@ namespace UNO_Spielprojekt.MainMenu
         public MainMenu()
         {
             InitializeComponent();
-            SetLanguage(new System.Globalization.CultureInfo("en-US"));
+            SetLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
         }
+
 
         private void SetLanguage(System.Globalization.CultureInfo culture)
         {
             LocalizationManager.SetLanguage(culture);
-            StartButton.Content = LocalizationManager.GetLocalizedString("Play");
-            ScoreboardButton.Content = LocalizationManager.GetLocalizedString("Scoreboard");
-            ExitButton.Content = LocalizationManager.GetLocalizedString("Exit");
+            StartButton.Content = GlobalLocalization.PlayButton;
+            ScoreboardButton.Content = GlobalLocalization.ScoreboardButton;
+            ExitButton.Content = GlobalLocalization.ExitButton;
         }
+
+
 
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainMenu());
+            NavigationService?.Navigate(new AddPlayer.AddPlayer());
         }
 
         private void ScoreboardButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Scoreboard.Scoreboard());
+            NavigationService?.Navigate(new Scoreboard.Scoreboard());
         }
 
         private void ExitButtonClicked(object sender, RoutedEventArgs e)
         {
             Thread.Sleep(100);
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Setting.Settings());
+            NavigationService?.Navigate(new Setting.Settings());
         }
     }
 }

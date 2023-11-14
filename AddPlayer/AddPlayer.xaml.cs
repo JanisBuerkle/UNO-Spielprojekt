@@ -66,8 +66,15 @@ namespace UNO_Spielprojekt.AddPlayer
 
         private void UpdateWeiterButtonVisibility()
         {
-            bool allFieldsFilled = TextFieldStackPanel.Children.OfType<TextBox>().All(textBox => !string.IsNullOrWhiteSpace(textBox.Text));
-            WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
+            if (TextFieldStackPanel.Children.Count == 0)
+            {
+                WeiterButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                bool allFieldsFilled = TextFieldStackPanel.Children.OfType<TextBox>().All(textBox => !string.IsNullOrWhiteSpace(textBox.Text));
+                WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
+            }
         }
 
 
