@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using UNO_Spielprojekt.AddPlayer;
+using UNO_Spielprojekt.GamePage;
 
 namespace UNO_Spielprojekt;
 
@@ -44,6 +45,6 @@ public partial class Rules : Page
 
     private void RulesButtonClicked(object sender, RoutedEventArgs e)
     {
-        NavigationService?.Navigate(new MainMenu.MainMenu());
+        NavigationService?.Navigate(new Game());
     }
 }

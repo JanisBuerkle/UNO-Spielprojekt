@@ -23,6 +23,12 @@
                 </ImageBrush>
             </Button.Background>
         </Button>
+        <Button Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="Skip_OnClick" Style="{StaticResource MyButtonStyle}">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\settings.png" Stretch="Fill">
+                </ImageBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Page>

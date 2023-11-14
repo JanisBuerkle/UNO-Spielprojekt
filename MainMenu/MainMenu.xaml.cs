@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Localization;
 
 namespace UNO_Spielprojekt.MainMenu
@@ -43,6 +44,11 @@ namespace UNO_Spielprojekt.MainMenu
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new Setting.Settings());
+        }
+
+        private void Skip_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Game());
         }
     }
 }
