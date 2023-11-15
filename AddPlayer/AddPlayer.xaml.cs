@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using UNO_Spielprojekt.GamePage;
 
 namespace UNO_Spielprojekt.AddPlayer
 {
@@ -9,31 +10,43 @@ namespace UNO_Spielprojekt.AddPlayer
     {
         private PlayerData _playerData;
 
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+            nameof(ViewModel), typeof(AddPlayerViewModel), typeof(AddPlayer), new PropertyMetadata(default(AddPlayerViewModel)));
+
+        public AddPlayerViewModel ViewModel
+        {
+            get => (AddPlayerViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
+        }
+        
         public AddPlayer()
         {
             _playerData = new PlayerData();
             InitializeComponent();
-            
+
             foreach (var textBox in TextFieldStackPanel.Children.OfType<TextBox>())
             {
                 textBox.TextChanged += TextBox_TextChanged;
             }
         }
 
+
         private void HomeButtonClicked(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new MainMenu.MainMenu());
         }
 
-        
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateWeiterButtonVisibility();
         }
-        
-        
+
+
         private void PlusClicked(object sender, RoutedEventArgs e)
         {
+            ViewModel.PlayerNames.Add(new NewPlayerViewModel());
+            
             if (TextFieldStackPanel.Children.Count < 5)
             {
                 TextBox newTextBox = new TextBox
@@ -58,6 +71,7 @@ namespace UNO_Spielprojekt.AddPlayer
                 {
                     lastTextBox.TextChanged -= TextBox_TextChanged;
                 }
+
                 TextFieldStackPanel.Children.Remove(lastElement);
             }
 
@@ -72,20 +86,20 @@ namespace UNO_Spielprojekt.AddPlayer
             }
             else
             {
-                bool allFieldsFilled = TextFieldStackPanel.Children.OfType<TextBox>().All(textBox => !string.IsNullOrWhiteSpace(textBox.Text));
-                WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
+                bool allFieldsFilled = TextFieldStackPanel.Children.OfType<TextBox>()
+                    .All(textBox => !string.IsNullOrWhiteSpace(textBox.Text));
+                // WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
             }
         }
 
 
         private void WeiterButtonClicked(object sender, RoutedEventArgs e)
         {
-            _playerData = new PlayerData();
             for (int i = 0; i < TextFieldStackPanel.Children.Count; i++)
             {
                 if (TextFieldStackPanel.Children[i] is TextBox textBox)
                 {
-                    _playerData.PlayerName.Add(textBox.Text);
+                    GameLogic.prop.props.Add(new Propertys() { PlayerName = textBox.Text });
                 }
             }
 

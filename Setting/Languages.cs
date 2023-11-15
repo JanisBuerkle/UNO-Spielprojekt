@@ -12,7 +12,6 @@ public class Languages
         {
             new Language() { CultureName = "en-US" , Flag="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\english (2).png", LangName="English"},
             new Language() { CultureName = "de-DE", Flag="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\germany.png", LangName="Deutsch"},
-
         };
         return list;
     }

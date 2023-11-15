@@ -94,4 +94,25 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Assets\background.jpg" />
+      <Resource Include="Assets\background.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Assets\english.png" />
+      <Resource Include="Assets\english.png" />
+      <None Remove="Assets\english (2).png" />
+      <Resource Include="Assets\english (2).png" />
+      <None Remove="Assets\germany.png" />
+      <Resource Include="Assets\germany.png" />
+      <None Remove="Assets\home.png" />
+      <Resource Include="Assets\home.png" />
+      <None Remove="Assets\plus.png" />
+      <Resource Include="Assets\plus.png" />
+      <None Remove="Assets\Red0.png" />
+      <Resource Include="Assets\Red0.png" />
+      <None Remove="Assets\settings.png" />
+      <Resource Include="Assets\settings.png" />
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using UNO_Spielprojekt.AddPlayer;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Localization;
 
@@ -24,10 +25,9 @@ namespace UNO_Spielprojekt.MainMenu
         }
 
 
-
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new AddPlayer.AddPlayer());
+            NavigationService?.Navigate(new AddPlayer.AddPlayer { ViewModel = new AddPlayerViewModel() });
         }
 
         private void ScoreboardButtonClicked(object sender, RoutedEventArgs e)

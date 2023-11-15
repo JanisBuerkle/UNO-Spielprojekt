@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="AddPlayer"
-      Width="1920" Height="1200">
-    <Grid>
+      Title="AddPlayer" Name="Control">
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Grid.Background>
             <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
@@ -49,14 +48,22 @@
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Name="TextFieldStackPanel">
+        <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding PlayerNames}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding Path=Name}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Name="TextFieldStackPanel" Visibility="Collapsed">
         </StackPanel>
 
         <Button Name="WeiterButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="0,0,0,200"
                 Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Click="WeiterButtonClicked"
-                Style="{StaticResource MyButtonStyle}" Visibility="Hidden">
+                Style="{StaticResource MyButtonStyle}">
         </Button>
 
         <Button Grid.Row="0" Grid.Column="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"

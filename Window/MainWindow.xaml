@@ -7,7 +7,6 @@
         Title="UNO"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Width="1920" Height="1200"
         WindowState="Maximized" WindowStyle="None">
     <Grid>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />

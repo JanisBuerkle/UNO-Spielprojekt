@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
       Title="Scoreboard"
-      Width="1920" Height="1080">
+      Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
@@ -25,21 +25,45 @@
                    HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard" />
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <ListBox Background="Transparent" BorderBrush="Transparent">
-                <ListBox.ItemContainerStyle>
-                    <Style>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <Setter Property="Background" Value="Gray" />
-                        <Setter Property="Margin" Value="1" />
-                    </Style>
-                </ListBox.Resources>
-                <ListBoxItem FontSize="50" Content="1. Janis | 5 Siege" />
-                <ListBoxItem FontSize="50" Content="2. Vlas  | 4 Siege" />
-                <ListBoxItem FontSize="50" Content="3. Peter | 2 Siege" />
-            </ListBox>
+            <!-- <ListBox Background="Transparent" BorderBrush="Transparent"> -->
+            <!--     <ListBox.ItemContainerStyle> -->
+            <!--         <Style> -->
+            <!--         </Style> -->
+            <!--     </ListBox.ItemContainerStyle> -->
+            <!--     <ListBox.Resources> -->
+            <!--         <Style TargetType="{x:Type ListBoxItem}"> -->
+            <!--             <Setter Property="Background" Value="Gray" /> -->
+            <!--             <Setter Property="Margin" Value="1" /> -->
+            <!--         </Style> -->
+            <!--     </ListBox.Resources> -->
+            <!-- </ListBox> -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding ScoreboardPlayers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="0 0 0 1" BorderBrush="#696394">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding PlayerScoreboardName}" Foreground="White"
+                                               Grid.Column="0" FontSize="20" Padding="5" />
+                                    <TextBlock Text="-" Foreground="White" Grid.Column="1"
+                                               FontSize="20" Padding="0 5 0 5" />
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding PlayerScoreboardScore}" Foreground="White"
+                                                   FontSize="20" Padding="5" />
+                                        <TextBlock Text="Punkte" Foreground="White" FontSize="20"
+                                                   Padding="0 5 5 5" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
 
         <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
