@@ -33,9 +33,9 @@ namespace UNO_Spielprojekt.Localization
                 _resourceManager = new ResourceManager("UNO_Spielprojekt.Resources.Resource", typeof(Resource).Assembly);
             }
 
-            if (Settings.language != null)
+            if (SettingsView.language != null)
             {
-                return _resourceManager.GetString(key, Settings.language.LangCulture);
+                return _resourceManager.GetString(key, SettingsView.language.LangCulture);
             }
             else
             {

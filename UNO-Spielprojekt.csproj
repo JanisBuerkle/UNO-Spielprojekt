@@ -14,17 +14,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="Scoreboard\Scoreboard.xaml">
+      <Page Update="Scoreboard\ScoreboardView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="MainMenu\MainMenu.xaml">
+      <Page Update="MainMenu\MainMenuView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="AddPlayer\AddPlayer.xaml">
+      <Page Update="AddPlayer\AddPlayerView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -34,31 +34,23 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Window\MainWindow.xaml">
+      <Page Update="Rules\RulesView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Rules\Rules.xaml">
+      <Page Update="Setting\SettingsView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Window\MainWindowView.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Setting\Settings.xaml">
-        <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Assets\minus.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ApplicationDefinition Include="Window\App.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </ApplicationDefinition>
     </ItemGroup>
 
     <ItemGroup>
@@ -113,6 +105,138 @@
       <Resource Include="Assets\Red0.png" />
       <None Remove="Assets\settings.png" />
       <Resource Include="Assets\settings.png" />
+      <None Remove="Assets\cards\reverse\blue.png" />
+      <Resource Include="Assets\cards\reverse\blue.png" />
+      <None Remove="Assets\cards\reverse\green.png" />
+      <Resource Include="Assets\cards\reverse\green.png" />
+      <None Remove="Assets\cards\reverse\red.png" />
+      <Resource Include="Assets\cards\reverse\red.png" />
+      <None Remove="Assets\cards\reverse\yellow.png" />
+      <Resource Include="Assets\cards\reverse\yellow.png" />
+      <None Remove="Assets\cards\wild\black.png" />
+      <Resource Include="Assets\cards\wild\wild.png" />
+      <None Remove="Assets\cards\wild\blue.png" />
+      <Resource Include="Assets\cards\wild\blue.png" />
+      <None Remove="Assets\cards\wild\green.png" />
+      <Resource Include="Assets\cards\wild\green.png" />
+      <None Remove="Assets\cards\wild\red.png" />
+      <Resource Include="Assets\cards\wild\red.png" />
+      <None Remove="Assets\cards\wild\yellow.png" />
+      <Resource Include="Assets\cards\wild\yellow.png" />
+      <None Remove="Assets\cards\skip\blue.png" />
+      <Resource Include="Assets\cards\skip\blue.png" />
+      <None Remove="Assets\cards\skip\green.png" />
+      <Resource Include="Assets\cards\skip\green.png" />
+      <None Remove="Assets\cards\skip\red.png" />
+      <Resource Include="Assets\cards\skip\red.png" />
+      <None Remove="Assets\cards\skip\yellow.png" />
+      <Resource Include="Assets\cards\skip\yellow.png" />
+      <None Remove="Assets\cards\9\blue.png" />
+      <Resource Include="Assets\cards\9\blue.png" />
+      <None Remove="Assets\cards\9\green.png" />
+      <Resource Include="Assets\cards\9\green.png" />
+      <None Remove="Assets\cards\9\red.png" />
+      <Resource Include="Assets\cards\9\red.png" />
+      <None Remove="Assets\cards\9\yellow.png" />
+      <Resource Include="Assets\cards\9\yellow.png" />
+      <None Remove="Assets\cards\8\blue.png" />
+      <Resource Include="Assets\cards\8\blue.png" />
+      <None Remove="Assets\cards\8\green.png" />
+      <Resource Include="Assets\cards\8\green.png" />
+      <None Remove="Assets\cards\8\red.png" />
+      <Resource Include="Assets\cards\8\red.png" />
+      <None Remove="Assets\cards\8\yellow.png" />
+      <Resource Include="Assets\cards\8\yellow.png" />
+      <None Remove="Assets\cards\7\blue.png" />
+      <Resource Include="Assets\cards\7\blue.png" />
+      <None Remove="Assets\cards\7\green.png" />
+      <Resource Include="Assets\cards\7\green.png" />
+      <None Remove="Assets\cards\7\red.png" />
+      <Resource Include="Assets\cards\7\red.png" />
+      <None Remove="Assets\cards\7\yellow.png" />
+      <Resource Include="Assets\cards\7\yellow.png" />
+      <None Remove="Assets\cards\6\blue.png" />
+      <Resource Include="Assets\cards\6\blue.png" />
+      <None Remove="Assets\cards\6\green.png" />
+      <Resource Include="Assets\cards\6\green.png" />
+      <None Remove="Assets\cards\6\red.png" />
+      <Resource Include="Assets\cards\6\red.png" />
+      <None Remove="Assets\cards\6\yellow.png" />
+      <Resource Include="Assets\cards\6\yellow.png" />
+      <None Remove="Assets\cards\5\blue.png" />
+      <Resource Include="Assets\cards\5\blue.png" />
+      <None Remove="Assets\cards\5\green.png" />
+      <Resource Include="Assets\cards\5\green.png" />
+      <None Remove="Assets\cards\5\red.png" />
+      <Resource Include="Assets\cards\5\red.png" />
+      <None Remove="Assets\cards\5\yellow.png" />
+      <Resource Include="Assets\cards\5\yellow.png" />
+      <None Remove="Assets\cards\4\blue.png" />
+      <Resource Include="Assets\cards\4\blue.png" />
+      <None Remove="Assets\cards\4\green.png" />
+      <Resource Include="Assets\cards\4\green.png" />
+      <None Remove="Assets\cards\4\red.png" />
+      <Resource Include="Assets\cards\4\red.png" />
+      <None Remove="Assets\cards\4\yellow.png" />
+      <Resource Include="Assets\cards\4\yellow.png" />
+      <None Remove="Assets\cards\3\blue.png" />
+      <Resource Include="Assets\cards\3\blue.png" />
+      <None Remove="Assets\cards\3\green.png" />
+      <Resource Include="Assets\cards\3\green.png" />
+      <None Remove="Assets\cards\3\red.png" />
+      <Resource Include="Assets\cards\3\red.png" />
+      <None Remove="Assets\cards\3\yellow.png" />
+      <Resource Include="Assets\cards\3\yellow.png" />
+      <None Remove="Assets\cards\2\blue.png" />
+      <Resource Include="Assets\cards\2\blue.png" />
+      <None Remove="Assets\cards\2\green.png" />
+      <Resource Include="Assets\cards\2\green.png" />
+      <None Remove="Assets\cards\2\red.png" />
+      <Resource Include="Assets\cards\2\red.png" />
+      <None Remove="Assets\cards\2\yellow.png" />
+      <Resource Include="Assets\cards\2\yellow.png" />
+      <None Remove="Assets\cards\1\blue.png" />
+      <Resource Include="Assets\cards\1\blue.png" />
+      <None Remove="Assets\cards\1\green.png" />
+      <Resource Include="Assets\cards\1\green.png" />
+      <None Remove="Assets\cards\1\red.png" />
+      <Resource Include="Assets\cards\1\red.png" />
+      <None Remove="Assets\cards\1\yellow.png" />
+      <Resource Include="Assets\cards\1\yellow.png" />
+      <None Remove="Assets\cards\0\blue.png" />
+      <Resource Include="Assets\cards\0\blue.png" />
+      <None Remove="Assets\cards\0\green.png" />
+      <Resource Include="Assets\cards\0\green.png" />
+      <None Remove="Assets\cards\0\red.png" />
+      <Resource Include="Assets\cards\0\red.png" />
+      <None Remove="Assets\cards\0\yellow.png" />
+      <Resource Include="Assets\cards\0\yellow.png" />
+      <None Remove="Assets\cards\+4\blue.png" />
+      <Resource Include="Assets\cards\+4\blue.png" />
+      <None Remove="Assets\cards\+4\draw.png" />
+      <Resource Include="Assets\cards\+4\draw.png" />
+      <None Remove="Assets\cards\+4\green.png" />
+      <Resource Include="Assets\cards\+4\green.png" />
+      <None Remove="Assets\cards\+4\red.png" />
+      <Resource Include="Assets\cards\+4\red.png" />
+      <None Remove="Assets\cards\+4\yellow.png" />
+      <Resource Include="Assets\cards\+4\yellow.png" />
+      <None Remove="Assets\cards\+2\blue.png" />
+      <Resource Include="Assets\cards\+2\blue.png" />
+      <None Remove="Assets\cards\+2\green.png" />
+      <Resource Include="Assets\cards\+2\green.png" />
+      <None Remove="Assets\cards\+2\red.png" />
+      <Resource Include="Assets\cards\+2\red.png" />
+      <None Remove="Assets\cards\+2\yellow.png" />
+      <Resource Include="Assets\cards\+2\yellow.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ApplicationDefinition Include="Window\App.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </ApplicationDefinition>
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,68 @@
+﻿<Page x:Class="UNO_Spielprojekt.GamePage.GameView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="Game">
+    
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate x:Key="ButtonTemplate">
+                <Button Content="{Binding}" Width="260" Height="400" Margin="5" Tag="Card">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="Fill"/>
+                    </Button.Background>
+                </Button>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+
+        <Button Grid.Column="0" Grid.Row="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="10,10,0,0"
+                BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
+                </ImageBrush>
+            </Button.Background>
+        </Button>
+
+        <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
+                Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,300,20,20"
+                    Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Click="LegenButton" />
+            <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,0,20,20"
+                    Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
+        </StackPanel>
+
+        <StackPanel x:Name="StackPanel" Grid.Row="2" Grid.Column="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl ItemTemplate="{StaticResource ButtonTemplate}" />
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>
+
+

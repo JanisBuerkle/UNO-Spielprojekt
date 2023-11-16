@@ -1,0 +1,57 @@
+﻿<Page x:Class="UNO_Spielprojekt.Setting.SettingsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UNO_Spielprojekt"
+      xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
+      xmlns:resx="clr-namespace:UNO_Spielprojekt.Resources"
+      mc:Ignorable="d"
+      Width="1920" Height="1200">
+    <Page.Resources>
+        <setting:Languages x:Key="Language" />
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />  
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+        <Button Grid.Row="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="10,10,0,0" BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
+                </ImageBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="Header" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="90" Margin="0,10,0,0" FontWeight="Bold" />
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ComboBox" FontSize="48" SelectionChanged="ComboBox_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding Source={StaticResource Language}, Path=MyLangs}" />
+                </CompositeCollection>
+            </ComboBox.ItemsSource>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Flag}"/>
+                        <TextBlock Text="{Binding LangName}"/>
+                    </StackPanel>
+                </DataTemplate> 
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SelectedLanguageText" />
+
+    </Grid>
+</Page>

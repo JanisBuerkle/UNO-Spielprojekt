@@ -7,11 +7,11 @@ namespace UNO_Spielprojekt.GamePage;
 public class GameLogic
 {
     public static Propertys prop = new Propertys();
-    static Random random = new Random();
+    static Random _random = new Random();
     
     static List<string> _colors = new List<string> { "Red", "Green", "Blue", "Yellow" };
     static List<string> _values = Enumerable.Range(0, 10).Select(i => i.ToString()).Concat(new string[] { "Skip", "+2", "Reverse" }).ToList();
-    static List<string> _specialCards = new List<string> { "Wild ", "Draw 4" };
+    static List<string> _specialCards = new List<string> { "Wild ", "Draw +4" };
 
     public static int PlayerCount()
     {
@@ -19,7 +19,7 @@ public class GameLogic
     }
     public static int ChooseStartingPlayer()
     {
-        return random.Next(0, prop.CountOfPlayers);
+        return _random.Next(0, prop.CountOfPlayers);
     }
     public static List<string> GenerateDeck()
     {
@@ -53,7 +53,7 @@ public class GameLogic
         while (number > 1)
         {
             number--;
-            int card = random.Next(number + 1);
+            int card = _random.Next(number + 1);
             string value = prop.Deck[card];
             prop.Deck[card] = prop.Deck[number];
             prop.Deck[number] = value;

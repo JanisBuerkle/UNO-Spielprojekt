@@ -32,7 +32,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" 
-                            CornerRadius="46"
+                            CornerRadius="45"
                             BorderThickness="0"
                             Padding="4,2" 
                             Background="{TemplateBinding Background}">
