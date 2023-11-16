@@ -51,18 +51,15 @@
         <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding PlayerNames}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=Name}" />
+                    <TextBox Text="{Binding Path=Name}" FontSize="40" x:Name="TextBoxName" TextChanged="TextBox_TextChanged"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Name="TextFieldStackPanel" Visibility="Collapsed">
-        </StackPanel>
 
         <Button Name="WeiterButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
-                VerticalAlignment="Bottom" Margin="0,0,0,200"
+                VerticalAlignment="Bottom" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
-                Click="WeiterButtonClicked"
                 Style="{StaticResource MyButtonStyle}">
         </Button>
 

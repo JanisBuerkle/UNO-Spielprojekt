@@ -11,23 +11,19 @@ namespace UNO_Spielprojekt.AddPlayer
         private PlayerData _playerData;
 
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-            nameof(ViewModel), typeof(AddPlayerViewModel), typeof(AddPlayer), new PropertyMetadata(default(AddPlayerViewModel)));
+            nameof(ViewModel), typeof(AddPlayerViewModel), typeof(AddPlayer),
+            new PropertyMetadata(default(AddPlayerViewModel)));
 
         public AddPlayerViewModel ViewModel
         {
             get => (AddPlayerViewModel)GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
         }
-        
+
         public AddPlayer()
         {
             _playerData = new PlayerData();
             InitializeComponent();
-
-            foreach (var textBox in TextFieldStackPanel.Children.OfType<TextBox>())
-            {
-                textBox.TextChanged += TextBox_TextChanged;
-            }
         }
 
 
@@ -39,71 +35,44 @@ namespace UNO_Spielprojekt.AddPlayer
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateWeiterButtonVisibility();
+            UpdateWeiterButtonVisibility(); 
         }
 
 
         private void PlusClicked(object sender, RoutedEventArgs e)
         {
-            ViewModel.PlayerNames.Add(new NewPlayerViewModel());
-            
-            if (TextFieldStackPanel.Children.Count < 5)
+            if (ViewModel.PlayerNames.Count < 5)
             {
-                TextBox newTextBox = new TextBox
-                {
-                    Margin = new Thickness(0, 10, 0, 0),
-                    FontSize = 40,
-                    Background = Brushes.DarkGray
-                };
-                newTextBox.TextChanged += TextBox_TextChanged;
-                TextFieldStackPanel.Children.Add(newTextBox);
+                ViewModel.PlayerNames.Add(new NewPlayerViewModel());
             }
-
             UpdateWeiterButtonVisibility();
         }
 
         private void MinusClicked(object sender, RoutedEventArgs e)
         {
-            if (TextFieldStackPanel.Children.Count > 0)
+            if (ViewModel.PlayerNames.Count > 0)
             {
-                UIElement lastElement = TextFieldStackPanel.Children[TextFieldStackPanel.Children.Count - 1];
-                if (lastElement is TextBox lastTextBox)
-                {
-                    lastTextBox.TextChanged -= TextBox_TextChanged;
-                }
-
-                TextFieldStackPanel.Children.Remove(lastElement);
+                ViewModel.PlayerNames.RemoveAt(ViewModel.PlayerNames.Count - 1);
             }
 
             UpdateWeiterButtonVisibility();
         }
 
+
         private void UpdateWeiterButtonVisibility()
         {
-            if (TextFieldStackPanel.Children.Count == 0)
+            if (ViewModel.PlayerNames.Count == 0)
             {
                 WeiterButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                bool allFieldsFilled = TextFieldStackPanel.Children.OfType<TextBox>()
-                    .All(textBox => !string.IsNullOrWhiteSpace(textBox.Text));
-                // WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
-            }
-        }
-
-
-        private void WeiterButtonClicked(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < TextFieldStackPanel.Children.Count; i++)
-            {
-                if (TextFieldStackPanel.Children[i] is TextBox textBox)
+                for (int i = 0; i < ViewModel.PlayerNames.Count; i++)
                 {
-                    GameLogic.prop.props.Add(new Propertys() { PlayerName = textBox.Text });
+                    bool allFieldsFilled = !string.IsNullOrWhiteSpace(ViewModel.PlayerNames[i].Name);
+                    WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
                 }
             }
-
-            NavigationService?.Navigate(new Rules(_playerData));
         }
     }
 }
