@@ -8,7 +8,7 @@
       Width="1920" Height="1200">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -25,18 +25,6 @@
                    HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard" />
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <!-- <ListBox Background="Transparent" BorderBrush="Transparent"> -->
-            <!--     <ListBox.ItemContainerStyle> -->
-            <!--         <Style> -->
-            <!--         </Style> -->
-            <!--     </ListBox.ItemContainerStyle> -->
-            <!--     <ListBox.Resources> -->
-            <!--         <Style TargetType="{x:Type ListBoxItem}"> -->
-            <!--             <Setter Property="Background" Value="Gray" /> -->
-            <!--             <Setter Property="Margin" Value="1" /> -->
-            <!--         </Style> -->
-            <!--     </ListBox.Resources> -->
-            <!-- </ListBox> -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
                 <ItemsControl ItemsSource="{Binding ScoreboardPlayers}">
                     <ItemsControl.ItemTemplate>
@@ -69,7 +57,7 @@
         <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
                 BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" Stretch="Fill">
                 </ImageBrush>
             </Button.Background>
         </Button>

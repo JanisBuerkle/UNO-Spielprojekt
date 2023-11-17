@@ -12,7 +12,7 @@ namespace UNO_Spielprojekt.MainMenu
         public MainMenuView()
         {
             InitializeComponent();
-            SetLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
+            SetLanguage(Thread.CurrentThread.CurrentUICulture);
         }
 
 
@@ -27,7 +27,7 @@ namespace UNO_Spielprojekt.MainMenu
 
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new AddPlayer.AddPlayerView { ViewModel = new AddPlayerViewModel() });
+            NavigationService?.Navigate(new AddPlayerView { ViewModel = new AddPlayerViewModel() });
         }
 
         private void ScoreboardButtonClicked(object sender, RoutedEventArgs e)
@@ -48,6 +48,8 @@ namespace UNO_Spielprojekt.MainMenu
 
         private void Skip_OnClick(object sender, RoutedEventArgs e)
         {
+            GameLogic.prop.props.Add(new Propertys() { PlayerName = "Hans" });
+            GameLogic.prop.props.Add(new Propertys() { PlayerName = "Peter" });
             NavigationService?.Navigate(new GameView());
         }
     }

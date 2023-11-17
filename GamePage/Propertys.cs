@@ -17,7 +17,8 @@ public class Propertys
     public int StartingPlayer { get; set; }
     public bool validCardPlayed { get; set; }
     public bool Draw { get; set; }
-    public object clickedCard { get; set; }
+    public int ClickedCardInt { get; set; }
+    public object ClickedCard { get; set; }
     public List<Propertys> props { get; set; }= new List<Propertys>();
     public Propertys()
     {

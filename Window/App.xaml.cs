@@ -11,7 +11,6 @@ namespace UNO_Spielprojekt.Window
 
         private static void SetLanguage()
         {
-            // Startlanguage
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
         }
     }

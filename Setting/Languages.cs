@@ -10,8 +10,8 @@ public class Languages
     {
         var list = new List<Language>()
         {
-            new Language() { CultureName = "en-US" , Flag="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\english (2).png", LangName="English"},
-            new Language() { CultureName = "de-DE", Flag="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\germany.png", LangName="Deutsch"},
+            new Language() { CultureName = "en-US" , Flag="pack://application:,,,/Assets/Languages/english.png", LangName="English"},
+            new Language() { CultureName = "de-DE", Flag="pack://application:,,,/Assets/Languages/germany.png", LangName="Deutsch"},
         };
         return list;
     }

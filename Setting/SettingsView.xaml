@@ -26,12 +26,12 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
         <Button Grid.Row="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"
                 Margin="10,10,0,0" BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\home.png" Stretch="Fill">
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" Stretch="Fill">
                 </ImageBrush>
             </Button.Background>
         </Button>
@@ -51,7 +51,7 @@
                 </DataTemplate> 
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SelectedLanguageText" />
+        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
     </Grid>
 </Page>

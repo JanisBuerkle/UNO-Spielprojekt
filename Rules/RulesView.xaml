@@ -3,17 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:UNO_Spielprojekt"
-      mc:Ignorable="d"
-      Title="Rules" Width="1920" Height="1200">
+      mc:Ignorable="d">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\background.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"></ImageBrush>
         </Grid.Background>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -23,13 +20,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Name="TextBlock" FontSize="40" FontWeight="Bold" Margin="0,20,0,0"></TextBlock>
-            <TextBlock FontSize="40" FontWeight="Bold">Hier sind nochmal die Regeln aufgelistet:</TextBlock>
-        </StackPanel>
+        <TextBlock Grid.Row="0" Grid.Column="1" FontSize="40" FontWeight="Bold" Margin="0,10,0,0">Hier sind nochmal die Regeln aufgelistet:</TextBlock>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="10,10,0,0">
-            <TextBlock FontWeight="DemiBold" FontSize="19" TextWrapping="Wrap">
+            <TextBlock FontWeight="DemiBold" FontSize="20" TextWrapping="Wrap">
                 Die Originalen UNO-Spielregeln: <LineBreak />
                 Karten: <LineBreak />
                 108 Karten  <LineBreak />
@@ -64,7 +58,7 @@
                 Auf diese Karte kann nur noch eine gleich farbige karte oder eine andere zieh zwei Karte. <LineBreak />
                 Retour Karte: <LineBreak />
                 Bei dieser Karte ändert sich die Spielrichtung.
-                Wenn bisher nach links gespielt wird nun nach rechts gespielt und umgekehrt.
+                Wenn bisher nach links gespielt wird nun nach rechts gespielt und umgekehrt. <LineBreak />
                 Die Karte kann nur auf eine entsprechende Farbe oder eine andere Retour Karte gelegt werden.
                 <LineBreak />
                 Wenn diese zu Beginn des Spiels gezogen wird, fängt der Geber an und dann setzt der Spieler zu seiner Rechten anstatt zu seiner linken das Spiel fort.
@@ -83,18 +77,19 @@
                 Plus 4 Karte: <LineBreak />
                 Der Spieler der sie Legt entscheidet welche Farbe als nächste gelegt werden soll.
                 Zudem muss der nächste Spieler 4 Karten ziehen und darf nicht ablegen.
-                (Leider darf die Karte nur dann gelegt werden wenn der Spieler der sie legt keine andere Karte auf den Stapel legen könnte)
                 <LineBreak />
                 UNO mit zwei Spielern: <LineBreak />
                 1. Wird eine Retour Karte abgelegt hat das dieselben Folgen wie eine Aussetzen Karte.
-                2. Der Spieler der eine Aussetzen Karte ablegt kann sofort noch eine Karte ablegen.
+                2. Der Spieler der eine Aussetzen Karte ablegt kann sofort noch eine Karte ablegen.<LineBreak />
                 3. Legt ein Spieler eine Zieh zwei Karte ab und hat der andere Spieler die 2 Karten gezogen, ist der erste Spieler wieder an der Reihe.
                 Dasselbe gilt für die Zieh Vier Farbenwahlkarte.
             </TextBlock>
         </StackPanel>
-        <Button Grid.Row="3" Grid.Column="1" Content="Verstanden" FontSize="30" FontWeight="Bold"
+
+        <Button Grid.Row="2" Grid.Column="1" Content="Verstanden" FontSize="35" FontWeight="Bold"
                 Background="DarkOliveGreen" Style="{StaticResource MyButtonStyle}" Margin="0,0,0,20"
                 Click="RulesButtonClicked">
         </Button>
+
     </Grid>
 </Page>

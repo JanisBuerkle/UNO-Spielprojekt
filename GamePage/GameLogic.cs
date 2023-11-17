@@ -6,22 +6,21 @@ namespace UNO_Spielprojekt.GamePage;
 
 public class GameLogic
 {
-    public static Propertys prop = new Propertys();
-    static Random _random = new Random();
-    
-    static List<string> _colors = new List<string> { "Red", "Green", "Blue", "Yellow" };
-    static List<string> _values = Enumerable.Range(0, 10).Select(i => i.ToString()).Concat(new string[] { "Skip", "+2", "Reverse" }).ToList();
-    static List<string> _specialCards = new List<string> { "Wild ", "Draw +4" };
+    public static Propertys prop = new Propertys(); 
+    Random _random = new Random();
+    List<string> _colors = new List<string> { "Red", "Green", "Blue", "Yellow" };
+    List<string> _values = Enumerable.Range(0, 10).Select(i => i.ToString()).Concat(new string[] { "Skip", "+2", "Reverse" }).ToList();
+    List<string> _specialCards = new List<string> { "Wild ", "Draw +4" };
 
-    public static int PlayerCount()
+    public  int PlayerCount()
     {
         return 1;
     }
-    public static int ChooseStartingPlayer()
+    public int ChooseStartingPlayer()
     {
         return _random.Next(0, prop.CountOfPlayers);
     }
-    public static List<string> GenerateDeck()
+    public List<string> GenerateDeck()
     {
         List<string> deck = new List<string>();
         foreach (string color in _colors)
@@ -47,20 +46,18 @@ public class GameLogic
         }
         return prop.Deck;
     }
-    public static void ShuffleDeck()
+    public void ShuffleDeck()
     {
         int number = prop.Deck.Count;
         while (number > 1)
         {
             number--;
             int card = _random.Next(number + 1);
-            string value = prop.Deck[card];
-            prop.Deck[card] = prop.Deck[number];
-            prop.Deck[number] = value;
+            (prop.Deck[card], prop.Deck[number]) = (prop.Deck[number], prop.Deck[card]);
         }
     }
 
-    public static List<string> DealCards(int handSize)
+    public List<string> DealCards(int handSize)
     {
         List<string> hand = new List<string>();
         for (prop.Player = 0; prop.Player < handSize; prop.Player++)
@@ -70,5 +67,15 @@ public class GameLogic
             hand.Add(card);
         }
         return hand;
+    }
+    
+    public List<string> PlaceFirstCardInCenter()
+    {
+        int randomCard = _random.Next(prop.Deck.Count);
+        string selectedCard = prop.Deck[randomCard];
+        prop.Deck.RemoveAt(randomCard);
+        prop.Center.Add(selectedCard);
+
+        return prop.Center;
     }
 }

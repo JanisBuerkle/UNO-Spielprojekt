@@ -79,7 +79,7 @@ namespace UNO_Spielprojekt.AddPlayer
         {
             for (int i = 0; i < ViewModel.PlayerNames.Count; i++)
             {
-                    GameLogic.prop.props.Add(new Propertys() { PlayerName = ViewModel.PlayerNames[i].Name });
+                GameLogic.prop.props.Add(new Propertys() { PlayerName = ViewModel.PlayerNames[i].Name });
             }
 
             NavigationService?.Navigate(new RulesView(_playerData));
