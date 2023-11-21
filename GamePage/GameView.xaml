@@ -60,7 +60,7 @@
         <Button x:Name="MiddleCard" Grid.Column="1" Grid.Row="1" Style="{StaticResource MyButtonStyle}"></Button>
         
         
-        <StackPanel x:Name="StackPanel" Grid.Row="2" Grid.Column="1" Grid.RowSpan="1">
+        <StackPanel x:Name="StackiPanel" Grid.Row="2" Grid.Column="1" Grid.RowSpan="1">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
                 <ItemsControl ItemTemplate="{StaticResource ButtonTemplate}" />
             </ScrollViewer>

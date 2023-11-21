@@ -19,7 +19,7 @@ public class Propertys
     public bool Draw { get; set; }
     public int ClickedCardInt { get; set; }
     public object ClickedCard { get; set; }
-    public List<Propertys> props { get; set; }= new List<Propertys>();
+    public List<Propertys> Players { get; set; }= new List<Propertys>();
     public Propertys()
     {
         Hand = new List<string>();

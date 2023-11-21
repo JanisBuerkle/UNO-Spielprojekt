@@ -48,8 +48,8 @@ namespace UNO_Spielprojekt.MainMenu
 
         private void Skip_OnClick(object sender, RoutedEventArgs e)
         {
-            GameLogic.prop.props.Add(new Propertys() { PlayerName = "Hans" });
-            GameLogic.prop.props.Add(new Propertys() { PlayerName = "Peter" });
+            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Hans" });
+            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
             NavigationService?.Navigate(new GameView());
         }
     }
