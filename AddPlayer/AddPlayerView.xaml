@@ -4,46 +4,38 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="AddPlayer" Name="Control">
-    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
+      Title="AddPlayer" Name="AddPlayerPage">
+    
+    <Grid DataContext="{Binding ElementName=AddPlayerPage, Path=ViewModel}">
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="1" Margin="0,20,0,0" Padding="5" BorderThickness="1" BorderBrush="Gray" Background="Gray"
-                CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock FontSize="50" FontWeight="Bold" Text=" Spieler hinzufügen "></TextBlock>
+        <Border Grid.Column="1" Margin="0,20,0,0" Padding="5" BorderThickness="1" BorderBrush="Gray" Background="Gray" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock FontSize="50" FontWeight="Bold" Text="Spieler hinzufügen"/>
         </Border>
-
+        
         <StackPanel Grid.Row="0" Grid.Column="2">
-            <Button Height="100" Width="100" HorizontalAlignment="Right"
-                    VerticalAlignment="Center" Margin="0,10,10,0" Click="PlusClicked"
-                    Style="{StaticResource MyButtonStyle}">
+            <Button Click="AddPlayerClicked" Style="{StaticResource PlusButtonStyle}">
                 <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/plus.png"
-                                Stretch="Fill">
-                    </ImageBrush>
+                    <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/plus.png" Stretch="Fill"/>
                 </Button.Background>
             </Button>
-
-            <Button Height="100" Width="100" HorizontalAlignment="Right"
-                    VerticalAlignment="Center" Margin="0,10,10,0" Click="MinusClicked"
-                    Style="{StaticResource MyButtonStyle}">
+            
+            <Button Click="RemovePlayerClicked" Style="{StaticResource PlusButtonStyle}">
                 <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/minus.png"
-                                Stretch="Fill">
-                    </ImageBrush>
+                    <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/minus.png" Stretch="Fill"/>
                 </Button.Background>
             </Button>
         </StackPanel>
@@ -51,24 +43,16 @@
         <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding PlayerNames}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=Name}" FontSize="40" x:Name="TextBoxName" TextChanged="TextBox_TextChanged"/>
+                    <TextBox Text="{Binding Path=Name}" FontSize="40" x:Name="TextBoxName" TextChanged="PlayerNameChanged"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-
-        <Button Name="WeiterButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
+        <Button Name="ContinueButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
-                Style="{StaticResource MyButtonStyle}" Click="WeiterButtonClicked">
-        </Button>
+                Style="{StaticResource MyButtonStyle}" Click="ContinueButtonClicked"/>
 
-        <Button Grid.Row="0" Grid.Column="0" Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top"
-                Margin="10,10,0,0" BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
-            <Button.Background>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" Stretch="Fill">
-                </ImageBrush>
-            </Button.Background>
-        </Button>
+        <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}"/>
     </Grid>
 </Page>

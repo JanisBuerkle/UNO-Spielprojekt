@@ -15,5 +15,4 @@ public class Languages
         };
         return list;
     }
-    
 }

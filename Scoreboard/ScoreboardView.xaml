@@ -4,11 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="Scoreboard"
-      Width="1920" Height="1200">
+      Title="Scoreboard">
+
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"></ImageBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -25,16 +25,16 @@
                    HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard" />
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <ItemsControl ItemsSource="{Binding ScoreboardPlayers}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0 0 0 1" BorderBrush="#696394">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding PlayerScoreboardName}" Foreground="White"
                                                Grid.Column="0" FontSize="20" Padding="5" />
@@ -54,12 +54,6 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
-                BorderThickness="0" Click="HomeButtonClicked" Style="{StaticResource MyButtonStyle}">
-            <Button.Background>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" Stretch="Fill">
-                </ImageBrush>
-            </Button.Background>
-        </Button>
+        <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}"/>
     </Grid>
 </Page>

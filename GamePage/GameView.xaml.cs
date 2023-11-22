@@ -17,7 +17,11 @@ public partial class GameView
         InitializeComponent();
         _viewModel = new GameViewModel();
         DataContext = _viewModel;
+
+        _viewModel.stackPanell = stackPanel;
+        _viewModel.CreateButtonsForPlayerHand();
     }
+
 
     private void LegenButton(object sender, RoutedEventArgs e)
     {
@@ -53,5 +57,9 @@ public partial class GameView
 
             MiddleCard.Background = imageBrush;
         }
+    }
+    public void Test()
+    {
+            
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using UNO_Spielprojekt.AddPlayer;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Localization;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.MainMenu
 {
@@ -43,7 +44,7 @@ namespace UNO_Spielprojekt.MainMenu
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Setting.SettingsView());
+            NavigationService?.Navigate(new Setting.SettingsView(new MainWindowView()));
         }
 
         private void Skip_OnClick(object sender, RoutedEventArgs e)

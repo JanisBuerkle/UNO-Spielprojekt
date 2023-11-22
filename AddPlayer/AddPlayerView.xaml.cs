@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using UNO_Spielprojekt.GamePage;
 
 namespace UNO_Spielprojekt.AddPlayer
@@ -33,13 +31,12 @@ namespace UNO_Spielprojekt.AddPlayer
         }
 
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PlayerNameChanged(object sender, TextChangedEventArgs e)
         {
             UpdateWeiterButtonVisibility(); 
         }
 
-
-        private void PlusClicked(object sender, RoutedEventArgs e)
+        private void AddPlayerClicked(object sender, RoutedEventArgs e)
         {
             if (ViewModel.PlayerNames.Count < 5)
             {
@@ -48,7 +45,7 @@ namespace UNO_Spielprojekt.AddPlayer
             UpdateWeiterButtonVisibility();
         }
 
-        private void MinusClicked(object sender, RoutedEventArgs e)
+        private void RemovePlayerClicked(object sender, RoutedEventArgs e)
         {
             if (ViewModel.PlayerNames.Count > 0)
             {
@@ -61,37 +58,31 @@ namespace UNO_Spielprojekt.AddPlayer
 
         private void UpdateWeiterButtonVisibility()
         {
-            if (ViewModel.PlayerNames.Count == 0)
+            if (ViewModel.PlayerNames.Count <= 1)
             {
-                WeiterButton.Visibility = Visibility.Hidden;
+                ContinueButton.Visibility = Visibility.Hidden;
             }
             else
             {
-                for (int i = 0; i < ViewModel.PlayerNames.Count; i++)
+                foreach (var t in ViewModel.PlayerNames)
                 {
-                    bool allFieldsFilled = !string.IsNullOrWhiteSpace(ViewModel.PlayerNames[i].Name);
-                    WeiterButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
+                    bool allFieldsFilled = !string.IsNullOrWhiteSpace(t.Name); 
+                    ContinueButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
                 }
             }
         }
         
-        private void WeiterButtonClicked(object sender, RoutedEventArgs e)
+        private void ContinueButtonClicked(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < ViewModel.PlayerNames.Count; i++)
+            foreach (var t in ViewModel.PlayerNames)
             {
-                GameLogic.prop.Players.Add(new Propertys() { PlayerName = ViewModel.PlayerNames[i].Name });
+                GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
             }
 
             NavigationService?.Navigate(new RulesView(_playerData));
         }
-        private void RemoveButtonFromStackPanel(int index)
-        {
-            
-            if (index >= 0 && StackPanel.Children.Count > index)
-            {
-                StackPanel.Children.RemoveAt(index);
-            }
-        }
+
+
     }
     
 }
