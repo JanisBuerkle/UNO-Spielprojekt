@@ -43,7 +43,7 @@
         <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding PlayerNames}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Path=Name}" FontSize="40" x:Name="TextBoxName" TextChanged="PlayerNameChanged"/>
+                    <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" FontSize="40" x:Name="TextBoxName" TextChanged="PlayerNameChanged"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
