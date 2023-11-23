@@ -28,6 +28,7 @@ namespace UNO_Spielprojekt.MainMenu
 
         private void StartButtonClicked(object sender, RoutedEventArgs e)
         {
+    
             NavigationService?.Navigate(new AddPlayerView { ViewModel = new AddPlayerViewModel() });
         }
 

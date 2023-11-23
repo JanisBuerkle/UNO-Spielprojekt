@@ -11,6 +11,7 @@
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
       <PackageReference Include="ILMerge" Version="3.0.41" />
+      <PackageReference Include="WPF-UI-Enhanced" Version="10.0.0" />
     </ItemGroup>
 
     <ItemGroup>
