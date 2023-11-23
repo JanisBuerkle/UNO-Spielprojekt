@@ -28,7 +28,7 @@ namespace UNO_Spielprojekt.GamePage
         private bool _chosenCard;
         private GameLogic _gameLogic;
         private ObservableCollection<string> buttonTexts = new ObservableCollection<string> { "Button 1", "Button 2", "Button 3" };
-        public StackPanel stackPanell { get; set; } = new StackPanel();
+        public StackPanel stackPanell { get; set; }
 
         public GameViewModel()
         {
@@ -43,7 +43,7 @@ namespace UNO_Spielprojekt.GamePage
             InitializePlayersHands();
             InitializeUI();
             _gameLogic.PlaceFirstCardInCenter();
-            
+            // ShowCardInCenter();
         }
 
         private void InitializeGameProperties()

@@ -32,7 +32,7 @@
             <ColumnDefinition Width="Auto" /> 
         </Grid.ColumnDefinitions>
 
-        <Grid.Background>
+        <Grid.Background> 
             <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"/>
         </Grid.Background>
 
