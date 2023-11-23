@@ -49,6 +49,9 @@ namespace UNO_Spielprojekt.Setting
             {
                 language.LangString = selectedLanguage.CultureName;
                 SetLanguage();
+                LanguageChangeSnackBar.Title = "Erfolg:";
+                LanguageChangeSnackBar.Message = "Du hast erfolgreich die Sprache geändert!";
+                LanguageChangeSnackBar.Show();
             }
         }
 

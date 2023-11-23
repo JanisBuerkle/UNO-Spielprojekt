@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:UNO_Spielprojekt"
       xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d">
     
     <Page.Resources>
@@ -68,5 +69,6 @@
         </ComboBox>
         
         <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ui:Snackbar Grid.Row="4" Grid.Column="1" x:Name="LanguageChangeSnackBar" Timeout="4000" Appearance="Success"/>
     </Grid>
 </Page>

@@ -4,15 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:UNO_Spielprojekt.GamePage"
-      mc:Ignorable="d"
-      Title="Game">
-
+      mc:Ignorable="d">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate x:Key="ButtonTemplate">
+            <DataTemplate x:Key="ButtonTemplate"> 
                 <Button Content="{Binding}" Width="260" Height="400" Margin="5" Tag="Card">
                     <Button.Background>
                         <ImageBrush ImageSource="{Binding ImagePath}" Stretch="Fill"/>
@@ -31,7 +29,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" /> 
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
@@ -41,13 +39,13 @@
         <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}"/>
 
         <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
-                Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />
+                   Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />
 
         <StackPanel Grid.Row="2" Grid.Column="2">
             <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,300,20,20"
-                    Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Click="LegenButton" />
+                       Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Click="LegenButton" />
             <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,0,20,20"
-                    Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
+                       Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
         </StackPanel>
 
         <Button x:Name="MiddleCard" Grid.Column="1" Grid.Row="1" Content="{Binding MiddleCard}" Style="{StaticResource MyButtonStyle}" />
