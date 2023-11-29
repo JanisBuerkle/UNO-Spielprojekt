@@ -5,6 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using UNO_Spielprojekt.AddPlayer;
+using UNO_Spielprojekt.Setting;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
 
@@ -19,7 +22,7 @@ public partial class GameView
         DataContext = _viewModel;
 
         _viewModel.stackPanell = stackPanel;
-        _viewModel.CreateButtonsForPlayerHand();
+        // _viewModel.CreateButtonsForPlayerHand();
     }
 
 
@@ -30,7 +33,7 @@ public partial class GameView
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)
     {
-        NavigationService?.Navigate(new MainMenu.MainMenuView());
+
     }
 
     public void UpdateMiddleCard(string content, string color, string value)

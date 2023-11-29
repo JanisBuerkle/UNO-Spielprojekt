@@ -3,11 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mainMenu="clr-namespace:UNO_Spielprojekt.MainMenu"
+        xmlns:window="clr-namespace:UNO_Spielprojekt.Window"
+        xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
+        xmlns:gamePage="clr-namespace:UNO_Spielprojekt.GamePage"
         mc:Ignorable="d"
         Title="UNO-Game"
-        Icon="C:\Users\bks\RiderProjects\UNO-Spielprojekt\Assets\Logos\logo.png">
-    <Grid>
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
-        
+        Icon="pack://application:,,,/Assets/Logos/logo.png">
+    <Window.Resources>
+        <window:MainViewModel x:Key="MainViewModel" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource MainViewModel}">
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"> </Frame>
+
+        <mainMenu:MainMenuView Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <setting:SettingsView Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding SettingsViewModel}" />
+        <gamePage:GameView Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </Window>

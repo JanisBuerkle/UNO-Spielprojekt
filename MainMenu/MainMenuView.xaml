@@ -1,10 +1,11 @@
-﻿<Page x:Class="UNO_Spielprojekt.MainMenu.MainMenuView"
+﻿<UserControl x:Class="UNO_Spielprojekt.MainMenu.MainMenuView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:resources="clr-namespace:UNO_Spielprojekt.Resources"
       mc:Ignorable="d"
-      Title="Mainmenu">
+      >
     
     <Grid>
         <Grid.Background>
@@ -12,17 +13,18 @@
         </Grid.Background>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Button x:Name="StartButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold" Click="StartButtonClicked" Style="{StaticResource MyButtonStyle}"/>
-            <Button x:Name="ScoreboardButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="67" FontWeight="Bold" Click="ScoreboardButtonClicked" Style="{StaticResource MyButtonStyle}"/>
-            <Button x:Name="ExitButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="70" FontWeight="Bold" Click="ExitButtonClicked" Style="{StaticResource MyButtonStyle}"/> 
+            <Button Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold" Style="{StaticResource MyButtonStyle}"
+                    Content="{x:Static resources:Resource.Play}"/>
+            <Button x:Name="ScoreboardButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="67" FontWeight="Bold" Style="{StaticResource MyButtonStyle}"/>
+            <Button x:Name="ExitButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="70" FontWeight="Bold" Style="{StaticResource MyButtonStyle}"/> 
         </StackPanel>
 
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Click="ButtonBase_OnClick" Style="{StaticResource MyButtonStyle}">
+        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0" Style="{StaticResource MyButtonStyle}">
             <Button.Background>
                 <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/settings.png" Stretch="Fill"/>
             </Button.Background>
         </Button>
 
-        <Button Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Skip_OnClick" Style="{StaticResource MyButtonStyle}"/>
+        <Button Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MyButtonStyle}"/>
     </Grid>
-</Page>
+</UserControl>

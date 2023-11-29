@@ -230,6 +230,22 @@
       <Resource Include="Assets\Symbols\settings.png" />
       <None Remove="Assets\Symbols\minus.png" />
       <Resource Include="Assets\Symbols\minus.png" />
+      <None Remove="Assets\Symbols\fullscreen.png" />
+      <Resource Include="Assets\Symbols\fullscreen.png" />
+      <None Remove="Assets\Symbols\windowed.png" />
+      <Resource Include="Assets\Symbols\windowed.png" />
+      <None Remove="Assets\Logos\logo.png" />
+      <Resource Include="Assets\Logos\logo.png" />
+      <None Remove="Assets\Logos\logo-144.png" />
+      <Resource Include="Assets\Logos\logo-144.png" />
+      <None Remove="Assets\Logos\logo-192.png" />
+      <Resource Include="Assets\Logos\logo-192.png" />
+      <None Remove="Assets\Logos\logo-320.png" />
+      <Resource Include="Assets\Logos\logo-320.png" />
+      <None Remove="Assets\Logos\logo-512.png" />
+      <Resource Include="Assets\Logos\logo-512.png" />
+      <None Remove="Assets\Logos\uno_icon.png" />
+      <Resource Include="Assets\Logos\uno_icon.png" />
     </ItemGroup>
 
     <ItemGroup>

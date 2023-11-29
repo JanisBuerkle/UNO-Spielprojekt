@@ -4,15 +4,16 @@ namespace UNO_Spielprojekt.Setting;
 
 public class WindowModes
 {
-    public List<WindowMode> MyModes { get; set; } = GetModes();
+    public List<WindowMode> MyModes { get; }
 
-    public static List<WindowMode> GetModes()
+    public WindowModes()
     {
-        var list = new List<WindowMode>()
+        MyModes = new List<WindowMode>()
         {
-            new WindowMode() { Symbol="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\Symbols\\fullscreen.png", Name= "Fullscreen"},
-            new WindowMode() { Symbol="C:\\Users\\bks\\RiderProjects\\UNO-Spielprojekt\\Assets\\Symbols\\windowed.png", Name= "Windowed"},
+            WindowMode.FullScreen,
+            WindowMode.Windowed
+            // new WindowMode() { Symbol="pack://application:,,,/Assets/fullscreen.png", Name= "Fullscreen"},
+            // new WindowMode() { Symbol="pack://application:,,,/Assets/Symbols/windowed.png", Name= "Windowed"},
         };
-        return list;
     }
 }

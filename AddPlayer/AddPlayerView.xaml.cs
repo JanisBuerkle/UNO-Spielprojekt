@@ -27,7 +27,7 @@ namespace UNO_Spielprojekt.AddPlayer
 
         private void HomeButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new MainMenu.MainMenuView());
+            
         }
 
 

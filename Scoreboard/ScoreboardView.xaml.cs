@@ -16,6 +16,6 @@ public partial class ScoreboardView : Page
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new MainMenu.MainMenuView()); 
+        // NavigationService.Navigate(new MainMenu.MainMenuView()); 
     }
 }

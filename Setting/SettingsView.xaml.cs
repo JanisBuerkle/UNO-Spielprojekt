@@ -7,11 +7,25 @@ using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Setting
 {
-    public partial class SettingsView : Page
+    public partial class SettingsView : UserControl
     {
-        public static Language language = new Language();
-        private MainWindowView _mainWindow;
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+            nameof(ViewModel), typeof(SettingsViewModel), typeof(SettingsView), new PropertyMetadata(default(SettingsViewModel)));
 
+        public SettingsViewModel ViewModel
+        {
+            get => (SettingsViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
+        }
+        
+        public static Language language = new Language();
+        private readonly MainWindowView _mainWindow;
+
+        public SettingsView()
+        {
+            InitializeComponent();
+        }
+        
         public SettingsView(MainWindowView mainWindow)
         {
             InitializeComponent();
@@ -37,12 +51,6 @@ namespace UNO_Spielprojekt.Setting
             Console.WriteLine($@"Header text: {Header.Text}");
         }
 
-
-        private void HomeButtonClicked(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new MainMenu.MainMenuView());
-        }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ComboBox.SelectedItem is Language selectedLanguage)
@@ -59,25 +67,19 @@ namespace UNO_Spielprojekt.Setting
         {
             if (ScreenModus.SelectedItem is WindowMode selectedMode)
             {
-                string selectedValue = selectedMode.Name;
-
-                if (selectedValue == "Fullscreen")
+                if (selectedMode == WindowMode.FullScreen)
                 {
                     // WindowWidth = 300;
                     // WindowHeight = 200;
+                    _mainWindow.WindowStyle = WindowStyle.None;
+                    _mainWindow.WindowState = WindowState.Maximized;
                     Console.Write("Fullscreen");
-                    
                 }
-                else if (selectedValue == "Windowed")
+                else if (selectedMode == WindowMode.Windowed)
                 {
-                    WindowWidth = 500;
-                    WindowHeight = 300;
                     Console.Write("Windowed");
                 }
             }
         }
-
-
-
     }
 }

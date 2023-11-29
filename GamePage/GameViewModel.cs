@@ -64,22 +64,21 @@ namespace UNO_Spielprojekt.GamePage
 
         private void InitializeUI()
         {
-            List<Button> buttons = CreateButtonsForPlayerHand();
-            DisplayPlayerHand(buttons);
+            // List<Button> buttons = CreateButtonsForPlayerHand();
+            // DisplayPlayerHand(buttons);
         }
 
-        public List<Button> CreateButtonsForPlayerHand()
-        {
-            List<Button> buttons = new List<Button>();
-
-            foreach (var card in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand)
-            {
-                Button button = CreateCardButton(card);
-                buttons.Add(button);
-            }
-
-            return buttons;
-        }
+        // public List<Button> CreateButtonsForPlayerHand()
+        // {
+        //     List<Button> buttons = new List<Button>();
+        //
+        //     foreach (var card in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand)
+        //     {
+        //         Button button = CreateCardButton(card);
+        //         buttons.Add(button);
+        //     }
+        //     return buttons;
+        // }
 
         private Button CreateCardButton(string card)
         {
@@ -143,7 +142,7 @@ namespace UNO_Spielprojekt.GamePage
         private void Card_Clicked(object sender, RoutedEventArgs e)
         {
             string? tag = (sender as FrameworkElement)?.Tag as string;
-
+            
             if (sender is Button clickedButton)
             {
                 HandleClickedCard(clickedButton, tag);
@@ -158,7 +157,6 @@ namespace UNO_Spielprojekt.GamePage
             {
                 ResetButtonMargins();
             }
-
             if (clickedButton.Margin.Top == 5)
             {
                 _chosenCard = true;
@@ -180,7 +178,7 @@ namespace UNO_Spielprojekt.GamePage
 
         private void MoveCardUp(Button clickedButton)
         {
-            Thickness newMargin = clickedButton.Margin;
+            Thickness newMargin = clickedButton.Margin; 
             newMargin.Top -= 100;
             clickedButton.Margin = newMargin;
         }
