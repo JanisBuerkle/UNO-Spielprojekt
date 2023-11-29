@@ -16,10 +16,14 @@
     </Window.Resources>
 
     <Grid DataContext="{StaticResource MainViewModel}">
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"> </Frame>
+        <!-- <Frame Name="MainFrame" NavigationUIVisibility="Hidden"> </Frame> -->
 
-        <mainMenu:MainMenuView Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <setting:SettingsView Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding SettingsViewModel}" />
-        <gamePage:GameView Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <mainMenu:MainMenuView
+            Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <setting:SettingsView
+            Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+            ViewModel="{Binding SettingsViewModel}" />
+        <gamePage:GameView Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           ViewModel="{Binding GameViewModel}" />
     </Grid>
 </Window>

@@ -15,6 +15,6 @@ public partial class RulesView : Page
 
     private void RulesButtonClicked(object sender, RoutedEventArgs e)
     {
-        NavigationService?.Navigate(new GameView());
+        // NavigationService?.Navigate(new GameView());
     }
 }

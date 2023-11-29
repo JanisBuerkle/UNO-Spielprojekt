@@ -1,39 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using UNO_Spielprojekt.AddPlayer;
-using UNO_Spielprojekt.Setting;
-using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
 
 public partial class GameView
 {
-    private GameViewModel _viewModel;
+    public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+        nameof(ViewModel), typeof(GameViewModel), typeof(GameView), new PropertyMetadata(default(GameViewModel)));
 
+    public GameViewModel ViewModel
+    {
+        get => (GameViewModel)GetValue(ViewModelProperty);
+        set => SetValue(ViewModelProperty, value);
+    }
+    
     public GameView()
     {
         InitializeComponent();
-        _viewModel = new GameViewModel();
-        DataContext = _viewModel;
-
-        _viewModel.stackPanell = stackPanel;
-        // _viewModel.CreateButtonsForPlayerHand();
-    }
-
-
-    private void LegenButton(object sender, RoutedEventArgs e)
-    {
-        _viewModel.LegenButtonMethod();
     }
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)
     {
-
+        
     }
 
     public void UpdateMiddleCard(string content, string color, string value)

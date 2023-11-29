@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CommunityToolkit.Mvvm.Input;
 
 namespace UNO_Spielprojekt.GamePage
 {
@@ -29,11 +30,13 @@ namespace UNO_Spielprojekt.GamePage
         private GameLogic _gameLogic;
         private ObservableCollection<string> buttonTexts = new ObservableCollection<string> { "Button 1", "Button 2", "Button 3" };
         public StackPanel stackPanell { get; set; } = new StackPanel();
+        public RelayCommand LegenCommand { get; }
 
         public GameViewModel()
         {
             InitializeGame();
             MiddleCard = GameLogic.prop.Center.FirstOrDefault();
+            LegenCommand = new RelayCommand(LegenButtonMethod);
         }
 
         private void InitializeGame()

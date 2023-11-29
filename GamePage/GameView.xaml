@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:UNO_Spielprojekt.GamePage"
-      mc:Ignorable="d">
+      mc:Ignorable="d"
+      Name="Control">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,7 +21,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -43,7 +44,7 @@
 
         <StackPanel Grid.Row="2" Grid.Column="2">
             <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,300,20,20"
-                       Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Click="LegenButton" />
+                       Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Command="{Binding LegenCommand}" />
             <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,0,20,20"
                        Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
         </StackPanel>

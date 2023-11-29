@@ -11,7 +11,7 @@ public partial class ScoreboardView : Page
     {
         InitializeComponent();
         ScoreboardViewModel viewModel = new ScoreboardViewModel();
-        this.DataContext = viewModel;
+        DataContext = viewModel;
     }
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)

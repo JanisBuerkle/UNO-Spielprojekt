@@ -7,7 +7,7 @@ namespace UNO_Spielprojekt.Window
         public MainWindowView()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainMenuView());
+            // MainFrame.Navigate(new MainMenuView());
         }
     }
 }
