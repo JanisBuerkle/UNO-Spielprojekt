@@ -1,26 +1,30 @@
 ﻿using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using UNO_Spielprojekt.AddPlayer;
-using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Localization;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.MainMenu
 {
-    public partial class MainMenuView : UserControl
+    public partial class MainMenuView
     {
+        public static readonly DependencyProperty MainViewModelProperty = DependencyProperty.Register(
+            nameof(MainViewModel), typeof(MainViewModel), typeof(MainMenuView), new PropertyMetadata(default(MainViewModel)));
 
-        public MainMenuView()
+        public MainViewModel MainViewModel
         {
-            InitializeComponent();
+            get => (MainViewModel)GetValue(MainViewModelProperty);
+            set => SetValue(MainViewModelProperty, value); 
         }
-        
-        public MainMenuView(MainWindowView mainWindowView)
+        public MainMenuView()
         {
             InitializeComponent();
             SetLanguage(Thread.CurrentThread.CurrentUICulture);
         }
+        // public MainMenuView(MainWindowView mainWindowView) 
+        // {
+        //     InitializeComponent();
+        //     SetLanguage(Thread.CurrentThread.CurrentUICulture);
+        // }
 
         private void SetLanguage(System.Globalization.CultureInfo culture)
         {
@@ -57,5 +61,10 @@ namespace UNO_Spielprojekt.MainMenu
         //     GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
         //     NavigationService?.Navigate(new GameView());
         // }
+        private void StartButtonClicked(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.MainMenuVisible = false;
+            MainViewModel.AddPlayerVisible = true;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace UNO_Spielprojekt.GamePage
             return 1;
         }
 
-        public int ChooseStartingPlayer()
+        public int ChooseStartingPlayer() 
         {
             return _random.Next(0, prop.CountOfPlayers);
         }

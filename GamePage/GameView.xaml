@@ -49,11 +49,23 @@
                        Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
         </StackPanel>
 
-        <Button x:Name="MiddleCard" Grid.Column="1" Grid.Row="1" Content="{Binding MiddleCard}" Style="{StaticResource MyButtonStyle}" />
+        <Button x:Name="MiddleCard" Grid.Column="1" Grid.Row="1" Content="{Binding MiddleCard}" Style="{StaticResource MyButtonStyle}" > 
+            <Button.Background>
+                <ImageBrush ImageSource="{Binding MiddleCardPic}" Stretch="Fill"/>
+            </Button.Background>
+        </Button>
 
-        <StackPanel x:Name="stackPanel" Grid.Row="2" Grid.Column="1" Grid.RowSpan="1">
+        <StackPanel x:Name="stackPanel" Grid.Row="2" Grid.Column="1">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-                <ItemsControl ItemTemplate="{StaticResource ButtonTemplate}" />
+                <ItemsControl ItemsSource="{Binding  PlayViewModel.Cards}"><!-- ItemTemplate="{StaticResource ButtonTemplate}"-->
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:CardViewModel}">
+                            <Button>
+                                <Image Source="{Binding ImageUri}"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </StackPanel>
     </Grid>

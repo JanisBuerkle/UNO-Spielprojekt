@@ -11,11 +11,11 @@ using CommunityToolkit.Mvvm.Input;
 namespace UNO_Spielprojekt.GamePage
 {
     public class GameViewModel : ViewModelBase
-    {
+    {  
         private string _middleCard;
         public string MiddleCard
         {
-            get { return _middleCard; }
+            get => _middleCard;
             set
             {
                 if (_middleCard != value)
@@ -25,17 +25,35 @@ namespace UNO_Spielprojekt.GamePage
                 }
             }
         }
+        private string _middleCardPic;
+        public string MiddleCardPic
+        {
+            get => _middleCardPic;
+            set
+            {
+                if (_middleCardPic != value)
+                {
+                    _middleCardPic = value;
+                    OnPropertyChanged(nameof(MiddleCardPic));
+                }
+            }
+        }
 
         private bool _chosenCard;
         private GameLogic _gameLogic;
         private ObservableCollection<string> buttonTexts = new ObservableCollection<string> { "Button 1", "Button 2", "Button 3" };
-        public StackPanel stackPanell { get; set; } = new StackPanel();
+        private StackPanel stackPanell { get; set; } = new StackPanel();
         public RelayCommand LegenCommand { get; }
+        public PlayViewModel PlayViewModel { get; set; }
 
         public GameViewModel()
         {
+            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Hans" });
+            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
             InitializeGame();
             MiddleCard = GameLogic.prop.Center.FirstOrDefault();
+            string[] test = MiddleCard.Split();
+            MiddleCardPic = $"pack://application:,,,/Assets/cards/{test[1]}/{test[0].ToLower()}.png";
             LegenCommand = new RelayCommand(LegenButtonMethod);
         }
 
@@ -65,23 +83,31 @@ namespace UNO_Spielprojekt.GamePage
             }
         }
 
-        private void InitializeUI()
+        private void Test()
         {
-            // List<Button> buttons = CreateButtonsForPlayerHand();
-            // DisplayPlayerHand(buttons);
+            foreach (string test in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand)
+            {
+                Console.Write(test);
+            }
+            
         }
 
-        // public List<Button> CreateButtonsForPlayerHand()
-        // {
-        //     List<Button> buttons = new List<Button>();
-        //
-        //     foreach (var card in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand)
-        //     {
-        //         Button button = CreateCardButton(card);
-        //         buttons.Add(button);
-        //     }
-        //     return buttons;
-        // }
+        private void InitializeUI()
+        {
+            List<Button> buttons = CreateButtonsForPlayerHand();
+            DisplayPlayerHand(buttons);
+        }
+
+        private List<Button> CreateButtonsForPlayerHand()
+        {
+            List<Button> buttons = new List<Button>();
+            foreach (var card in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand)
+            {
+                Button button = CreateCardButton(card);
+                buttons.Add(button);
+            }
+            return buttons;
+        }
 
         private Button CreateCardButton(string card)
         {
@@ -186,7 +212,7 @@ namespace UNO_Spielprojekt.GamePage
             clickedButton.Margin = newMargin;
         }
 
-        public void LegenButtonMethod()
+        private void LegenButtonMethod()
         {
             if (_chosenCard)
             {
@@ -197,14 +223,14 @@ namespace UNO_Spielprojekt.GamePage
                 {
                     GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand.RemoveAt(indexOfSelectedCard);
                     GameLogic.prop.Center.Add(GameLogic.prop.ClickedCard.ToString());
-                    // ShowCardInCenter();
+                    ShowCardInCenter();
                     UpdatePlayerHand();
                     RemoveButtonFromStackPanel(indexOfSelectedCard);
                 }
             }
         }
 
-        public void RemoveButtonFromStackPanel(int index)
+        private void RemoveButtonFromStackPanel(int index)
         {
             if (index >= 0 && stackPanell.Children.Count > index)
             {
@@ -212,51 +238,15 @@ namespace UNO_Spielprojekt.GamePage
             }
         }
 
-        // private void ShowCardInCenter()
-        // {
-        //     string[] cardSplit = GameLogic.prop.Center[^1].Split();
-        //     string color = cardSplit[0].ToLower();
-        //     string value = cardSplit[1].ToLower();
-        //
-        //     SetMiddleCardProperties(color, value);
-        //     MiddleCard = GameLogic.prop.Center[^1];
-        // }
-        //
-        // private void SetMiddleCardProperties(string color, string value)
-        // {
-        //     MiddleCard.Content = GameLogic.prop.Center[^1];
-        //     MiddleCard.Width = 260;
-        //     MiddleCard.Height = 400;
-        //     MiddleCard.Margin = new Thickness(5);
-        //     MiddleCard.Tag = "Card";
-        //
-        //     SetMiddleCardBackground(color, value);
-        // }
-        //
-        // private void SetMiddleCardBackground(string color, string value)
-        // {
-        //     if (color == "wild")
-        //     {
-        //         ImageBrush imageBrush = new ImageBrush
-        //         {
-        //             ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
-        //             Stretch = Stretch.Fill
-        //         };
-        //
-        //         MiddleCard.Background = imageBrush;
-        //     }
-        //     else
-        //     {
-        //         ImageBrush imageBrush = new ImageBrush
-        //         {
-        //             ImageSource =
-        //                 new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
-        //             Stretch = Stretch.Fill
-        //         };
-        //
-        //         MiddleCard.Background = imageBrush;
-        //     }
-        // }
+        private void ShowCardInCenter()
+        {
+            string[] cardSplit = GameLogic.prop.Center[^1].Split();
+            string color = cardSplit[0].ToLower();
+            string value = cardSplit[1].ToLower();
+        
+            SetMiddleCardProperties(color, value);
+            MiddleCard = GameLogic.prop.Center[^1];
+        }
 
         private void UpdatePlayerHand()
         {
@@ -271,6 +261,65 @@ namespace UNO_Spielprojekt.GamePage
 
                 button.Content = updatedCard;
                 button.Style = buttonStyle;
+            }
+        }
+
+        private void SetMiddleCardProperties(string color, string value)
+        {
+            // MiddleCard.Content = GameLogic.prop.Center[^1];
+            // MiddleCard.Width = 260;
+            // MiddleCard.Height = 400;
+            // MiddleCard.Margin = new Thickness(5);
+            // MiddleCard.Tag = "Card";
+        
+            SetMiddleCardBackground(color, value);
+        }
+
+        private void SetMiddleCardBackground(string color, string value)
+        {
+            if (color == "wild")
+            {
+                ImageBrush imageBrush = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
+                    Stretch = Stretch.Fill
+                };
+                // MiddleCard.Background = imageBrush; 
+            }
+            else
+            {
+                ImageBrush imageBrush = new ImageBrush
+                {
+                    ImageSource =
+                        new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
+                    Stretch = Stretch.Fill
+                };
+                // MiddleCard.Background = imageBrush;
+            }
+        }
+        public void UpdateMiddleCard(string content, string color, string value)
+        {
+            // MiddleCard.Content = content;
+
+            if (color == "wild")
+            {
+                ImageBrush imageBrush = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
+                    Stretch = Stretch.Fill
+                };
+
+                // MiddleCard.Background = imageBrush;
+            }
+            else
+            {
+                ImageBrush imageBrush = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
+                    Stretch = Stretch.Fill
+                };
+
+                // MiddleCard.Background = imageBrush;
             }
         }
     }

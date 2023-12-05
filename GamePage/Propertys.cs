@@ -26,4 +26,6 @@ public class Propertys
         Center = new List<string>();
         Deck = new List<string>(); 
     }
+     
+    
 }

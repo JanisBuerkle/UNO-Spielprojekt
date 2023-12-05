@@ -15,9 +15,19 @@ public partial class GameView
         get => (GameViewModel)GetValue(ViewModelProperty);
         set => SetValue(ViewModelProperty, value);
     }
+
+    public static readonly DependencyProperty PropertysProperty = DependencyProperty.Register(
+        nameof(Propertys), typeof(Propertys), typeof(GameView), new PropertyMetadata(default(Propertys)));
+
+    public Propertys Propertys
+    {
+        get { return (Propertys)GetValue(PropertysProperty); }
+        set { SetValue(PropertysProperty, value); }
+    }
     
     public GameView()
     {
+        ViewModel = new GameViewModel();
         InitializeComponent();
     }
 
@@ -26,31 +36,7 @@ public partial class GameView
         
     }
 
-    public void UpdateMiddleCard(string content, string color, string value)
-    {
-        MiddleCard.Content = content;
 
-        if (color == "wild")
-        {
-            ImageBrush imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-
-            MiddleCard.Background = imageBrush;
-        }
-        else
-        {
-            ImageBrush imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-
-            MiddleCard.Background = imageBrush;
-        }
-    }
     public void Test()
     {
             

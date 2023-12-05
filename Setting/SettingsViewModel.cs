@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.Input;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Setting;
 
 public class SettingsViewModel : ViewModelBase
 {
+    private readonly MainViewModel _mainViewModel;
     public List<Language> MyLangs { get; }
     public List<WindowMode> MyModes { get; }
     public RelayCommand GoToMainMenuCommand { get; }
@@ -33,5 +35,11 @@ public class SettingsViewModel : ViewModelBase
         };
 
         GoToMainMenuCommand = new RelayCommand(goToMainMenuCommand);
+    }
+
+    public SettingsViewModel(MainViewModel mainViewModel)
+    {
+        _mainViewModel = mainViewModel;
+        GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
     }
 }
