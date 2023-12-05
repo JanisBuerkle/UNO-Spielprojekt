@@ -24,7 +24,7 @@ public partial class GameView
         get { return (Propertys)GetValue(PropertysProperty); }
         set { SetValue(PropertysProperty, value); }
     }
-    
+
     public GameView()
     {
         ViewModel = new GameViewModel();
@@ -33,12 +33,10 @@ public partial class GameView
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)
     {
-        
     }
 
 
     public void Test()
     {
-            
     }
 }

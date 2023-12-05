@@ -6,7 +6,7 @@ namespace UNO_Spielprojekt.AddPlayer
 {
     public partial class AddPlayerView
     {
-        private PlayerData _playerData;
+        private readonly PlayerData _playerData;
 
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
             nameof(ViewModel), typeof(AddPlayerViewModel), typeof(AddPlayerView),
@@ -27,13 +27,12 @@ namespace UNO_Spielprojekt.AddPlayer
 
         private void HomeButtonClicked(object sender, RoutedEventArgs e)
         {
-            
         }
 
 
         private void PlayerNameChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateWeiterButtonVisibility(); 
+            UpdateWeiterButtonVisibility();
         }
 
         private void AddPlayerClicked(object sender, RoutedEventArgs e)
@@ -42,6 +41,7 @@ namespace UNO_Spielprojekt.AddPlayer
             {
                 ViewModel.PlayerNames.Add(new NewPlayerViewModel());
             }
+
             UpdateWeiterButtonVisibility();
         }
 
@@ -66,12 +66,12 @@ namespace UNO_Spielprojekt.AddPlayer
             {
                 foreach (var t in ViewModel.PlayerNames)
                 {
-                    bool allFieldsFilled = !string.IsNullOrWhiteSpace(t.Name); 
+                    bool allFieldsFilled = !string.IsNullOrWhiteSpace(t.Name);
                     ContinueButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
                 }
             }
         }
-        
+
         private void ContinueButtonClicked(object sender, RoutedEventArgs e)
         {
             foreach (var t in ViewModel.PlayerNames)
@@ -81,8 +81,5 @@ namespace UNO_Spielprojekt.AddPlayer
 
             NavigationService?.Navigate(new RulesView(_playerData));
         }
-
-
     }
-    
 }

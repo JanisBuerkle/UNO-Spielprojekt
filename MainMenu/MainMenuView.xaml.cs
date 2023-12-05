@@ -8,13 +8,15 @@ namespace UNO_Spielprojekt.MainMenu
     public partial class MainMenuView
     {
         public static readonly DependencyProperty MainViewModelProperty = DependencyProperty.Register(
-            nameof(MainViewModel), typeof(MainViewModel), typeof(MainMenuView), new PropertyMetadata(default(MainViewModel)));
+            nameof(MainViewModel), typeof(MainViewModel), typeof(MainMenuView),
+            new PropertyMetadata(default(MainViewModel)));
 
         public MainViewModel MainViewModel
         {
             get => (MainViewModel)GetValue(MainViewModelProperty);
-            set => SetValue(MainViewModelProperty, value); 
+            set => SetValue(MainViewModelProperty, value);
         }
+
         public MainMenuView()
         {
             InitializeComponent();

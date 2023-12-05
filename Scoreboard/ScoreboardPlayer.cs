@@ -1,8 +1,9 @@
-﻿namespace UNO_Spielprojekt.Scoreboard;
-
-public class ScoreboardPlayer
+﻿namespace UNO_Spielprojekt.Scoreboard
 {
-    public string PlayerScoreboardName { get; set; }
-    public int PlayerScoreboardScore { get; set; }
+    public class ScoreboardPlayer
+    {
+        public string PlayerScoreboardName { get; set; }
+        public int PlayerScoreboardScore { get; set; }
     
+    }
 }

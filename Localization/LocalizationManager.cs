@@ -12,7 +12,6 @@ namespace UNO_Spielprojekt.Localization
 
         public static void SetLanguage(CultureInfo culture)
         {
-
             _resourceManager = new ResourceManager("UNO_Spielprojekt.Resources.Resource", typeof(Resource).Assembly);
 
             var localizedResourceSet = _resourceManager.GetResourceSet(culture, true, true);
@@ -26,11 +25,13 @@ namespace UNO_Spielprojekt.Localization
                 Console.WriteLine($@"No resources found for culture: {culture.Name}");
             }
         }
+
         public static string? GetLocalizedString(string key)
         {
             if (_resourceManager == null)
             {
-                _resourceManager = new ResourceManager("UNO_Spielprojekt.Resources.Resource", typeof(Resource).Assembly);
+                _resourceManager =
+                    new ResourceManager("UNO_Spielprojekt.Resources.Resource", typeof(Resource).Assembly);
             }
 
             if (SettingsView.language != null)

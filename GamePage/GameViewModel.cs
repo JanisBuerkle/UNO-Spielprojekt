@@ -11,8 +11,9 @@ using CommunityToolkit.Mvvm.Input;
 namespace UNO_Spielprojekt.GamePage
 {
     public class GameViewModel : ViewModelBase
-    {  
+    {
         private string _middleCard;
+
         public string MiddleCard
         {
             get => _middleCard;
@@ -25,7 +26,9 @@ namespace UNO_Spielprojekt.GamePage
                 }
             }
         }
+
         private string _middleCardPic;
+
         public string MiddleCardPic
         {
             get => _middleCardPic;
@@ -41,7 +44,10 @@ namespace UNO_Spielprojekt.GamePage
 
         private bool _chosenCard;
         private GameLogic _gameLogic;
-        private ObservableCollection<string> buttonTexts = new ObservableCollection<string> { "Button 1", "Button 2", "Button 3" };
+
+        private ObservableCollection<string> buttonTexts = new ObservableCollection<string>
+            { "Button 1", "Button 2", "Button 3" };
+
         private StackPanel stackPanell { get; set; } = new StackPanel();
         public RelayCommand LegenCommand { get; }
         public PlayViewModel PlayViewModel { get; set; }
@@ -64,7 +70,6 @@ namespace UNO_Spielprojekt.GamePage
             InitializePlayersHands();
             InitializeUI();
             _gameLogic.PlaceFirstCardInCenter();
-            
         }
 
         private void InitializeGameProperties()
@@ -89,7 +94,6 @@ namespace UNO_Spielprojekt.GamePage
             {
                 Console.Write(test);
             }
-            
         }
 
         private void InitializeUI()
@@ -106,6 +110,7 @@ namespace UNO_Spielprojekt.GamePage
                 Button button = CreateCardButton(card);
                 buttons.Add(button);
             }
+
             return buttons;
         }
 
@@ -135,14 +140,15 @@ namespace UNO_Spielprojekt.GamePage
         private void SetButtonBackground(Button button, string color, string value)
         {
             ImageBrush imageBrush = new ImageBrush();
-            
+
             if (color == "wild")
             {
                 imageBrush.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/wild.png"));
             }
             else
             {
-                imageBrush.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png"));
+                imageBrush.ImageSource =
+                    new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png"));
             }
 
             imageBrush.Stretch = Stretch.Fill;
@@ -171,7 +177,7 @@ namespace UNO_Spielprojekt.GamePage
         private void Card_Clicked(object sender, RoutedEventArgs e)
         {
             string? tag = (sender as FrameworkElement)?.Tag as string;
-            
+
             if (sender is Button clickedButton)
             {
                 HandleClickedCard(clickedButton, tag);
@@ -186,6 +192,7 @@ namespace UNO_Spielprojekt.GamePage
             {
                 ResetButtonMargins();
             }
+
             if (clickedButton.Margin.Top == 5)
             {
                 _chosenCard = true;
@@ -196,7 +203,7 @@ namespace UNO_Spielprojekt.GamePage
         private void ResetButtonMargins()
         {
             foreach (Button button in stackPanell.Children.OfType<ScrollViewer>()
-                .SelectMany(sv => ((ItemsControl)sv.Content).Items.OfType<Button>()))
+                         .SelectMany(sv => ((ItemsControl)sv.Content).Items.OfType<Button>()))
             {
                 if ((button.Tag as string) == "Card")
                 {
@@ -207,7 +214,7 @@ namespace UNO_Spielprojekt.GamePage
 
         private void MoveCardUp(Button clickedButton)
         {
-            Thickness newMargin = clickedButton.Margin; 
+            Thickness newMargin = clickedButton.Margin;
             newMargin.Top -= 100;
             clickedButton.Margin = newMargin;
         }
@@ -243,7 +250,7 @@ namespace UNO_Spielprojekt.GamePage
             string[] cardSplit = GameLogic.prop.Center[^1].Split();
             string color = cardSplit[0].ToLower();
             string value = cardSplit[1].ToLower();
-        
+
             SetMiddleCardProperties(color, value);
             MiddleCard = GameLogic.prop.Center[^1];
         }
@@ -271,7 +278,7 @@ namespace UNO_Spielprojekt.GamePage
             // MiddleCard.Height = 400;
             // MiddleCard.Margin = new Thickness(5);
             // MiddleCard.Tag = "Card";
-        
+
             SetMiddleCardBackground(color, value);
         }
 
@@ -297,6 +304,7 @@ namespace UNO_Spielprojekt.GamePage
                 // MiddleCard.Background = imageBrush;
             }
         }
+
         public void UpdateMiddleCard(string content, string color, string value)
         {
             // MiddleCard.Content = content;

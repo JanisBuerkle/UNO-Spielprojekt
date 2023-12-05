@@ -1,23 +1,21 @@
 ﻿<UserControl x:Class="UNO_Spielprojekt.Setting.SettingsView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:UNO_Spielprojekt"
-      xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-      xmlns:resources="clr-namespace:UNO_Spielprojekt.Resources"
-      mc:Ignorable="d"
-      Name="Control">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             mc:Ignorable="d"
+             Name="Control">
     <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />  
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -25,26 +23,29 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
         </Grid.Background>
-        
-        <Button Name="Home" Command="{Binding GoToMainMenuCommand}" Style="{StaticResource HomeButtonStyle}"/>
-        
-        <TextBlock x:Name="Header" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="90" Margin="0,10,0,0" FontWeight="Bold" />
-        
-        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ComboBox" FontSize="48" SelectionChanged="ComboBox_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}"
+
+        <Button Name="Home" Command="{Binding GoToMainMenuCommand}" Style="{StaticResource HomeButtonStyle}" />
+
+        <TextBlock x:Name="Header" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="90" Margin="0,10,0,0" FontWeight="Bold" />
+
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ComboBox" FontSize="48"
+                  SelectionChanged="ComboBox_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}"
                   ItemsSource="{Binding MyLangs}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Flag}"/>
-                        <TextBlock Text="{Binding LangName}"/>
+                        <Image Source="{Binding Flag}" />
+                        <TextBlock Text="{Binding LangName}" />
                     </StackPanel>
-                </DataTemplate> 
+                </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        
-        <ComboBox x:Name="ScreenModus" Grid.Row="3" Grid.Column="1" Margin="0,20,0,0" FontSize="48" SelectionChanged="ScreenModus_OnSelectionChanged"
+
+        <ComboBox x:Name="ScreenModus" Grid.Row="3" Grid.Column="1" Margin="0,20,0,0" FontSize="48"
+                  SelectionChanged="ScreenModus_OnSelectionChanged"
                   ItemsSource="{Binding MyModes}">
             <ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type setting:WindowMode}">
@@ -54,22 +55,26 @@
                                 <Style TargetType="Image">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding}" Value="FullScreen">
-                                            <Setter Property="Source" Value="pack://application:,,,/Assets/Symbols/fullscreen.png"></Setter>
+                                            <Setter Property="Source"
+                                                    Value="pack://application:,,,/Assets/Symbols/fullscreen.png">
+                                            </Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding}" Value="Windowed">
-                                            <Setter Property="Source" Value="pack://application:,,,/Assets/Symbols/windowed.png"></Setter>
+                                            <Setter Property="Source"
+                                                    Value="pack://application:,,,/Assets/Symbols/windowed.png">
+                                            </Setter>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Image.Style>
                         </Image>
-                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}" />
                     </StackPanel>
-                </DataTemplate> 
+                </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        
-        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <ui:Snackbar Grid.Row="4" Grid.Column="1" x:Name="LanguageChangeSnackBar" Timeout="4000" Appearance="Success"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <ui:Snackbar Grid.Row="4" Grid.Column="1" x:Name="LanguageChangeSnackBar" Timeout="4000" Appearance="Success" />
     </Grid>
 </UserControl>

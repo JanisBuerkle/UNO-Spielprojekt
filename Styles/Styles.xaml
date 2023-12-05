@@ -48,14 +48,14 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="PlusButtonStyle" TargetType="Button">
-        <Setter Property="Height" Value="100"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,10,10,0"/>
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,10,10,0" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -77,20 +77,19 @@
         </Setter>
     </Style>
 
-    
-    
+
     <Style x:Key="HomeButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="80"/>
-        <Setter Property="Height" Value="80"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Margin" Value="10,10,0,0"/>
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="80" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="10,10,0,0" />
         <Setter Property="Background">
             <Setter.Value>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png"/>
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" />
             </Setter.Value>
         </Setter>
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

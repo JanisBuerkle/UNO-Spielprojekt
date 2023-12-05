@@ -10,14 +10,15 @@ namespace UNO_Spielprojekt.Setting
     public partial class SettingsView : UserControl
     {
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-            nameof(ViewModel), typeof(SettingsViewModel), typeof(SettingsView), new PropertyMetadata(default(SettingsViewModel)));
+            nameof(ViewModel), typeof(SettingsViewModel), typeof(SettingsView),
+            new PropertyMetadata(default(SettingsViewModel)));
 
         public SettingsViewModel ViewModel
         {
             get => (SettingsViewModel)GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
         }
-        
+
         public static Language language = new Language();
         private readonly MainWindowView _mainWindow;
 
@@ -25,7 +26,7 @@ namespace UNO_Spielprojekt.Setting
         {
             InitializeComponent();
         }
-        
+
         public SettingsView(MainWindowView mainWindow)
         {
             InitializeComponent();

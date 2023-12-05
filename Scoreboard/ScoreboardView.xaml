@@ -8,7 +8,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill"/>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -32,9 +32,9 @@
                             <Border BorderThickness="0 0 0 1" BorderBrush="#696394">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding PlayerScoreboardName}" Foreground="White"
                                                Grid.Column="0" FontSize="20" Padding="5" />
@@ -54,6 +54,6 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}"/>
+        <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </Page>

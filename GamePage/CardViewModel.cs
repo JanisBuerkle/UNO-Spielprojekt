@@ -29,7 +29,7 @@ public class CardViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
-    
+
     public Uri ImageUri
     {
         get => _imageUri;

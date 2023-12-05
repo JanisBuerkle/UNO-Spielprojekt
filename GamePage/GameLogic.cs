@@ -9,7 +9,10 @@ namespace UNO_Spielprojekt.GamePage
         public static Propertys prop = new Propertys();
         private readonly Random _random = new Random();
         private readonly List<string> _colors = new List<string> { "Red", "Green", "Blue", "Yellow" };
-        private readonly List<string> _values = Enumerable.Range(0, 10).Select(i => i.ToString()).Concat(new string[] { "Skip", "+2", "Reverse" }).ToList();
+
+        private readonly List<string> _values = Enumerable.Range(0, 10).Select(i => i.ToString())
+            .Concat(new string[] { "Skip", "+2", "Reverse" }).ToList();
+
         private readonly List<string> _specialCards = new List<string> { "Wild ", "Draw +4" };
 
         public int PlayerCount()
@@ -17,7 +20,7 @@ namespace UNO_Spielprojekt.GamePage
             return 1;
         }
 
-        public int ChooseStartingPlayer() 
+        public int ChooseStartingPlayer()
         {
             return _random.Next(0, prop.CountOfPlayers);
         }
@@ -44,6 +47,7 @@ namespace UNO_Spielprojekt.GamePage
                     deck.Add(specialCard);
                 }
             }
+
             prop.Deck = deck.Concat(deck).ToList();
 
             return prop.Deck;
@@ -69,6 +73,7 @@ namespace UNO_Spielprojekt.GamePage
                 prop.Deck.RemoveAt(0);
                 hand.Add(card);
             }
+
             return hand;
         }
 

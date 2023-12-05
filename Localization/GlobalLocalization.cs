@@ -10,5 +10,4 @@ namespace UNO_Spielprojekt.Localization
         public static string ScoreboardButton => LocalizationManager.GetLocalizedString("Scoreboard");
         public static string ExitButton => LocalizationManager.GetLocalizedString("Exit");
     }
-
 }

@@ -9,7 +9,7 @@ namespace WPF_Spielprojekt_Schwimmen.Scoreboard;
 
 public class ScoreboardViewModel
 {
-    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers  = new ObservableCollection<ScoreboardPlayer>();
+    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers = new ObservableCollection<ScoreboardPlayer>();
 
     public ObservableCollection<ScoreboardPlayer> ScoreboardPlayers
     {
@@ -46,7 +46,5 @@ public class ScoreboardViewModel
         {
             scoreboardPlayers.Add(player);
         }
-
     }
-
 }
