@@ -79,7 +79,7 @@ namespace UNO_Spielprojekt.AddPlayer
                 GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
             }
 
-            NavigationService?.Navigate(new RulesView(_playerData));
+            // NavigationService?.Navigate(new RulesView(_playerData));
         }
     }
 }

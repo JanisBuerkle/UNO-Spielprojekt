@@ -7,6 +7,7 @@
         xmlns:window="clr-namespace:UNO_Spielprojekt.Window"
         xmlns:setting="clr-namespace:UNO_Spielprojekt.Setting"
         xmlns:gamePage="clr-namespace:UNO_Spielprojekt.GamePage"
+        xmlns:addPlayer="clr-namespace:UNO_Spielprojekt.AddPlayer"
         mc:Ignorable="d"
         Title="UNO-Game"
         Icon="pack://application:,,,/Assets/Logos/logo.png">
@@ -18,6 +19,7 @@
     <Grid DataContext="{StaticResource MainViewModel}">
         <mainMenu:MainMenuView Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <setting:SettingsView Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding SettingsViewModel}" />
+        <addPlayer:AddPlayerView Visibility="{Binding AddPlayerVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding AddPlayerViewModel}" />
         <gamePage:GameView Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding GameViewModel}" />
     </Grid>
 </Window>

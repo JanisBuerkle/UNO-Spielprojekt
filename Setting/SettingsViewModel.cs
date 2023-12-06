@@ -42,4 +42,5 @@ public class SettingsViewModel : ViewModelBase
         _mainViewModel = mainViewModel;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
     }
+    
 }

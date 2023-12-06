@@ -1,20 +1,20 @@
 ﻿using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using UNO_Spielprojekt.Localization;
-using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.MainMenu
 {
-    public partial class MainMenuView
+    public partial class MainMenuView : UserControl
     {
-        public static readonly DependencyProperty MainViewModelProperty = DependencyProperty.Register(
-            nameof(MainViewModel), typeof(MainViewModel), typeof(MainMenuView),
-            new PropertyMetadata(default(MainViewModel)));
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+            nameof(ViewModel), typeof(MainMenuViewModel), typeof(MainMenuView),
+            new PropertyMetadata(default(MainMenuViewModel)));
 
-        public MainViewModel MainViewModel
+        public MainMenuViewModel ViewModel
         {
-            get => (MainViewModel)GetValue(MainViewModelProperty);
-            set => SetValue(MainViewModelProperty, value);
+            get => (MainMenuViewModel)GetValue(ViewModelProperty);
+            set => SetValue(ViewModelProperty, value);
         }
 
         public MainMenuView()
@@ -22,11 +22,6 @@ namespace UNO_Spielprojekt.MainMenu
             InitializeComponent();
             SetLanguage(Thread.CurrentThread.CurrentUICulture);
         }
-        // public MainMenuView(MainWindowView mainWindowView) 
-        // {
-        //     InitializeComponent();
-        //     SetLanguage(Thread.CurrentThread.CurrentUICulture);
-        // }
 
         private void SetLanguage(System.Globalization.CultureInfo culture)
         {
@@ -34,7 +29,6 @@ namespace UNO_Spielprojekt.MainMenu
             ScoreboardButton.Content = GlobalLocalization.ScoreboardButton;
             ExitButton.Content = GlobalLocalization.ExitButton;
         }
-
         // private void StartButtonClicked(object sender, RoutedEventArgs e)
         // {
         //
@@ -63,10 +57,5 @@ namespace UNO_Spielprojekt.MainMenu
         //     GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
         //     NavigationService?.Navigate(new GameView());
         // }
-        private void StartButtonClicked(object sender, RoutedEventArgs e)
-        {
-            MainViewModel.MainMenuVisible = false;
-            MainViewModel.AddPlayerVisible = true;
-        }
     }
 }

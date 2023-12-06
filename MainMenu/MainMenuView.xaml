@@ -4,21 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:resources="clr-namespace:UNO_Spielprojekt.Resources"
-             mc:Ignorable="d" Name="Control">
-    <Grid DataContext="{Binding ElementName=Control, Path=MainViewModel}">
+             mc:Ignorable="d" 
+             Name="Control">
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}"
+>
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
         </Grid.Background>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold"
-                    Style="{StaticResource MyButtonStyle}"
-                    Content="{x:Static resources:Resource.Play}" Click="StartButtonClicked" />
+            <Button Command="{Binding GoToAddPlayerCommand}" Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold"
+                    Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Play}"  />
             <Button x:Name="ScoreboardButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="67"
-                    FontWeight="Bold" Style="{StaticResource MyButtonStyle}"
-                    Content="{x:Static resources:Resource.Scoreboard}" />
+                    FontWeight="Bold" Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Scoreboard}" />
             <Button x:Name="ExitButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="70" FontWeight="Bold"
-                    Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Exit}" />
+                    Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Exit}"/>
         </StackPanel>
 
         <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"

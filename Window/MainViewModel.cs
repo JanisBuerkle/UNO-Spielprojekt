@@ -22,8 +22,8 @@ public class MainViewModel : ViewModelBase
         AddPlayerViewModel = new AddPlayerViewModel();
         GameViewModel = new GameViewModel();
         SettingsViewModel = new SettingsViewModel(this);
-        GameVisible = true; 
-        MainMenuViewModel = new MainMenuViewModel(SettingsViewModel);
+        MainMenuViewModel = new MainMenuViewModel(this);
+        SettingsVisible = true; 
     }
 
     public void GoToMainMenu()
@@ -32,6 +32,13 @@ public class MainViewModel : ViewModelBase
         GameVisible = false;
         AddPlayerVisible = false;
         MainMenuVisible = true;
+    }
+    public void GoToAddPlayer()
+    {
+        SettingsVisible = false;
+        GameVisible = false;
+        AddPlayerVisible = true;
+        MainMenuVisible = false;
     }
     
     public bool MainMenuVisible 
