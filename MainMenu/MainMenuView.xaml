@@ -4,31 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:resources="clr-namespace:UNO_Spielprojekt.Resources"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              Name="Control">
-    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}"
->
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
-        </Grid.Background>
-
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}" Style="{StaticResource GridBackgroundStyle}">
+        <Button Command="{Binding GoToSettings}" Style="{StaticResource SettingsButtonStyle}"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Command="{Binding GoToAddPlayerCommand}" Height="100" Width="500" Margin="0,0,0,10" FontSize="69" FontWeight="Bold"
-                    Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Play}"  />
-            <Button x:Name="ScoreboardButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="67"
-                    FontWeight="Bold" Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Scoreboard}" />
-            <Button x:Name="ExitButton" Height="100" Width="500" Margin="0,0,0,10" FontSize="70" FontWeight="Bold"
-                    Style="{StaticResource MyButtonStyle}" Content="{x:Static resources:Resource.Exit}"/>
-        </StackPanel>
-
-        <Button Height="80" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"
-                BorderThickness="0" Style="{StaticResource MyButtonStyle}">
-            <Button.Background>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/settings.png" Stretch="Fill" />
-            </Button.Background>
-        </Button>
-
-        <Button Height="80" Width="80" HorizontalAlignment="Right" VerticalAlignment="Top"
-                Style="{StaticResource MyButtonStyle}" />
+            <Button Command="{Binding GoToAddPlayerCommand}" Style="{StaticResource MainMenuButtonStyle}"
+                    Content="{x:Static resources:Resource.Play}"/>
+            <Button Command="{Binding GoToScoreboardCommand}" Style="{StaticResource MainMenuButtonStyle}"
+                    Content="{x:Static resources:Resource.Scoreboard}"/>
+            <Button Command="{Binding ExitApplicationCommand}" Style="{StaticResource MainMenuButtonStyle}"
+                    Content="{x:Static resources:Resource.Exit}"/>
+        </StackPanel> 
     </Grid>
 </UserControl>

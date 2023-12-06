@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}" Style="{StaticResource GridBackgroundStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -32,10 +32,6 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
-        </Grid.Background>
 
         <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
 

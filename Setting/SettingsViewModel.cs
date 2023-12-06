@@ -12,8 +12,10 @@ public class SettingsViewModel : ViewModelBase
     public List<WindowMode> MyModes { get; }
     public RelayCommand GoToMainMenuCommand { get; }
 
-    public SettingsViewModel(Action goToMainMenuCommand)
+    public SettingsViewModel(MainViewModel mainViewModel)
     {
+        _mainViewModel = mainViewModel;
+        GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
         MyLangs = new List<Language>()
         {
             new Language()
@@ -34,13 +36,6 @@ public class SettingsViewModel : ViewModelBase
             WindowMode.Windowed
         };
 
-        GoToMainMenuCommand = new RelayCommand(goToMainMenuCommand);
-    }
-
-    public SettingsViewModel(MainViewModel mainViewModel)
-    {
-        _mainViewModel = mainViewModel;
-        GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
     }
     
 }

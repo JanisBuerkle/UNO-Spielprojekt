@@ -6,10 +6,7 @@
       mc:Ignorable="d"
       Name="AddPlayerPage">
 
-    <Grid DataContext="{Binding ElementName=AddPlayerPage, Path=ViewModel}">
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" Stretch="Fill" />
-        </Grid.Background>
+    <Grid DataContext="{Binding ElementName=AddPlayerPage, Path=ViewModel}" Style="{StaticResource GridBackgroundStyle}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -50,11 +47,11 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Name="ContinueButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
+        <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Style="{StaticResource MyButtonStyle}" Click="ContinueButtonClicked" />
 
-        <Button Grid.Column="0" Grid.Row="0" Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
+        <Button Command="{Binding GoToMainMenuCommand}" Grid.Column="0" Grid.Row="0" Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </UserControl>

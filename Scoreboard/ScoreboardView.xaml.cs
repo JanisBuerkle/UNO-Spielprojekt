@@ -5,13 +5,19 @@ using WPF_Spielprojekt_Schwimmen.Scoreboard;
 
 namespace UNO_Spielprojekt.Scoreboard;
 
-public partial class ScoreboardView : Page
+public partial class ScoreboardView : UserControl
 {
+    public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+        nameof(ViewModel), typeof(ScoreboardViewModel), typeof(ScoreboardView), new PropertyMetadata(default(ScoreboardViewModel)));
+
+    public ScoreboardViewModel ViewModel
+    {
+        get => (ScoreboardViewModel)GetValue(ViewModelProperty); 
+        set => SetValue(ViewModelProperty, value); 
+    }
     public ScoreboardView()
     {
         InitializeComponent();
-        ScoreboardViewModel viewModel = new ScoreboardViewModel();
-        DataContext = viewModel;
     }
 
     private void HomeButtonClicked(object sender, RoutedEventArgs e)

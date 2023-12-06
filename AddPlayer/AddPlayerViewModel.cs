@@ -2,16 +2,32 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.Input;
+using UNO_Spielprojekt.GamePage;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.AddPlayer;
 
 public class AddPlayerViewModel : INotifyPropertyChanged
 {
+    private readonly MainViewModel _mainViewModel;
+    public RelayCommand GoToMainMenuCommand { get; }
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    public AddPlayerViewModel()
+    public RelayCommand WeiterButtonCommand { get; }
+    
+    public AddPlayerViewModel(MainViewModel mainViewModel)
     {
+        _mainViewModel = mainViewModel;
         PlayerNames = new ObservableCollection<NewPlayerViewModel>();
+        GoToMainMenuCommand = new RelayCommand(_mainViewModel.GoToMainMenu);
+        WeiterButtonCommand = new RelayCommand(Test);
+    }
+    private void Test()
+    {
+        foreach (var t in PlayerNames)
+        {
+            GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
+        }
     }
 
     public ObservableCollection<NewPlayerViewModel> PlayerNames { get; }
