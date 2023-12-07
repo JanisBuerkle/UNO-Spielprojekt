@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}" Style="{StaticResource GridBackgroundStyle}">
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -33,7 +33,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Button Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
+        <Button Name="Home" Command="{Binding ExitConfirmCommand}" Style="{StaticResource HomeButtonStyle}" />
 
         <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
                 Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />

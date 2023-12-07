@@ -1,7 +1,6 @@
 ﻿using UNO_Spielprojekt.AddPlayer;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.MainMenu;
-using UNO_Spielprojekt.Scoreboard;
 using UNO_Spielprojekt.Setting;
 using WPF_Spielprojekt_Schwimmen.Scoreboard;
 
@@ -14,9 +13,11 @@ public class MainViewModel : ViewModelBase
     private bool _gameVisible;
     private bool _settingsVisible;
     private bool _addPlayerVisible;
+    private bool _rulesVisible;
 
     public AddPlayerViewModel AddPlayerViewModel { get; set; }
     public MainMenuViewModel MainMenuViewModel { get; set; }
+    public RulesViewModel RulesViewModel { get; set; }
     public GameViewModel GameViewModel { get; set; }
     public SettingsViewModel SettingsViewModel { get; }
     public ScoreboardViewModel ScoreboardViewModel { get; }
@@ -24,8 +25,9 @@ public class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         AddPlayerViewModel = new AddPlayerViewModel(this);
+        RulesViewModel = new RulesViewModel(this);
         ScoreboardViewModel = new ScoreboardViewModel(this);
-        GameViewModel = new GameViewModel();
+        GameViewModel = new GameViewModel(this);
         SettingsViewModel = new SettingsViewModel(this);
         MainMenuViewModel = new MainMenuViewModel(this);
         MainMenuVisible = true;
@@ -33,44 +35,58 @@ public class MainViewModel : ViewModelBase
 
     public void GoToMainMenu()
     {
-        SettingsVisible = false;
-        GameVisible = false;
-        ScoreboardVisible = false;
-        AddPlayerVisible = false;
         MainMenuVisible = true;
+        GameVisible = false;
+        RulesVisible = false;
+        SettingsVisible = false;
+        AddPlayerVisible = false;
+        ScoreboardVisible = false;
     }
 
     public void GoToAddPlayer()
     {
-        SettingsVisible = false;
-        GameVisible = false;
-        ScoreboardVisible = false;
         AddPlayerVisible = true;
+        GameVisible = false;
+        RulesVisible = false;
         MainMenuVisible = false;
+        SettingsVisible = false;
+        ScoreboardVisible = false;
     }
     public void GoToSettings()
     {
         SettingsVisible = true;
         GameVisible = false;
-        ScoreboardVisible = false;
-        AddPlayerVisible = false;
+        RulesVisible = false;
         MainMenuVisible = false;
+        AddPlayerVisible = false;
+        ScoreboardVisible = false;
     }
     public void GoToGame()
     {
-        SettingsVisible = false;
         GameVisible = true;
-        ScoreboardVisible = false;
-        AddPlayerVisible = false;
+        RulesVisible = false;
         MainMenuVisible = false;
+        SettingsVisible = false;
+        AddPlayerVisible = false;
+        ScoreboardVisible = false;
     }
     public void GoToScoreboard()
     {
-        SettingsVisible = false;
-        GameVisible = false;
         ScoreboardVisible = true;
-        AddPlayerVisible = false;
+        GameVisible = false;
+        RulesVisible = false;
         MainMenuVisible = false;
+        SettingsVisible = false;
+        AddPlayerVisible = false;
+    }
+    public void GoToRules()
+    {
+        RulesVisible = true;
+        GameVisible = false;
+        MainMenuVisible = false;
+        SettingsVisible = false;
+        AddPlayerVisible = false;
+        ScoreboardVisible = false;
     }
 
     public bool MainMenuVisible
@@ -83,6 +99,18 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+    
+    public bool RulesVisible
+    {
+        get => _rulesVisible;
+        set
+        {
+            if (value == _rulesVisible) return;
+            _rulesVisible = value;
+            OnPropertyChanged();
+        }
+    }
+    
     
     public bool ScoreboardVisible
     {

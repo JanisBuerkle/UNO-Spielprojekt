@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using UNO_Spielprojekt.Localization;
 using UNO_Spielprojekt.Window;
 
@@ -25,12 +26,6 @@ namespace UNO_Spielprojekt.Setting
         public SettingsView()
         {
             InitializeComponent();
-        }
-
-        public SettingsView(MainWindowView mainWindow)
-        {
-            InitializeComponent();
-            _mainWindow = mainWindow;
             SetLanguage();
         }
 
@@ -48,8 +43,8 @@ namespace UNO_Spielprojekt.Setting
             }
 
 
-            Header.Text = LocalizationManager.GetLocalizedString("Header");
-            Console.WriteLine($@"Header text: {Header.Text}");
+            // Header.Text = LocalizationManager.GetLocalizedString("Header");
+            // Console.WriteLine($@"Header text: {Header.Text}");
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,15 +65,15 @@ namespace UNO_Spielprojekt.Setting
             {
                 if (selectedMode == WindowMode.FullScreen)
                 {
-                    // WindowWidth = 300;
-                    // WindowHeight = 200;
-                    _mainWindow.WindowStyle = WindowStyle.None;
-                    _mainWindow.WindowState = WindowState.Maximized;
-                    Console.Write("Fullscreen");
+                    Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                    Application.Current.MainWindow.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1f1f1f"));
                 }
                 else if (selectedMode == WindowMode.Windowed)
                 {
-                    Console.Write("Windowed");
+                    Application.Current.MainWindow.WindowStyle = WindowStyle.None;
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                    Application.Current.MainWindow.Background = Brushes.Transparent;
                 }
             }
         }

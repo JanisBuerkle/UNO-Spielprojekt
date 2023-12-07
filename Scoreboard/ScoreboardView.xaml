@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" Name="Control">
 
-    <Grid Style="{StaticResource GridBackgroundStyle}" DataContext="{Binding ElementName=Control, Path=ViewModel}">
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

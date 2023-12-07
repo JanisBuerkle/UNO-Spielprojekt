@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.Input;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage
 {
@@ -48,28 +49,36 @@ namespace UNO_Spielprojekt.GamePage
         private ObservableCollection<string> buttonTexts = new ObservableCollection<string>
             { "Button 1", "Button 2", "Button 3" };
 
+        private readonly MainViewModel MainViewModel;
         private StackPanel stackPanell { get; set; } = new StackPanel();
-        public RelayCommand LegenCommand { get; }
         public PlayViewModel PlayViewModel { get; set; }
+        public RelayCommand LegenCommand { get; }
+        public RelayCommand ExitConfirmCommand { get; }
 
-        public GameViewModel()
+        public GameViewModel(MainViewModel mainViewModel)
         {
-            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Hans" });
-            GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
-            InitializeGame();
-            MiddleCard = GameLogic.prop.Center.FirstOrDefault();
-            string[] test = MiddleCard.Split();
-            MiddleCardPic = $"pack://application:,,,/Assets/cards/{test[1]}/{test[0].ToLower()}.png";
+            MainViewModel = mainViewModel;
             LegenCommand = new RelayCommand(LegenButtonMethod);
+            ExitConfirmCommand = new RelayCommand(ExitConfirmCommandMethod);
         }
 
-        private void InitializeGame()
+        private void ExitConfirmCommandMethod()
+        {
+            ExitConfirmWindow exitConfirmWindow = new ExitConfirmWindow(MainViewModel);
+            exitConfirmWindow.Owner = MainWindowView.Instance;
+            exitConfirmWindow.ShowDialog();
+        }
+        
+        public void InitializeGame()
         {
             _gameLogic = new GameLogic();
             InitializeGameProperties();
             InitializePlayersHands();
             InitializeUI();
             _gameLogic.PlaceFirstCardInCenter();
+            MiddleCard = GameLogic.prop.Center.FirstOrDefault();
+            string[] middleCardSplitted = MiddleCard.Split();
+            MiddleCardPic = $"pack://application:,,,/Assets/cards/{middleCardSplitted[1]}/{middleCardSplitted[0].ToLower()}.png";
         }
 
         private void InitializeGameProperties()

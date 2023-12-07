@@ -55,7 +55,6 @@ namespace UNO_Spielprojekt.AddPlayer
             UpdateWeiterButtonVisibility();
         }
 
-
         private void UpdateWeiterButtonVisibility()
         {
             if (ViewModel.PlayerNames.Count <= 1)
@@ -70,16 +69,6 @@ namespace UNO_Spielprojekt.AddPlayer
                     ContinueButton.Visibility = allFieldsFilled ? Visibility.Visible : Visibility.Hidden;
                 }
             }
-        }
-
-        private void ContinueButtonClicked(object sender, RoutedEventArgs e)
-        {
-            foreach (var t in ViewModel.PlayerNames)
-            {
-                GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
-            }
-
-            // NavigationService?.Navigate(new RulesView(_playerData));
         }
     }
 }

@@ -9,19 +9,36 @@
         xmlns:gamePage="clr-namespace:UNO_Spielprojekt.GamePage"
         xmlns:addPlayer="clr-namespace:UNO_Spielprojekt.AddPlayer"
         xmlns:scoreboard="clr-namespace:UNO_Spielprojekt.Scoreboard"
+        xmlns:unoSpielprojekt="clr-namespace:UNO_Spielprojekt"
         mc:Ignorable="d"
         Title="UNO-Game"
-        Icon="pack://application:,,,/Assets/Logos/logo.png">
+        Icon="pack://application:,,,/Assets/Logos/logo.png" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" ShowInTaskbar="False" Background="Transparent" ResizeMode="NoResize"
+        WindowStyle="None">
     <Window.Resources>
         <window:MainViewModel x:Key="MainViewModel" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
-
-    <Grid DataContext="{StaticResource MainViewModel}">
-        <mainMenu:MainMenuView Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding MainMenuViewModel}"/>
-        <setting:SettingsView Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding SettingsViewModel}" />
-        <scoreboard:ScoreboardView Visibility="{Binding ScoreboardVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding ScoreboardViewModel}" />
-        <addPlayer:AddPlayerView Visibility="{Binding AddPlayerVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding AddPlayerViewModel}" />
-        <gamePage:GameView Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}" ViewModel="{Binding GameViewModel}" />
-    </Grid>
+    <Border Background="#1f1f1f" BorderThickness="0" CornerRadius="20">
+        <Grid DataContext="{StaticResource MainViewModel}">
+            <mainMenu:MainMenuView
+                Visibility="{Binding MainMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding MainMenuViewModel}" />
+            <setting:SettingsView
+                Visibility="{Binding SettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding SettingsViewModel}" />
+            <scoreboard:ScoreboardView
+                Visibility="{Binding ScoreboardVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding ScoreboardViewModel}" />
+            <addPlayer:AddPlayerView
+                Visibility="{Binding AddPlayerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding AddPlayerViewModel}" />
+            <gamePage:GameView
+                Visibility="{Binding GameVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding GameViewModel}" />
+            <unoSpielprojekt:RulesView
+                Visibility="{Binding RulesVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding RulesViewModel}" />
+        </Grid>
+    </Border>
 </Window>

@@ -6,7 +6,8 @@
              xmlns:resources="clr-namespace:UNO_Spielprojekt.Resources"
              mc:Ignorable="d"
              Name="Control">
-    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}" Style="{StaticResource GridBackgroundStyle}">
+    
+    <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}" >
         <Button Command="{Binding GoToSettings}" Style="{StaticResource SettingsButtonStyle}"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Command="{Binding GoToAddPlayerCommand}" Style="{StaticResource MainMenuButtonStyle}"

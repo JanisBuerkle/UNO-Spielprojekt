@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using UNO_Spielprojekt.GamePage;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
 
@@ -27,16 +29,7 @@ public partial class GameView
 
     public GameView()
     {
-        ViewModel = new GameViewModel();
+        ViewModel = new GameViewModel(new MainViewModel());
         InitializeComponent();
-    }
-
-    private void HomeButtonClicked(object sender, RoutedEventArgs e)
-    {
-    }
-
-
-    public void Test()
-    {
     }
 }

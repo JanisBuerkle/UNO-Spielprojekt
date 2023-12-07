@@ -12,6 +12,7 @@ public class SettingsViewModel : ViewModelBase
     public List<WindowMode> MyModes { get; }
     public RelayCommand GoToMainMenuCommand { get; }
 
+    
     public SettingsViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
@@ -29,6 +30,8 @@ public class SettingsViewModel : ViewModelBase
                 LangName = "Deutsch"
             },
         };
+        
+        
 
         MyModes = new List<WindowMode>()
         {

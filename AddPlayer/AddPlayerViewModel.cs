@@ -20,14 +20,16 @@ public class AddPlayerViewModel : INotifyPropertyChanged
         _mainViewModel = mainViewModel;
         PlayerNames = new ObservableCollection<NewPlayerViewModel>();
         GoToMainMenuCommand = new RelayCommand(_mainViewModel.GoToMainMenu);
-        WeiterButtonCommand = new RelayCommand(Test);
+        WeiterButtonCommand = new RelayCommand(WeiterButtonCommandMethod);
     }
-    private void Test()
+    private void WeiterButtonCommandMethod()
     {
         foreach (var t in PlayerNames)
         {
             GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
         }
+        
+        _mainViewModel.GoToRules();
     }
 
     public ObservableCollection<NewPlayerViewModel> PlayerNames { get; }
