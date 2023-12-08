@@ -8,18 +8,18 @@ public class Languages
 
     public static List<Language> GetLangs()
     {
-        var list = new List<Language>()
+        var list = new List<Language>
         {
-            new Language()
+            new()
             {
                 CultureName = "en-US", Flag = "pack://application:,,,/Assets/Languages/english.png",
                 LangName = "English"
             },
-            new Language()
+            new()
             {
                 CultureName = "de-DE", Flag = "pack://application:,,,/Assets/Languages/germany.png",
                 LangName = "Deutsch"
-            },
+            }
         };
         return list;
     }

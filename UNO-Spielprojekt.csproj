@@ -246,6 +246,8 @@
       <Resource Include="Assets\Logos\logo-512.png" />
       <None Remove="Assets\Logos\uno_icon.png" />
       <Resource Include="Assets\Logos\uno_icon.png" />
+      <None Remove="Assets\Logos\card_back.png" />
+      <Resource Include="Assets\Logos\card_back.png" />
     </ItemGroup>
 
     <ItemGroup>

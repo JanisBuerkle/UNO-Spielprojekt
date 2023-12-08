@@ -1,15 +1,12 @@
-﻿using UNO_Spielprojekt.MainMenu;
+﻿namespace UNO_Spielprojekt.Window;
 
-namespace UNO_Spielprojekt.Window
+public partial class MainWindowView : System.Windows.Window
 {
-    public partial class MainWindowView : System.Windows.Window
-    {
-        public static MainWindowView Instance { get; private set; }
+    public static MainWindowView Instance { get; private set; }
 
-        public MainWindowView()
-        {
-            InitializeComponent();
-            Instance = this;
-        }
+    public MainWindowView()
+    {
+        InitializeComponent();
+        Instance = this;
     }
 }

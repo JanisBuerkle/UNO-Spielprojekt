@@ -8,12 +8,10 @@ public class WindowModes
 
     public WindowModes()
     {
-        MyModes = new List<WindowMode>()
+        MyModes = new List<WindowMode>
         {
             WindowMode.FullScreen,
             WindowMode.Windowed
-            // new WindowMode() { Symbol="pack://application:,,,/Assets/fullscreen.png", Name= "Fullscreen"},
-            // new WindowMode() { Symbol="pack://application:,,,/Assets/Symbols/windowed.png", Name= "Windowed"},
         };
     }
 }

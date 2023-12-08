@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using CommunityToolkit.Mvvm.Input;
@@ -13,17 +13,14 @@ public class ScoreboardViewModel
 {
     private readonly MainViewModel _mainViewModel;
     public RelayCommand GoToMainMenuCommand { get; }
-    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers = new ObservableCollection<ScoreboardPlayer>();
+    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers = new();
 
     public ObservableCollection<ScoreboardPlayer> ScoreboardPlayers
     {
         get => scoreboardPlayers;
         set
         {
-            if (scoreboardPlayers != value)
-            {
-                scoreboardPlayers = value;
-            }
+            if (scoreboardPlayers != value) scoreboardPlayers = value;
         }
     }
 
@@ -31,26 +28,21 @@ public class ScoreboardViewModel
     {
         _mainViewModel = mainViewModel;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
-        if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-        {
-            for (int i = 0; i < 10; i++)
+        if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            for (var i = 0; i < 10; i++)
             {
-                Random random = new Random();
-                ScoreboardPlayer player = new ScoreboardPlayer
+                var random = new Random();
+                var player = new ScoreboardPlayer
                 {
                     PlayerScoreboardName = $"Player {i}",
                     PlayerScoreboardScore = random.Next(1, 100)
                 };
                 ScoreboardPlayers.Add(player);
             }
-        }
 
-        List<ScoreboardPlayer> sortedList =
+        var sortedList =
             ScoreboardPlayers.OrderByDescending(ScoreboardPlayer => ScoreboardPlayer.PlayerScoreboardScore).ToList();
         scoreboardPlayers.Clear();
-        foreach (var player in sortedList)
-        {
-            scoreboardPlayers.Add(player);
-        }
+        foreach (var player in sortedList) scoreboardPlayers.Add(player);
     }
 }

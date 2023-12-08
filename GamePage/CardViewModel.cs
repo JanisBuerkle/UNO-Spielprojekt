@@ -4,11 +4,11 @@ namespace UNO_Spielprojekt.GamePage;
 
 public class CardViewModel : ViewModelBase
 {
-    private int _value;
+    private string _value;
     private string _color;
-    private Uri _imageUri;
+    private string _imageUri;
 
-    public int Value
+    public string Value
     {
         get => _value;
         set
@@ -30,7 +30,7 @@ public class CardViewModel : ViewModelBase
         }
     }
 
-    public Uri ImageUri
+    public string ImageUri
     {
         get => _imageUri;
         set

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CommunityToolkit.Mvvm.Input;
 using UNO_Spielprojekt.Window;
 
@@ -12,33 +11,30 @@ public class SettingsViewModel : ViewModelBase
     public List<WindowMode> MyModes { get; }
     public RelayCommand GoToMainMenuCommand { get; }
 
-    
+
     public SettingsViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
-        MyLangs = new List<Language>()
+        MyLangs = new List<Language>
         {
-            new Language()
+            new()
             {
                 CultureName = "en-US", Flag = "pack://application:,,,/Assets/Languages/english.png",
                 LangName = "English"
             },
-            new Language()
+            new()
             {
                 CultureName = "de-DE", Flag = "pack://application:,,,/Assets/Languages/germany.png",
                 LangName = "Deutsch"
-            },
+            }
         };
-        
-        
 
-        MyModes = new List<WindowMode>()
+
+        MyModes = new List<WindowMode>
         {
             WindowMode.FullScreen,
             WindowMode.Windowed
         };
-
     }
-    
 }

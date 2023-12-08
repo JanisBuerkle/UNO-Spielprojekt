@@ -14,7 +14,7 @@ public class AddPlayerViewModel : INotifyPropertyChanged
     public RelayCommand GoToMainMenuCommand { get; }
     public event PropertyChangedEventHandler? PropertyChanged;
     public RelayCommand WeiterButtonCommand { get; }
-    
+
     public AddPlayerViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
@@ -22,12 +22,10 @@ public class AddPlayerViewModel : INotifyPropertyChanged
         GoToMainMenuCommand = new RelayCommand(_mainViewModel.GoToMainMenu);
         WeiterButtonCommand = new RelayCommand(WeiterButtonCommandMethod);
     }
+
     private void WeiterButtonCommandMethod()
     {
-        foreach (var t in PlayerNames)
-        {
-            GameLogic.prop.Players.Add(new Propertys() { PlayerName = t.Name });
-        }
+        foreach (var t in PlayerNames) GameLogic.prop.Players.Add(new Propertys { PlayerName = t.Name });
         
         _mainViewModel.GoToRules();
     }

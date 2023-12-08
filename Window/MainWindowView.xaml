@@ -13,7 +13,7 @@
         mc:Ignorable="d"
         Title="UNO-Game"
         Icon="pack://application:,,,/Assets/Logos/logo.png" WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True" ShowInTaskbar="False" Background="Transparent" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
         WindowStyle="None">
     <Window.Resources>
         <window:MainViewModel x:Key="MainViewModel" />

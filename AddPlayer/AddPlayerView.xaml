@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="UNO_Spielprojekt.AddPlayer.AddPlayerView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d"
-      Name="AddPlayerPage">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Name="AddPlayerPage">
 
     <Grid DataContext="{Binding ElementName=AddPlayerPage, Path=ViewModel}">
 
@@ -47,11 +47,13 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"
+        <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Style="{StaticResource MyButtonStyle}" />
 
-        <Button Command="{Binding GoToMainMenuCommand}" Grid.Column="0" Grid.Row="0" Name="Home" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
+        <Button Command="{Binding GoToMainMenuCommand}" Grid.Column="0" Grid.Row="0" Name="Home"
+                Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </UserControl>

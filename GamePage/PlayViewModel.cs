@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using Wpf.Ui.Controls;
 
 namespace UNO_Spielprojekt.GamePage;
 
@@ -6,7 +8,7 @@ public class PlayViewModel : ViewModelBase
 {
     private ObservableCollection<CardViewModel> _cards;
 
-    public ObservableCollection<CardViewModel> Cards
+    public ObservableCollection<CardViewModel> Cards 
     {
         get => _cards;
         set

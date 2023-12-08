@@ -1,16 +1,16 @@
 ﻿<UserControl x:Class="UNO_Spielprojekt.Scoreboard.ScoreboardView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d" Name="Control">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" Name="Control">
 
     <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions> 
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -50,6 +50,7 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Button Command="{Binding GoToMainMenuCommand}" Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
+        <Button Command="{Binding GoToMainMenuCommand}" Click="HomeButtonClicked"
+                Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </UserControl>

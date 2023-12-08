@@ -11,19 +11,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate x:Key="ButtonTemplate">
-                <Button Content="{Binding}" Width="260" Height="400" Margin="5" Tag="Card">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="Fill" />
-                    </Button.Background>
-                </Button>
-            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -33,12 +27,12 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Button Name="Home" Command="{Binding ExitConfirmCommand}" Style="{StaticResource HomeButtonStyle}" />
+        <Button Command="{Binding ExitConfirmCommand}" Style="{StaticResource HomeButtonStyle}" />
 
-        <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
+        <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
                 Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />
 
-        <StackPanel Grid.Row="2" Grid.Column="2">
+        <StackPanel Grid.Row="3" Grid.Column="2">
             <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,300,20,20"
                     Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold"
                     Command="{Binding LegenCommand}" />
@@ -46,20 +40,28 @@
                     Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
         </StackPanel>
 
-        <Button x:Name="MiddleCard" Grid.Column="1" Grid.Row="1" Content="{Binding MiddleCard}"
-                Style="{StaticResource MyButtonStyle}">
-            <Button.Background>
-                <ImageBrush ImageSource="{Binding MiddleCardPic}" Stretch="Fill" />
-            </Button.Background>
-        </Button>
+        <StackPanel  Grid.RowSpan="3" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" >
+            <Button Width="150" Height="225" Style="{StaticResource CardStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/Assets/Logos/card_back.png" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+            
+            <Button Width="150" Height="225" Content="{Binding MiddleCard}" Style="{StaticResource CardStyle}">
+                <Button.Background>
+                    <ImageBrush ImageSource="{Binding MiddleCardPic}" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
 
-        <StackPanel x:Name="stackPanel" Grid.Row="2" Grid.Column="1">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-                <ItemsControl ItemsSource="{Binding  PlayViewModel.Cards}"><!-- ItemTemplate="{StaticResource ButtonTemplate}"-->
+
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" DataContext="{Binding ElementName=Control, Path=PlayViewModel}">
+                <ItemsControl ItemsSource="{Binding Cards}"><!-- ItemTemplate="{StaticResource ButtonTemplate}"-->
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type local:CardViewModel}">
                             <Button>
-                                <Image Source="{Binding ImageUri}"></Image>
+                                <Image Source="{Binding ImageUri}" />
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

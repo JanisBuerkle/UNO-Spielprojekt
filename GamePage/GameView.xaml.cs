@@ -1,8 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using UNO_Spielprojekt.GamePage;
+﻿using System.Windows;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
@@ -23,13 +19,14 @@ public partial class GameView
 
     public Propertys Propertys
     {
-        get { return (Propertys)GetValue(PropertysProperty); }
-        set { SetValue(PropertysProperty, value); }
+        get => (Propertys)GetValue(PropertysProperty);
+        set => SetValue(PropertysProperty, value);
     }
+    
 
     public GameView()
     {
-        ViewModel = new GameViewModel(new MainViewModel());
+        ViewModel = new GameViewModel(new MainViewModel(), new PlayViewModel());
         InitializeComponent();
     }
 }

@@ -6,7 +6,8 @@ namespace UNO_Spielprojekt.GamePage;
 public partial class ExitConfirmWindow : System.Windows.Window
 {
     public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-        nameof(ViewModel), typeof(ExitConfirmViewModel), typeof(ExitConfirmWindow), new PropertyMetadata(default(ExitConfirmViewModel)));
+        nameof(ViewModel), typeof(ExitConfirmViewModel), typeof(ExitConfirmWindow),
+        new PropertyMetadata(default(ExitConfirmViewModel)));
 
     public ExitConfirmViewModel ViewModel
     {
@@ -14,7 +15,8 @@ public partial class ExitConfirmWindow : System.Windows.Window
         set => SetValue(ViewModelProperty, value);
     }
 
-    private MainViewModel MainViewModel;
+    private readonly MainViewModel MainViewModel;
+
     public ExitConfirmWindow(MainViewModel mainViewModel)
     {
         MainViewModel = mainViewModel;

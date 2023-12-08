@@ -19,15 +19,17 @@ public class MainViewModel : ViewModelBase
     public MainMenuViewModel MainMenuViewModel { get; set; }
     public RulesViewModel RulesViewModel { get; set; }
     public GameViewModel GameViewModel { get; set; }
+    public PlayViewModel PlayViewModel { get; set; }
     public SettingsViewModel SettingsViewModel { get; }
     public ScoreboardViewModel ScoreboardViewModel { get; }
 
     public MainViewModel()
     {
         AddPlayerViewModel = new AddPlayerViewModel(this);
-        RulesViewModel = new RulesViewModel(this);
         ScoreboardViewModel = new ScoreboardViewModel(this);
-        GameViewModel = new GameViewModel(this);
+        PlayViewModel = new PlayViewModel();
+        GameViewModel = new GameViewModel(this, PlayViewModel);
+        RulesViewModel = new RulesViewModel(this, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this);
         MainMenuViewModel = new MainMenuViewModel(this);
         MainMenuVisible = true;
@@ -52,6 +54,7 @@ public class MainViewModel : ViewModelBase
         SettingsVisible = false;
         ScoreboardVisible = false;
     }
+
     public void GoToSettings()
     {
         SettingsVisible = true;
@@ -61,6 +64,7 @@ public class MainViewModel : ViewModelBase
         AddPlayerVisible = false;
         ScoreboardVisible = false;
     }
+
     public void GoToGame()
     {
         GameVisible = true;
@@ -70,6 +74,7 @@ public class MainViewModel : ViewModelBase
         AddPlayerVisible = false;
         ScoreboardVisible = false;
     }
+
     public void GoToScoreboard()
     {
         ScoreboardVisible = true;
@@ -79,6 +84,7 @@ public class MainViewModel : ViewModelBase
         SettingsVisible = false;
         AddPlayerVisible = false;
     }
+
     public void GoToRules()
     {
         RulesVisible = true;
@@ -99,7 +105,7 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
-    
+
     public bool RulesVisible
     {
         get => _rulesVisible;
@@ -110,8 +116,8 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
-    
-    
+
+
     public bool ScoreboardVisible
     {
         get => _scoreboardVisible;
