@@ -5,6 +5,15 @@ namespace UNO_Spielprojekt.GamePage;
 
 public partial class GameView
 {
+    public static readonly DependencyProperty PlayViewModelProperty = DependencyProperty.Register(
+        nameof(PlayViewModel), typeof(PlayViewModel), typeof(GameView), new PropertyMetadata(default(PlayViewModel)));
+    
+    public PlayViewModel PlayViewModel
+    {
+        get { return (PlayViewModel)GetValue(PlayViewModelProperty); }
+        set { SetValue(PlayViewModelProperty, value); }
+    }
+    
     public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
         nameof(ViewModel), typeof(GameViewModel), typeof(GameView), new PropertyMetadata(default(GameViewModel)));
 
@@ -27,6 +36,7 @@ public partial class GameView
     public GameView()
     {
         ViewModel = new GameViewModel(new MainViewModel(), new PlayViewModel());
+        PlayViewModel = new PlayViewModel();
         InitializeComponent();
     }
 }

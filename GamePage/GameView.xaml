@@ -55,7 +55,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="3" Grid.Column="1">
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" DataContext="{Binding ElementName=Control, Path=PlayViewModel}">
                 <ItemsControl ItemsSource="{Binding Cards}"><!-- ItemTemplate="{StaticResource ButtonTemplate}"-->
                     <ItemsControl.ItemTemplate>

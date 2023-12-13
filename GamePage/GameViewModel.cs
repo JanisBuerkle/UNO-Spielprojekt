@@ -52,7 +52,7 @@ public class GameViewModel : ViewModelBase
 
     private readonly MainViewModel MainViewModel;
     private StackPanel stackPanell { get; } = new();
-    private PlayViewModel PlayViewModel;
+    public PlayViewModel PlayViewModel;
     public CardViewModel CardViewModel { get; set; }
     public RelayCommand LegenCommand { get; }
     public RelayCommand ExitConfirmCommand { get; }
@@ -97,6 +97,7 @@ public class GameViewModel : ViewModelBase
         foreach (CardViewModel cards in _gameLogic.cards)
         {
             PlayViewModel.Cards.Add(cards);
+            OnPropertyChanged(nameof(PlayViewModel.Cards));
         }
     }
 
