@@ -48,11 +48,11 @@ public class GameViewModel : ViewModelBase
     private bool _chosenCard;
     private GameLogic _gameLogic;
 
-    private ObservableCollection<string> buttonTexts = new() { "Button 1", "Button 2", "Button 3" };
+    private ObservableCollection<string> _buttonTexts = new() { "Button 1", "Button 2", "Button 3" };
 
     private readonly MainViewModel MainViewModel;
     private StackPanel stackPanell { get; } = new();
-    public PlayViewModel PlayViewModel;
+    private PlayViewModel PlayViewModel;
     public CardViewModel CardViewModel { get; set; }
     public RelayCommand LegenCommand { get; }
     public RelayCommand ExitConfirmCommand { get; }
