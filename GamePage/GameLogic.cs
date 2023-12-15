@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using Wpf.Ui.Controls;
 
 namespace UNO_Spielprojekt.GamePage;
 
 public class GameLogic
 {
-    public static Propertys prop = new();
+    public List<Players> players = new List<Players>();
+    private PlayViewModel PlayViewModel { get; set; }
+    public int CountOfPlayers { get; set; }
+
+
+    public readonly ObservableCollection<CardViewModel> Center = new();
     private readonly Random _random = new();
     private readonly List<string> _colors = new() { "Red", "Green", "Blue", "Yellow" };
 
@@ -15,32 +22,13 @@ public class GameLogic
 
     private readonly List<string> _specialCards = new() { "Wild ", "Draw +4" };
 
-    public int PlayerCount()
+    public GameLogic(PlayViewModel playViewModel)
     {
-        return 1;
+        PlayViewModel = playViewModel;
     }
-
     public int ChooseStartingPlayer()
     {
-        return _random.Next(0, prop.CountOfPlayers);
-    }
-
-    public List<string> GenerateDeck()
-    {
-        var deck = new List<string>();
-
-        foreach (var color in _colors)
-        foreach (var value in _values)
-            if (value != "0")
-                deck.Add($"{color} {value}");
-
-        foreach (var specialCard in _specialCards)
-            for (var i = 0; i < 4; i++)
-                deck.Add(specialCard);
-
-        prop.Deck = deck.Concat(deck).ToList();
-
-        return prop.Deck;
+        return _random.Next(0, players.Count);
     }
 
     public List<CardViewModel> cards = new List<CardViewModel>()
@@ -158,35 +146,32 @@ public class GameLogic
 
     public void ShuffleDeck()
     {
-        var number = prop.Deck.Count;
+        var number = PlayViewModel.Cards.Count;
         while (number > 1)
         {
             number--;
             var card = _random.Next(number + 1);
-            (prop.Deck[card], prop.Deck[number]) = (prop.Deck[number], prop.Deck[card]);
+            (PlayViewModel.Cards[card], PlayViewModel.Cards[number]) = (PlayViewModel.Cards[number], PlayViewModel.Cards[card]);
         }
     }
 
-    public List<string> DealCards(int handSize)
+    public void DealCards(int handSize)
     {
-        var hand = new List<string>();
-        for (prop.Player = 0; prop.Player < handSize; prop.Player++)
+        for (int player = 0; player < players.Count; player++)
         {
-            var card = prop.Deck.First();
-            prop.Deck.RemoveAt(0);
-            hand.Add(card);
+            for (int i = 0; i < handSize; i++)
+            {
+                CardViewModel card = PlayViewModel.Cards.First();
+                PlayViewModel.Cards.RemoveAt(0);
+                players[player].Hand.Add(card);
+            }
         }
-
-        return hand;
     }
-
-    public List<string> PlaceFirstCardInCenter()
+    public void PlaceFirstCardInCenter()
     {
-        var randomCard = _random.Next(prop.Deck.Count);
-        var selectedCard = prop.Deck[randomCard];
-        prop.Deck.RemoveAt(randomCard);
-        prop.Center.Add(selectedCard);
-
-        return prop.Center;
+        var randomCard = _random.Next(PlayViewModel.Cards.Count);
+        var selectedCard = PlayViewModel.Cards[randomCard];
+        PlayViewModel.Cards.RemoveAt(randomCard);
+        Center.Add(selectedCard);
     }
 }

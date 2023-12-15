@@ -19,16 +19,18 @@ public class MainViewModel : ViewModelBase
     public MainMenuViewModel MainMenuViewModel { get; set; }
     public RulesViewModel RulesViewModel { get; set; }
     public GameViewModel GameViewModel { get; set; }
-    public PlayViewModel PlayViewModel { get; set; }
+    private GameLogic GameLogic { get; set; }
+    private PlayViewModel PlayViewModel { get; set; }
     public SettingsViewModel SettingsViewModel { get; }
     public ScoreboardViewModel ScoreboardViewModel { get; }
 
     public MainViewModel()
     {
-        AddPlayerViewModel = new AddPlayerViewModel(this);
         ScoreboardViewModel = new ScoreboardViewModel(this);
         PlayViewModel = new PlayViewModel();
-        GameViewModel = new GameViewModel(this, PlayViewModel);
+        GameLogic = new GameLogic(PlayViewModel);
+        AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic);
+        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic);
         RulesViewModel = new RulesViewModel(this, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this);
         MainMenuViewModel = new MainMenuViewModel(this);

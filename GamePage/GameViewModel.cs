@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.Input;
 using UNO_Spielprojekt.Window;
@@ -15,9 +18,9 @@ namespace UNO_Spielprojekt.GamePage;
 
 public class GameViewModel : ViewModelBase
 {
-    private string _middleCard;
+    private CardViewModel _middleCard;
 
-    public string MiddleCard
+    private CardViewModel MiddleCard
     {
         get => _middleCard;
         set
@@ -46,263 +49,229 @@ public class GameViewModel : ViewModelBase
     }
 
     private bool _chosenCard;
-    private GameLogic _gameLogic;
 
     private ObservableCollection<string> _buttonTexts = new() { "Button 1", "Button 2", "Button 3" };
 
-    private readonly MainViewModel MainViewModel;
-    private StackPanel stackPanell { get; } = new();
-    public PlayViewModel PlayViewModel;
+    private readonly MainViewModel _mainViewModel;
+    private int StartingPlayer { get; set; }
+    private PlayViewModel PlayViewModel { get; }
+    private GameLogic GameLogic { get; set; }
+    public object ClickedCard { get; set; }
+    private int currentPlayer { get; set; }
     public CardViewModel CardViewModel { get; set; }
+    public RelayCommand ZiehenCommand { get; }
     public RelayCommand LegenCommand { get; }
+    public RelayCommand FertigCommand { get; }
+    public RelayCommand UNOCommand { get; }
     public RelayCommand ExitConfirmCommand { get; }
 
-    public GameViewModel(MainViewModel mainViewModel, PlayViewModel playViewModel)
+    public ObservableCollection<CardViewModel> CurrentHand { get; set; } = new();
+    public int selectedCardIndex { get; set; }
+    public ICommand CardClickedCommand { get; private set; }
+
+    public GameViewModel(MainViewModel mainViewModel, PlayViewModel playViewModel, GameLogic gameLogic)
     {
+        GameLogic = gameLogic;
         PlayViewModel = playViewModel;
-        MainViewModel = mainViewModel;
-        LegenCommand = new RelayCommand(LegenButtonMethod);
+        _mainViewModel = mainViewModel;
+
+        ZiehenCommand = new RelayCommand(ZiehenCommandMethod);
+        LegenCommand = new RelayCommand(LegenCommandMethod);
+        FertigCommand = new RelayCommand(FertigCommandMethod);
+        UNOCommand = new RelayCommand(UnoCommandMethod);
+
         ExitConfirmCommand = new RelayCommand(ExitConfirmCommandMethod);
+    }
+
+    private bool _legen;
+    private bool _ziehen;
+    private bool _uno;
+
+    private void ZiehenCommandMethod()
+    {
+        if (_ziehen || _legen)
+        {
+        }
+        else
+        {
+            CardViewModel card = PlayViewModel.Cards.First();
+            PlayViewModel.Cards.RemoveAt(0);
+            GameLogic.players[currentPlayer].Hand.Add(card);
+            SetCurrentHand();
+            _ziehen = true;
+            Console.WriteLine("Gezogen");
+        }
+    }
+
+    public void LegenCommandMethod()
+    {
+        if (_ziehen || _legen)
+        {
+        }
+        else
+        {
+            var selectedCard = GameLogic.players[currentPlayer].Hand[selectedCardIndex];
+            if (selectedCard.Color == GameLogic.Center[GameLogic.Center.Count - 1].Color ||
+                selectedCard.Value == GameLogic.Center[GameLogic.Center.Count - 1].Value)
+            {
+                Console.WriteLine("Gelegt");
+                GameLogic.players[currentPlayer].Hand.RemoveAt(selectedCardIndex);
+                GameLogic.Center.Add(selectedCard);
+                MiddleCardPic = selectedCard.ImageUri;
+                SetCurrentHand();
+                _legen = true;
+            }
+            else if (selectedCard.Color == "Wild" || selectedCard.Value == "+4")
+            {
+                Console.WriteLine("Gelegt");
+                GameLogic.players[currentPlayer].Hand.RemoveAt(selectedCardIndex);
+                GameLogic.Center.Add(selectedCard);
+                MiddleCardPic = selectedCard.ImageUri;
+                SetCurrentHand();
+                _legen = true;
+                
+                var chooseColorView = new ChooseColorView()
+                {
+                    Owner = MainWindowView.Instance
+                };
+                chooseColorView.ShowDialog();
+            }
+            else
+            {
+            }
+        }
+    }
+
+    private void FertigCommandMethod()
+    {
+        if (_legen || _ziehen )
+        {
+            _legen = false;
+            _ziehen = false;
+            _uno = false;
+            
+            if (currentPlayer == GameLogic.players.Count - 1)
+            {
+                currentPlayer = 0;
+                Console.WriteLine("Neue Runde");
+                Console.WriteLine(GameLogic.players[currentPlayer].PlayerName);
+                SetCurrentHand();
+            }
+            else
+            {
+                currentPlayer += 1;
+                Console.WriteLine(GameLogic.players[currentPlayer].PlayerName);
+                SetCurrentHand();
+            }
+        }
+    }
+
+    private void UnoCommandMethod()
+    {
+        if (_uno == false)
+        {
+            if (GameLogic.players[currentPlayer].Hand.Count == 1)
+            {
+                Console.WriteLine("UNOOOOOOOOOOOOO!!!");
+            }
+            else
+            {
+                CardViewModel card = PlayViewModel.Cards.First();
+                PlayViewModel.Cards.RemoveAt(0);
+                GameLogic.players[currentPlayer].Hand.Add(card);
+                SetCurrentHand();
+                _uno = true;
+                _ziehen = true;
+                Console.WriteLine("Falsche UNO Aussage");
+            }
+        }
+    }
+
+    public void Game()
+    {
+        _mainViewModel.GoToGame();
+    }
+
+    public void SetCurrentHand()
+    {
+        if (GameLogic.players.Count != 0)
+        {
+            CurrentHand.Clear();
+            foreach (var card in GameLogic.players[currentPlayer].Hand)
+            {
+                CurrentHand.Add(card);
+            }
+        }
     }
 
     private void ExitConfirmCommandMethod()
     {
-        var exitConfirmWindow = new ExitConfirmWindow(MainViewModel);
-        exitConfirmWindow.Owner = MainWindowView.Instance;
+        var exitConfirmWindow = new ExitConfirmWindow(_mainViewModel)
+        {
+            Owner = MainWindowView.Instance
+        };
         exitConfirmWindow.ShowDialog();
     }
 
     public void InitializeGame()
     {
-        _gameLogic = new GameLogic();
-        InitializeGameProperties();
         InitializePlayersHands();
-        _gameLogic.PlaceFirstCardInCenter();
-        MiddleCard = GameLogic.prop.Center.FirstOrDefault();
-        var middleCardSplitted = MiddleCard.Split();
-        MiddleCardPic =
-            $"pack://application:,,,/Assets/cards/{middleCardSplitted[1]}/{middleCardSplitted[0].ToLower()}.png";
+        InitializeGameProperties();
+        GameLogic.PlaceFirstCardInCenter();
+
+        MiddleCard = GameLogic.Center.FirstOrDefault();
+        var middleCardPath = MiddleCard.ImageUri;
+        MiddleCardPic = middleCardPath;
     }
 
     private void InitializeGameProperties()
     {
-        GameLogic.prop.CountOfPlayers = _gameLogic.PlayerCount();
-        GameLogic.prop.StartingPlayer = _gameLogic.ChooseStartingPlayer();
-        _gameLogic.GenerateDeck();
-        _gameLogic.ShuffleDeck();
+        StartingPlayer = GameLogic.ChooseStartingPlayer();
+        currentPlayer = StartingPlayer;
+        GameLogic.ShuffleDeck();
+        GameLogic.DealCards(7);
     }
 
     private void InitializePlayersHands()
     {
-        foreach (CardViewModel cards in _gameLogic.cards)
+        foreach (CardViewModel cards in GameLogic.cards)
         {
             PlayViewModel.Cards.Add(cards);
-            OnPropertyChanged(nameof(PlayViewModel.Cards));
         }
     }
 
-    private void Test()
-    {
-        foreach (var test in GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand) Console.Write(test);
-    }
-
-    private Button CreateCardButton(string card)
-    {
-        var buttonStyle = (Style)Application.Current.FindResource("CardStyle")!;
-        var cardSplit = card.Split();
-        var color = cardSplit[0].ToLower();
-        var value = cardSplit[1].ToLower();
-
-        var button = new Button
-        {
-            Content = card,
-            Width = 260,
-            Height = 400,
-            Margin = new Thickness(5),
-            Tag = "Card",
-            Style = buttonStyle
-        };
-
-        SetButtonBackground(button, color, value);
-
-        button.Click += Card_Clicked;
-        return button;
-    }
-
-    private void SetButtonBackground(Button button, string color, string value)
-    {
-        var imageBrush = new ImageBrush();
-
-        if (color == "wild")
-            imageBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/cards/wild/wild.png"));
-        else
-            imageBrush.ImageSource =
-                new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png"));
-
-        imageBrush.Stretch = Stretch.Fill;
-        button.Background = imageBrush;
-    }
-
-    private void DisplayPlayerHand(List<Button> buttons)
-    {
-        var itemsControl = new ItemsControl
-        {
-            ItemsSource = buttons,
-            ItemTemplate = Application.Current.TryFindResource("ButtonTemplate") as DataTemplate,
-            ItemsPanel = new ItemsPanelTemplate(new FrameworkElementFactory(typeof(WrapPanel)))
-        };
-
-        var scrollViewer = new ScrollViewer
-        {
-            Content = itemsControl,
-            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-            VerticalScrollBarVisibility = ScrollBarVisibility.Hidden
-        };
-
-        stackPanell.Children.Add(scrollViewer);
-    }
-
-    private void Card_Clicked(object sender, RoutedEventArgs e)
-    {
-        var tag = (sender as FrameworkElement)?.Tag as string;
-
-        if (sender is Button clickedButton) HandleClickedCard(clickedButton, tag);
-    }
-
-    private void HandleClickedCard(Button clickedButton, string? tag)
-    {
-        GameLogic.prop.ClickedCard = clickedButton.Content;
-
-        if (tag == "Card") ResetButtonMargins();
-
-        if (clickedButton.Margin.Top == 5)
-        {
-            _chosenCard = true;
-            MoveCardUp(clickedButton);
-        }
-    }
-
-    private void ResetButtonMargins()
-    {
-        foreach (var button in stackPanell.Children.OfType<ScrollViewer>()
-                     .SelectMany(sv => ((ItemsControl)sv.Content).Items.OfType<Button>()))
-            if (button.Tag as string == "Card")
-                button.Margin = new Thickness(5);
-    }
-
-    private void MoveCardUp(Button clickedButton)
-    {
-        var newMargin = clickedButton.Margin;
-        newMargin.Top -= 100;
-        clickedButton.Margin = newMargin;
-    }
-
-    private void LegenButtonMethod()
-    {
-        // if (_chosenCard)
-        // {
-        //     // var indexOfSelectedCard = GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand
-        //     //     .IndexOf(GameLogic.prop.ClickedCard.ToString());
-        //
-        //     if (indexOfSelectedCard != -1)
-        //     {
-        //         GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand.RemoveAt(indexOfSelectedCard);
-        //         GameLogic.prop.Center.Add(GameLogic.prop.ClickedCard.ToString());
-        //         ShowCardInCenter();
-        //         UpdatePlayerHand();
-        //         RemoveButtonFromStackPanel(indexOfSelectedCard);
-        //     }
-        // }
-    }
-
-    private void RemoveButtonFromStackPanel(int index)
-    {
-        if (index >= 0 && stackPanell.Children.Count > index) stackPanell.Children.RemoveAt(index);
-    }
-
-    private void ShowCardInCenter()
-    {
-        var cardSplit = GameLogic.prop.Center[^1].Split();
-        var color = cardSplit[0].ToLower();
-        var value = cardSplit[1].ToLower();
-
-        SetMiddleCardProperties(color, value);
-        MiddleCard = GameLogic.prop.Center[^1];
-    }
-
-    private void UpdatePlayerHand()
-    {
-        foreach (var button in stackPanell.Children.OfType<Button>())
-        {
-            var buttonStyle = (Style)Application.Current.FindResource("CardStyle");
-            var cardSplit = button.Content.ToString().Split();
-            var color = cardSplit[0].ToLower();
-            var value = cardSplit[1].ToLower();
-
-            var updatedCard = $"{color} {value}";
-
-            button.Content = updatedCard;
-            button.Style = buttonStyle;
-        }
-    }
-
-    private void SetMiddleCardProperties(string color, string value)
-    {
-        // MiddleCard.Content = GameLogic.prop.Center[^1];
-        // MiddleCard.Width = 260;
-        // MiddleCard.Height = 400;
-        // MiddleCard.Margin = new Thickness(5);
-        // MiddleCard.Tag = "Card";
-
-        SetMiddleCardBackground(color, value);
-    }
-
-    private void SetMiddleCardBackground(string color, string value)
-    {
-        if (color == "wild")
-        {
-            var imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-            // MiddleCard.Background = imageBrush; 
-        }
-        else
-        {
-            var imageBrush = new ImageBrush
-            {
-                ImageSource =
-                    new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-            // MiddleCard.Background = imageBrush;
-        }
-    }
-
-    public void UpdateMiddleCard(string content, string color, string value)
-    {
-        // MiddleCard.Content = content;
-
-        if (color == "wild")
-        {
-            var imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/wild/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-
-            // MiddleCard.Background = imageBrush;
-        }
-        else
-        {
-            var imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Assets/cards/{value}/{color}.png")),
-                Stretch = Stretch.Fill
-            };
-
-            // MiddleCard.Background = imageBrush;
-        }
-    }
+    // private void ResetButtonMargins()
+    // {
+    //     foreach (var button in stackPanell.Children.OfType<ScrollViewer>()
+    //                  .SelectMany(sv => ((ItemsControl)sv.Content).Items.OfType<Button>()))
+    //         if (button.Tag as string == "Card")
+    //             button.Margin = new Thickness(5);
+    // }
+    // private void MoveCardUp(Button clickedButton)
+    // {
+    //     var newMargin = clickedButton.Margin;
+    //     newMargin.Top -= 100;
+    //     clickedButton.Margin = newMargin;
+    // }
+    // private void LegenButtonMethod()
+    // {
+    //     // if (_chosenCard)
+    //     // {
+    //     //     // var indexOfSelectedCard = GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand
+    //     //     //     .IndexOf(GameLogic.prop.ClickedCard.ToString());
+    //     //
+    //     //     if (indexOfSelectedCard != -1)
+    //     //     {
+    //     //         GameLogic.prop.Players[GameLogic.prop.StartingPlayer].Hand.RemoveAt(indexOfSelectedCard);
+    //     //         GameLogic.prop.Center.Add(GameLogic.prop.ClickedCard.ToString());
+    //     //         ShowCardInCenter();
+    //     //         UpdatePlayerHand();
+    //     //         RemoveButtonFromStackPanel(indexOfSelectedCard);
+    //     //     }
+    //     // }
+    // }
+    // private void RemoveButtonFromStackPanel(int index)
+    // {
+    //     if (index >= 0 && stackPanell.Children.Count > index) stackPanell.Children.RemoveAt(index);
+    // }
 }

@@ -6,20 +6,19 @@ namespace UNO_Spielprojekt;
 
 public class RulesViewModel
 {
-    private readonly MainViewModel _mainViewModel;
     public RelayCommand GoToGameCommand { get; }
-    public GameViewModel GameViewModel;
+    private GameViewModel GameViewModel;
 
     public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel)
     {
-        _mainViewModel = mainViewModel;
         GameViewModel = gameViewModel;
         GoToGameCommand = new RelayCommand(GoToGameMethod);
     }
 
-    public void GoToGameMethod()
+    private void GoToGameMethod()
     {
         GameViewModel.InitializeGame();
-        _mainViewModel.GoToGame();
+        GameViewModel.SetCurrentHand();
+        GameViewModel.Game();
     }
 }

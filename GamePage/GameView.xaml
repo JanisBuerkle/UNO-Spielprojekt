@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -29,44 +29,52 @@
 
         <Button Command="{Binding ExitConfirmCommand}" Style="{StaticResource HomeButtonStyle}" />
 
-        <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
-                Margin="20,400,0,20" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" />
+        <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Command="{Binding UNOCommand}"
+                Margin="10" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" VerticalAlignment="Bottom"/>
 
-        <StackPanel Grid.Row="3" Grid.Column="2">
-            <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,300,20,20"
-                    Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold"
+        <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom">
+            <Button Style="{StaticResource MyButtonStyle}"
+                    Background="DarkSeaGreen" Content="Legen" FontSize="40" FontWeight="Bold" Height="100" Width="200" Margin="10"
                     Command="{Binding LegenCommand}" />
-            <Button Style="{StaticResource MyButtonStyle}" Height="100" Width="200" Margin="0,0,20,20"
-                    Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" />
+            <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}"
+                    Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100" Width="200" Margin="10" />
         </StackPanel>
 
-        <StackPanel  Grid.RowSpan="3" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" >
-            <Button Width="150" Height="225" Style="{StaticResource CardStyle}">
+        <StackPanel Grid.RowSpan="3" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top"
+                    HorizontalAlignment="Center">
+            <Button Width="150" Height="225" Style="{StaticResource CardStyle}" Command="{Binding ZiehenCommand}">
                 <Button.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Assets/Logos/card_back.png" Stretch="Fill" />
                 </Button.Background>
             </Button>
-            
-            <Button Width="150" Height="225" Content="{Binding MiddleCard}" Style="{StaticResource CardStyle}">
+
+            <Button Width="150" Height="225" Style="{StaticResource CardStyle}" >
                 <Button.Background>
                     <ImageBrush ImageSource="{Binding MiddleCardPic}" Stretch="Fill" />
                 </Button.Background>
             </Button>
         </StackPanel>
 
+<ScrollViewer Grid.Row="3" Grid.Column="1"
+              VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
+              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+    <ItemsControl ItemsSource="{Binding CurrentHand}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type local:CardViewModel}">
+                <Button Click="CardButton_Click"
+                        CommandParameter="{Binding}">
+                    <Image Source="{Binding ImageUri}" />
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</ScrollViewer>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" DataContext="{Binding ElementName=Control, Path=PlayViewModel}">
-                <ItemsControl ItemsSource="{Binding Cards}"><!-- ItemTemplate="{StaticResource ButtonTemplate}"-->
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type local:CardViewModel}">
-                            <Button>
-                                <Image Source="{Binding ImageUri}" />
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </StackPanel>
+        
     </Grid>
 </UserControl>

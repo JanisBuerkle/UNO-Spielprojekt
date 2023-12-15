@@ -1,19 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
 
 public partial class GameView
 {
-    public static readonly DependencyProperty PlayViewModelProperty = DependencyProperty.Register(
-        nameof(PlayViewModel), typeof(PlayViewModel), typeof(GameView), new PropertyMetadata(default(PlayViewModel)));
-    
-    public PlayViewModel PlayViewModel
-    {
-        get { return (PlayViewModel)GetValue(PlayViewModelProperty); }
-        set { SetValue(PlayViewModelProperty, value); }
-    }
-    
     public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
         nameof(ViewModel), typeof(GameViewModel), typeof(GameView), new PropertyMetadata(default(GameViewModel)));
 
@@ -23,20 +17,34 @@ public partial class GameView
         set => SetValue(ViewModelProperty, value);
     }
 
-    public static readonly DependencyProperty PropertysProperty = DependencyProperty.Register(
-        nameof(Propertys), typeof(Propertys), typeof(GameView), new PropertyMetadata(default(Propertys)));
+    public static readonly DependencyProperty PlayerProperty = DependencyProperty.Register(
+        nameof(Player), typeof(Players), typeof(GameView), new PropertyMetadata(default(Players)));
 
-    public Propertys Propertys
+    public Players Player
     {
-        get => (Propertys)GetValue(PropertysProperty);
-        set => SetValue(PropertysProperty, value);
+        get => (Players)GetValue(PlayerProperty);
+        set => SetValue(PlayerProperty, value);
     }
     
+    public void CardButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.DataContext is CardViewModel card)
+        {
+            int selectedIndex = ViewModel.CurrentHand.IndexOf(card);
+            ViewModel.selectedCardIndex = selectedIndex;
+            ViewModel.LegenCommandMethod();
+        }
+    }
 
+    private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        var scrollViewer = (ScrollViewer)sender;
+        double scrollFactor = 1.0;
+        scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - e.Delta * scrollFactor);
+        e.Handled = true;
+    }
     public GameView()
     {
-        ViewModel = new GameViewModel(new MainViewModel(), new PlayViewModel());
-        PlayViewModel = new PlayViewModel();
         InitializeComponent();
     }
 }
