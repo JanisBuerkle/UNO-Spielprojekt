@@ -31,6 +31,22 @@ public class GameLogic
         return _random.Next(0, players.Count);
     }
 
+    public List<CardViewModel> WildCards = new List<CardViewModel>()
+    {
+        new CardViewModel { Color = "Red", Value = "Wild", ImageUri = "pack://application:,,,/Assets/cards/wild/red.png" },
+        new CardViewModel { Color = "Blue", Value = "Wild", ImageUri = "pack://application:,,,/Assets/cards/wild/blue.png" },
+        new CardViewModel { Color = "Yellow", Value = "Wild", ImageUri = "pack://application:,,,/Assets/cards/wild/yellow.png" },
+        new CardViewModel { Color = "Green", Value = "Wild", ImageUri = "pack://application:,,,/Assets/cards/wild/green.png" },
+    };
+    
+    public List<CardViewModel> Draw4Cards = new List<CardViewModel>()
+    {
+        new CardViewModel { Color = "Red", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/red.png" },
+        new CardViewModel { Color = "Blue", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/blue.png" },
+        new CardViewModel { Color = "Yellow", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/yellow.png" },
+        new CardViewModel { Color = "Green", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/green.png" },
+    };
+    
     public List<CardViewModel> cards = new List<CardViewModel>()
     {
         new CardViewModel { Color = "Blue", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Blue.png" },
