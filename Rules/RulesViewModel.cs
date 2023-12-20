@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+
+using tt.Tools.Logging;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
 
@@ -8,15 +10,17 @@ public class RulesViewModel
 {
     public RelayCommand GoToGameCommand { get; }
     private GameViewModel GameViewModel;
-
-    public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel)
+    private readonly ILogger logger;
+    public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel, ILogger logger)
     {
+        this.logger = logger;
         GameViewModel = gameViewModel;
         GoToGameCommand = new RelayCommand(GoToGameMethod);
     }
 
     private void GoToGameMethod()
     {
+        logger.Info("Spiel wird gestartet.");
         GameViewModel.InitializeGame();
         GameViewModel.SetCurrentHand();
         GameViewModel.Game();

@@ -2,8 +2,10 @@
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Logging;
 using UNO_Spielprojekt.MainMenu;
+using UNO_Spielprojekt.Scoreboard;
 using UNO_Spielprojekt.Setting;
-using WPF_Spielprojekt_Schwimmen.Scoreboard;
+using UNO_Spielprojekt.Winner;
+
 
 namespace UNO_Spielprojekt.Window;
 
@@ -12,6 +14,7 @@ public class MainViewModel : ViewModelBase
     private bool _mainMenuVisible;
     private bool _scoreboardVisible;
     private bool _gameVisible;
+    private bool _winnerVisible;
     private bool _settingsVisible;
     private bool _addPlayerVisible;
     private bool _rulesVisible;
@@ -24,6 +27,7 @@ public class MainViewModel : ViewModelBase
     private PlayViewModel PlayViewModel { get; set; }
     public SettingsViewModel SettingsViewModel { get; }
     public ScoreboardViewModel ScoreboardViewModel { get; }
+    public WinnerViewModel WinnerViewModel { get; }
 
     public MainViewModel()
     {
@@ -31,20 +35,22 @@ public class MainViewModel : ViewModelBase
         var logger = loggerFactory.CreateLogger("Uno-Spielprojekt");
         ScoreboardViewModel = new ScoreboardViewModel(this);
         PlayViewModel = new PlayViewModel();
-        GameLogic = new GameLogic(PlayViewModel);
-        AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic);
+        GameLogic = new GameLogic(PlayViewModel, logger);
+        AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger);
-        RulesViewModel = new RulesViewModel(this, GameViewModel);
-        SettingsViewModel = new SettingsViewModel(this);
-        MainMenuViewModel = new MainMenuViewModel(this);
+        RulesViewModel = new RulesViewModel(this, GameViewModel, logger);
+        WinnerViewModel = new WinnerViewModel(this);
+        SettingsViewModel = new SettingsViewModel(this, logger);
+        MainMenuViewModel = new MainMenuViewModel(this, logger);
         MainMenuVisible = true;
     }
 
     public void GoToMainMenu()
     {
-        MainMenuVisible = true;
+        MainMenuVisible = false;
         GameVisible = false;
         RulesVisible = false;
+        WinnerVisible = true;
         SettingsVisible = false;
         AddPlayerVisible = false;
         ScoreboardVisible = false;
@@ -55,6 +61,7 @@ public class MainViewModel : ViewModelBase
         AddPlayerVisible = true;
         GameVisible = false;
         RulesVisible = false;
+        WinnerVisible = false;
         MainMenuVisible = false;
         SettingsVisible = false;
         ScoreboardVisible = false;
@@ -65,6 +72,7 @@ public class MainViewModel : ViewModelBase
         SettingsVisible = true;
         GameVisible = false;
         RulesVisible = false;
+        WinnerVisible = false;
         MainMenuVisible = false;
         AddPlayerVisible = false;
         ScoreboardVisible = false;
@@ -74,6 +82,7 @@ public class MainViewModel : ViewModelBase
     {
         GameVisible = true;
         RulesVisible = false;
+        WinnerVisible = false;
         MainMenuVisible = false;
         SettingsVisible = false;
         AddPlayerVisible = false;
@@ -85,6 +94,7 @@ public class MainViewModel : ViewModelBase
         ScoreboardVisible = true;
         GameVisible = false;
         RulesVisible = false;
+        WinnerVisible = false;
         MainMenuVisible = false;
         SettingsVisible = false;
         AddPlayerVisible = false;
@@ -94,8 +104,20 @@ public class MainViewModel : ViewModelBase
     {
         RulesVisible = true;
         GameVisible = false;
+        WinnerVisible = false;
         MainMenuVisible = false;
         SettingsVisible = false;
+        AddPlayerVisible = false;
+        ScoreboardVisible = false;
+        
+    }
+    public void GoToWinner()
+    {
+        WinnerVisible = true;
+        GameVisible = false;
+        RulesVisible = false;
+        SettingsVisible = false;
+        MainMenuVisible = false;
         AddPlayerVisible = false;
         ScoreboardVisible = false;
     }
@@ -107,6 +129,16 @@ public class MainViewModel : ViewModelBase
         {
             if (value == _mainMenuVisible) return;
             _mainMenuVisible = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool WinnerVisible
+    {
+        get => _winnerVisible;
+        set
+        {
+            if (value == _winnerVisible) return;
+            _winnerVisible = value;
             OnPropertyChanged();
         }
     }

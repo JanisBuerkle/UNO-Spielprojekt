@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPF_Spielprojekt_Schwimmen.Scoreboard;
+using UNO_Spielprojekt.Scoreboard;
 
 namespace UNO_Spielprojekt.Scoreboard;
 
@@ -19,10 +19,5 @@ public partial class ScoreboardView : UserControl
     public ScoreboardView()
     {
         InitializeComponent();
-    }
-
-    private void HomeButtonClicked(object sender, RoutedEventArgs e)
-    {
-        // NavigationService.Navigate(new MainMenu.MainMenuView()); 
     }
 }

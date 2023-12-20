@@ -42,7 +42,7 @@
                     Command="{Binding LegenCommand}" />
 
             <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}"
-                    Background="Wheat" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100" Width="200"
+                    Background="{Binding TheBackground}" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100" Width="200"
                     Margin="10" />
         </StackPanel>
 

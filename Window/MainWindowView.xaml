@@ -9,6 +9,7 @@
         xmlns:gamePage="clr-namespace:UNO_Spielprojekt.GamePage"
         xmlns:addPlayer="clr-namespace:UNO_Spielprojekt.AddPlayer"
         xmlns:scoreboard="clr-namespace:UNO_Spielprojekt.Scoreboard"
+        xmlns:winner="clr-namespace:UNO_Spielprojekt.Winner"
         xmlns:unoSpielprojekt="clr-namespace:UNO_Spielprojekt"
         mc:Ignorable="d"
         Title="UNO-Game"
@@ -39,6 +40,9 @@
             <unoSpielprojekt:RulesView
                 Visibility="{Binding RulesVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                 ViewModel="{Binding RulesViewModel}" />
+            <winner:WinnerView
+                Visibility="{Binding WinnerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                ViewModel="{Binding WinnerViewModel}" />
         </Grid>
     </Border>
 </Window>

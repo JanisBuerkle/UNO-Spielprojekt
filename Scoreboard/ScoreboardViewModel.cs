@@ -4,10 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using CommunityToolkit.Mvvm.Input;
-using UNO_Spielprojekt.Scoreboard;
 using UNO_Spielprojekt.Window;
 
-namespace WPF_Spielprojekt_Schwimmen.Scoreboard;
+namespace UNO_Spielprojekt.Scoreboard;
 
 public class ScoreboardViewModel
 {

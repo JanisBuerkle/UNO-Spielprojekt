@@ -50,7 +50,7 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Button Command="{Binding GoToMainMenuCommand}" Click="HomeButtonClicked"
+        <Button Command="{Binding GoToMainMenuCommand}"
                 Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </UserControl>
