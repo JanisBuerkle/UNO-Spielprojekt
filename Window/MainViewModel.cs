@@ -1,5 +1,6 @@
 ﻿using UNO_Spielprojekt.AddPlayer;
 using UNO_Spielprojekt.GamePage;
+using UNO_Spielprojekt.Logging;
 using UNO_Spielprojekt.MainMenu;
 using UNO_Spielprojekt.Setting;
 using WPF_Spielprojekt_Schwimmen.Scoreboard;
@@ -26,11 +27,13 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+        var loggerFactory = new SerilogLoggerFactory();
+        var logger = loggerFactory.CreateLogger("Uno-Spielprojekt");
         ScoreboardViewModel = new ScoreboardViewModel(this);
         PlayViewModel = new PlayViewModel();
         GameLogic = new GameLogic(PlayViewModel);
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic);
-        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic);
+        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger);
         RulesViewModel = new RulesViewModel(this, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this);
         MainMenuViewModel = new MainMenuViewModel(this);

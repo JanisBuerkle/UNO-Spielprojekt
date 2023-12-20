@@ -6,16 +6,45 @@ namespace UNO_Spielprojekt.GamePage;
 
 public class ChooseColorViewModel : ViewModelBase
 {
-    public RelayCommand<string> ChooseCommand { get; }
-    public int choosenColor { get; set; }
+    private int _choosenColor;
+    public RelayCommand ChooseRedCommand { get; }
+    public RelayCommand ChooseBlueCommand { get; }
+    public RelayCommand ChooseYellowCommand { get; }
+    public RelayCommand ChooseGreenCommand { get; }
+
+    public int ChoosenColor
+    {
+        get => _choosenColor;
+        private set
+        {
+            if (value == _choosenColor) return;
+            _choosenColor = value;
+            OnPropertyChanged();
+        }
+    }
 
     public ChooseColorViewModel()
     {
-        ChooseCommand = new RelayCommand<string>(Test);
+        ChooseRedCommand = new RelayCommand(ChooseRedCommandMethod);
+        ChooseBlueCommand = new RelayCommand(ChooseBlueCommandMethod);
+        ChooseYellowCommand = new RelayCommand(ChooseYellowCommandMethod);
+        ChooseGreenCommand = new RelayCommand(ChooseGreenCommandMethod);
     }
 
-    private void Test(string color)
+    private void ChooseRedCommandMethod()
     {
-        choosenColor = Convert.ToInt32(color);
+        ChoosenColor = (int)Color.Red;
+    }
+    private void ChooseBlueCommandMethod()
+    {
+        ChoosenColor = (int)Color.Blue;
+    }
+    private void ChooseYellowCommandMethod()
+    {
+        ChoosenColor = (int)Color.Yellow;
+    }
+    private void ChooseGreenCommandMethod()
+    {
+        ChoosenColor = (int)Color.Green;
     }
 }

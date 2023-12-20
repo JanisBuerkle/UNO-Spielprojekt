@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Windows;
 
 namespace UNO_Spielprojekt.GamePage;
 
-public partial class ChooseColorView : System.Windows.Window
+public partial class ChooseColorView
 {
     public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
         nameof(ViewModel), typeof(ChooseColorViewModel), typeof(ChooseColorView), new PropertyMetadata(default(ChooseColorViewModel)));
@@ -17,9 +15,5 @@ public partial class ChooseColorView : System.Windows.Window
     {
         ViewModel = new ChooseColorViewModel();
         InitializeComponent();
-    }
-    private void CloseWindow(object sender, RoutedEventArgs e)
-    {
-        Close();
     }
 }
