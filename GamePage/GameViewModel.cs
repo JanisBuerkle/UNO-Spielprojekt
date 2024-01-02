@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
@@ -65,6 +66,20 @@ public class GameViewModel : ViewModelBase
     public ObservableCollection<CardViewModel> CurrentHand { get; set; } = new();
     public int SelectedCardIndex { get; set; }
     private int RoundCounter { get; set; }
+
+    private string _winnerName;
+    public string WinnerName
+    {
+        get => _winnerName;
+        set
+        {
+            if (_winnerName != value)
+            {
+                _winnerName = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     private string _roundCounterString;
 
@@ -429,6 +444,7 @@ public class GameViewModel : ViewModelBase
         if (GameLogic.players[CurrentPlayer].Hand.Count == 0)
         {
             logger.Info($"{CurrentPlayerName} hat Gewonnen!");
+            WinnerName = CurrentPlayerName;
             _mainViewModel.GoToWinner();
         }
     }

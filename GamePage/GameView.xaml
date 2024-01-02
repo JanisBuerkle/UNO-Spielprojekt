@@ -8,7 +8,7 @@
              Name="Control">
     <UserControl.Resources>
         <ResourceDictionary>
-                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -42,12 +42,15 @@
                     Command="{Binding LegenCommand}" />
 
             <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}"
-                    Background="{Binding TheBackground}" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100" Width="200"
+                    Background="{Binding TheBackground}" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100"
+                    Width="200"
                     Margin="10" />
         </StackPanel>
 
-        <Label Margin="0,20,0,0" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" FontSize="20" Content="{Binding RoundCounterString}" Foreground="Wheat"></Label>
-        
+        <Label Margin="0,20,0,0" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" FontSize="20"
+               Content="{Binding RoundCounterString}" Foreground="Wheat">
+        </Label>
+
         <StackPanel Grid.RowSpan="3" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top"
                     HorizontalAlignment="Center">
             <Button Width="150" Height="225" Style="{StaticResource CardStyle}" Command="{Binding ZiehenCommand}">
@@ -82,8 +85,8 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3"
-              ZIndex="1000" Visibility="{Binding ChooseColorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1000" 
+              Visibility="{Binding ChooseColorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:ChooseColorView ViewModel="{Binding ChooseColorViewModel}" />
         </Grid>
 

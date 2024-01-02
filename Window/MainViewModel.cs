@@ -47,10 +47,10 @@ public class MainViewModel : ViewModelBase
 
     public void GoToMainMenu()
     {
-        MainMenuVisible = false;
+        MainMenuVisible = true;
         GameVisible = false;
         RulesVisible = false;
-        WinnerVisible = true;
+        WinnerVisible = false;
         SettingsVisible = false;
         AddPlayerVisible = false;
         ScoreboardVisible = false;

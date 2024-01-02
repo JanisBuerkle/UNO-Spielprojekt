@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Winner;
 
 namespace UNO_Spielprojekt.Winner;
@@ -13,6 +14,15 @@ public partial class WinnerView : UserControl
     {
         get => (WinnerViewModel)GetValue(ViewModelProperty); 
         set => SetValue(ViewModelProperty, value); 
+    }
+
+    public static readonly DependencyProperty GameViewModelProperty = DependencyProperty.Register(
+        nameof(GameViewModel), typeof(GameViewModel), typeof(WinnerView), new PropertyMetadata(default(GameViewModel)));
+
+    public GameViewModel GameViewModel
+    {
+        get => (GameViewModel)GetValue(GameViewModelProperty);
+        set => SetValue(GameViewModelProperty, value); 
     }
 
     public WinnerView()

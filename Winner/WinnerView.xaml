@@ -19,6 +19,13 @@
         <TextBlock Grid.Column="1" Grid.Row="0" Background="Gray" VerticalAlignment="Center"
                    HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="WINNER" />
 
-        <Button Command="{Binding GoToMainMenuCommand}" Style="{StaticResource HomeButtonStyle}" />
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label FontSize="20" Foreground="White" 
+                   DataContext="{Binding ElementName=Control, Path=GameViewModel}" Content="{Binding Winners}" />
+            <Label FontSize="20" Foreground="White" Content="Thomas" />
+        </StackPanel>
+
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding GoToMainMenuCommand}"
+                Style="{StaticResource HomeButtonStyle}" />
     </Grid>
 </UserControl>

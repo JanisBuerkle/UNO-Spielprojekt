@@ -17,7 +17,6 @@ public class ChooseColorViewModel : ViewModelBase
         get => _choosenColor;
         private set
         {
-            if (value == _choosenColor) return;
             _choosenColor = value;
             OnPropertyChanged();
         }

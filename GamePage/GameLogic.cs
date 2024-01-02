@@ -91,7 +91,8 @@ public class GameLogic
         new CardViewModel
             { Color = "Blue", Value = "+2", ImageUri = "pack://application:,,,/Assets/cards/+2/Blue.png" },
 
-        new CardViewModel { Color = "Green", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Blue.png" },
+        new CardViewModel
+            { Color = "Green", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Green.png" },
         new CardViewModel
             { Color = "Green", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Green.png" },
         new CardViewModel
