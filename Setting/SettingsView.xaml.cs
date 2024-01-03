@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,7 +45,7 @@ public partial class SettingsView : UserControl
         // Console.WriteLine($@"Header text: {Header.Text}");
     }
 
-    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Languages_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ComboBox.SelectedItem is Language selectedLanguage)
         {
@@ -56,7 +57,7 @@ public partial class SettingsView : UserControl
         }
     }
 
-    private void ScreenModus_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void WindowModes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ScreenModus.SelectedItem is WindowMode selectedMode)
         {
@@ -72,6 +73,21 @@ public partial class SettingsView : UserControl
                 Application.Current.MainWindow.WindowStyle = WindowStyle.None;
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
                 Application.Current.MainWindow.Background = Brushes.Transparent;
+            }
+        }
+    }
+    
+    private void ThemeModes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ThemeModes.SelectedItem is ThemeMode selectedMode)
+        {
+            if (selectedMode == ThemeMode.Dark)
+            {
+                Console.Write("Dark");
+            }
+            else if (selectedMode == ThemeMode.Bright)
+            {
+                Console.Write("Bright");
             }
         }
     }

@@ -504,7 +504,7 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(1);
+        GameLogic.DealCards(7);
     }
 
     private void InitializePlayersHands()

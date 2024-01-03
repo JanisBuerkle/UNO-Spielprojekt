@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -29,7 +30,7 @@
                    FontSize="90" Margin="0,10,0,0" FontWeight="Bold" />
 
         <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ComboBox" FontSize="48"
-                  SelectionChanged="ComboBox_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}"
+                  SelectionChanged="Languages_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}"
                   ItemsSource="{Binding MyLangs}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -42,8 +43,8 @@
         </ComboBox>
 
         <ComboBox x:Name="ScreenModus" Grid.Row="3" Grid.Column="1" Margin="0,20,0,0" FontSize="48"
-                  SelectionChanged="ScreenModus_OnSelectionChanged"
-                  ItemsSource="{Binding MyModes}">
+                  SelectionChanged="WindowModes_OnSelectionChanged"
+                  ItemsSource="{Binding MyWindowModes}">
             <ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type setting:WindowMode}">
                     <StackPanel Orientation="Horizontal">
@@ -63,6 +64,18 @@
                                 </Style>
                             </Image.Style>
                         </Image>
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox x:Name="ThemeModes" Grid.Row="4" Grid.Column="1" Margin="0,20,0,0" FontSize="48"
+                  SelectionChanged="ThemeModes_OnSelectionChanged"
+                  ItemsSource="{Binding MyThemeModes}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type setting:WindowMode}">
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding}" />
                     </StackPanel>
                 </DataTemplate>
