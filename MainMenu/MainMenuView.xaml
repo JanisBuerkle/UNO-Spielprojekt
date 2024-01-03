@@ -10,11 +10,11 @@
     <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
         <Button Command="{Binding GoToSettings}" Style="{StaticResource SettingsButtonStyle}" />
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Command="{Binding GoToAddPlayerCommand}" Style="{StaticResource MainMenuButtonStyle}"
+            <Button Foreground="White" Command="{Binding GoToAddPlayerCommand}" Style="{StaticResource MainMenuButtonStyle}"
                     Content="{x:Static resources:Resource.Play}" />
-            <Button Command="{Binding GoToScoreboardCommand}" Style="{StaticResource MainMenuButtonStyle}"
+            <Button Foreground="White" Command="{Binding GoToScoreboardCommand}" Style="{StaticResource MainMenuButtonStyle}"
                     Content="{x:Static resources:Resource.Scoreboard}" />
-            <Button Command="{Binding ExitApplicationCommand}" Style="{StaticResource MainMenuButtonStyle}"
+            <Button Foreground="White" Command="{Binding ExitApplicationCommand}" Style="{StaticResource MainMenuButtonStyle}"
                     Content="{x:Static resources:Resource.Exit}" />
         </StackPanel>
     </Grid>

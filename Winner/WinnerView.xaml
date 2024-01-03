@@ -16,15 +16,21 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" Background="Gray" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="WINNER" />
+        <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Foreground="White" FontSize="80" FontWeight="Bold" Text="Winner" />
 
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label FontSize="20" Foreground="White" 
-                   DataContext="{Binding ElementName=Control, Path=GameViewModel}" Content="{Binding Winners}" />
-            <Label FontSize="20" Foreground="White" Content="Thomas" />
-        </StackPanel>
-
+        <!-- <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal"> -->
+        <!-- <Label FontSize="25" Content="Der Gewinner ist: " /> -->
+        <!-- -->
+        <!-- <Label FontSize="25" Foreground="White"  -->
+        <!--        DataContext="{Binding ElementName=Control, Path=GameViewModel}" -->
+        <!--        Content="{Binding WinnerName}" /> -->
+        <!-- </StackPanel> -->
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" DataContext="{Binding ElementName=Control, Path=GameViewModel}" FontSize="25">
+            <Run Text="Der Gewinner ist: " Foreground="Gray"></Run>
+            <Run Text="{Binding WinnerName}" Foreground="White"></Run>
+        </TextBlock>
         <Button Grid.Row="0" Grid.Column="0" Command="{Binding GoToMainMenuCommand}"
                 Style="{StaticResource HomeButtonStyle}" />
     </Grid>

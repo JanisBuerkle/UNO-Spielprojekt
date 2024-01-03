@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.Input;
 using UNO_Spielprojekt.GamePage;
@@ -15,36 +14,35 @@ public class AddPlayerViewModel : INotifyPropertyChanged
 {
     private readonly MainViewModel _mainViewModel;
     public RelayCommand GoToMainMenuCommand { get; }
-    public GameLogic GameLogic { get; set; }
+    private GameLogic GameLogic { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
     public RelayCommand WeiterButtonCommand { get; }
 
-    private readonly ILogger logger;
+    private readonly ILogger _logger;
     public AddPlayerViewModel(MainViewModel mainViewModel, GameLogic gameLogic, ILogger logger)
     {
-        this.logger = logger;
+        this._logger = logger;
         _mainViewModel = mainViewModel;
         GameLogic = gameLogic;
         PlayerNames = new ObservableCollection<NewPlayerViewModel>();
-        PlayViewModel playViewModel = new PlayViewModel();
-        
+
         GoToMainMenuCommand = new RelayCommand(GoToMainMenuCommandMethod);
         WeiterButtonCommand = new RelayCommand(WeiterButtonCommandMethod);
     }
 
     private void GoToMainMenuCommandMethod()
     {
-        logger.Info("MainMenu wurde geöffnet.");
+        _logger.Info("MainMenu wurde geöffnet.");
         _mainViewModel.GoToMainMenu();
     }
     private void WeiterButtonCommandMethod()
     {
         foreach (var t in PlayerNames)
         {
-            logger.Info($"Neuer Spieler: {t.Name} wurde hinzugefügt.");
-            GameLogic.players.Add(new Players { PlayerName = t.Name });
+            _logger.Info($"Neuer Spieler: {t.Name} wurde hinzugefügt.");
+            GameLogic.Players.Add(new Players { PlayerName = t.Name });
         }
-        logger.Info("Rules Seite wurde geöffnet.");
+        _logger.Info("Rules Seite wurde geöffnet.");
         _mainViewModel.GoToRules();
     }
 

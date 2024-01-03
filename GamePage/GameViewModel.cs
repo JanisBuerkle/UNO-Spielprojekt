@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,11 +11,12 @@ namespace UNO_Spielprojekt.GamePage;
 
 public class GameViewModel : ViewModelBase
 {
+    private readonly Random _random = new();
     private Brush _theBackground;
 
     public Brush TheBackground
     {
-        get { return _theBackground; }
+        get => _theBackground;
         set
         {
             _theBackground = value;
@@ -55,7 +56,7 @@ public class GameViewModel : ViewModelBase
 
 
     private readonly MainViewModel _mainViewModel;
-    private readonly ILogger logger;
+    private readonly ILogger _logger;
     private PlayViewModel PlayViewModel { get; }
     private GameLogic GameLogic { get; }
 
@@ -68,6 +69,7 @@ public class GameViewModel : ViewModelBase
     private int RoundCounter { get; set; }
 
     private string _winnerName;
+
     public string WinnerName
     {
         get => _winnerName;
@@ -98,7 +100,7 @@ public class GameViewModel : ViewModelBase
 
     private bool IsSkip { get; set; }
     private bool IsReverse { get; set; }
-    public CardViewModel SelectedCard { get; set; }
+    private CardViewModel SelectedCard { get; set; }
 
     private string _currentPlayerName;
 
@@ -128,7 +130,7 @@ public class GameViewModel : ViewModelBase
         GameLogic = gameLogic;
         PlayViewModel = playViewModel;
         _mainViewModel = mainViewModel;
-        this.logger = logger;
+        this._logger = logger;
 
         ZiehenCommand = new RelayCommand(ZiehenCommandMethod);
         LegenCommand = new RelayCommand(LegenCommandMethod);
@@ -153,36 +155,36 @@ public class GameViewModel : ViewModelBase
         }
         else
         {
-            TheBackground = Brushes.Wheat;
+            TheBackground = Brushes.DarkSeaGreen;
             var card = PlayViewModel.Cards.First();
             PlayViewModel.Cards.RemoveAt(0);
-            GameLogic.players[CurrentPlayer].Hand.Add(card);
+            GameLogic.Players[CurrentPlayer].Hand.Add(card);
             SetCurrentHand();
             _ziehen = true;
-            logger.Info($"{CurrentPlayerName} hat eine Karte gezogen {card.Color} {card.Value}.");
+            _logger.Info($"{CurrentPlayerName} hat eine Karte gezogen {card.Color} {card.Value}.");
         }
     }
 
     public void LegenCommandMethod()
     {
-        SelectedCard = GameLogic.players[CurrentPlayer].Hand[SelectedCardIndex];
+        SelectedCard = GameLogic.Players[CurrentPlayer].Hand[SelectedCardIndex];
         if (!_legen)
         {
-            logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} {SelectedCard.Value} angeklickt.");
+            _logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} {SelectedCard.Value} angeklickt.");
             if (SelectedCard.Value == "Wild")
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 _legen = true;
 
                 ChooseColorViewModel = new ChooseColorViewModel();
                 ChooseColorViewModel.PropertyChanged += ColorChoosen;
                 ChooseColorVisible = true;
                 SetCurrentHand();
-                logger.Info($"{CurrentPlayerName} hat Wild gespielt.");
+                _logger.Info($"{CurrentPlayerName} hat Wild gespielt.");
             }
             else if (SelectedCard.Value == "+4")
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 _legen = true;
 
                 ChooseColorViewModel = new ChooseColorViewModel();
@@ -192,29 +194,29 @@ public class GameViewModel : ViewModelBase
 
                 for (var i = 0; i < 4; i++)
                 {
-                    GameLogic.players[NextPlayer].Hand.Add(PlayViewModel.Cards[0]);
+                    GameLogic.Players[NextPlayer].Hand.Add(PlayViewModel.Cards[0]);
                     PlayViewModel.Cards.RemoveAt(0);
                 }
 
                 SetCurrentHand();
-                logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} +4 gespielt.");
+                _logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} +4 gespielt.");
             }
             else if (SelectedCard.Color == GameLogic.Center[GameLogic.Center.Count - 1].Color ||
                      SelectedCard.Value == GameLogic.Center[GameLogic.Center.Count - 1].Value)
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 _legen = true;
-                GameLogic.players[CurrentPlayer].Hand.RemoveAt(SelectedCardIndex);
+                GameLogic.Players[CurrentPlayer].Hand.RemoveAt(SelectedCardIndex);
                 GameLogic.Center.Add(SelectedCard);
                 MiddleCardPic = SelectedCard.ImageUri;
                 SetCurrentHand();
-                logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} {SelectedCard.Value} gespielt.");
+                _logger.Info($"{CurrentPlayerName} hat {SelectedCard.Color} {SelectedCard.Value} gespielt.");
             }
 
             if (SelectedCard.Value == "Skip" &&
                 SelectedCard.Value == GameLogic.Center[GameLogic.Center.Count - 1].Value)
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 IsSkip = true;
                 SetCurrentHand();
             }
@@ -222,10 +224,10 @@ public class GameViewModel : ViewModelBase
             else if (SelectedCard.Value == "+2" &&
                      SelectedCard.Value == GameLogic.Center[GameLogic.Center.Count - 1].Value)
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 for (var i = 0; i < 2; i++)
                 {
-                    GameLogic.players[NextPlayer].Hand.Add(PlayViewModel.Cards[0]);
+                    GameLogic.Players[NextPlayer].Hand.Add(PlayViewModel.Cards[0]);
                     PlayViewModel.Cards.RemoveAt(0);
                 }
 
@@ -234,16 +236,16 @@ public class GameViewModel : ViewModelBase
             else if (SelectedCard.Value == "Reverse" &&
                      SelectedCard.Value == GameLogic.Center[GameLogic.Center.Count - 1].Value)
             {
-                TheBackground = Brushes.Wheat;
+                TheBackground = Brushes.DarkSeaGreen;
                 if (IsReverse)
                     IsReverse = false;
                 else
                     IsReverse = true;
-                if (GameLogic.players.Count == 2)
+                if (GameLogic.Players.Count == 2)
                 {
                     if (CurrentPlayer == 0)
                     {
-                        CurrentPlayer = GameLogic.players.Count - 1;
+                        CurrentPlayer = GameLogic.Players.Count - 1;
                     }
                     else
                     {
@@ -257,7 +259,7 @@ public class GameViewModel : ViewModelBase
     private void ColorChoosen(object? sender, PropertyChangedEventArgs e)
     {
         ChooseColorVisible = false;
-        GameLogic.players[CurrentPlayer].Hand.RemoveAt(SelectedCardIndex);
+        GameLogic.Players[CurrentPlayer].Hand.RemoveAt(SelectedCardIndex);
 
         if (SelectedCard.Value == "Wild")
         {
@@ -271,7 +273,7 @@ public class GameViewModel : ViewModelBase
         }
 
         SetCurrentHand();
-        logger.Info($"{CurrentPlayerName} hat eine Farbe ausgewählt.");
+        _logger.Info($"{CurrentPlayerName} hat eine Farbe ausgewählt.");
     }
 
     public ChooseColorViewModel ChooseColorViewModel
@@ -301,30 +303,31 @@ public class GameViewModel : ViewModelBase
         if (_legen || _ziehen)
         {
             CheckForWinner();
+            CheckForDrawStack();
             _legen = false;
             _ziehen = false;
             TheBackground = Brushes.Transparent;
-            logger.Info($"{CurrentPlayerName} hat seinen Zug beendet.");
-            if (GameLogic.players[CurrentPlayer].Hand.Count <= 1)
+            _logger.Info($"{CurrentPlayerName} hat seinen Zug beendet.");
+            if (GameLogic.Players[CurrentPlayer].Hand.Count <= 1)
             {
                 UnoCommandMethod();
-                logger.Info("UNO wurde vergessen zu drücken.");
+                _logger.Info("UNO wurde vergessen zu drücken.");
             }
 
             if (IsReverse)
             {
                 if (CurrentPlayer == 0)
                 {
-                    CurrentPlayer = GameLogic.players.Count - 1;
+                    CurrentPlayer = GameLogic.Players.Count - 1;
                     if (IsSkip)
                     {
-                        CurrentPlayer = GameLogic.players.Count - 2;
+                        CurrentPlayer = GameLogic.Players.Count - 2;
                         IsSkip = false;
                     }
 
                     NextPlayer = CurrentPlayer - 1;
 
-                    logger.Info("Eine neue Runde hat begonnen.");
+                    _logger.Info("Eine neue Runde hat begonnen.");
                     RoundCounter++;
                     RoundCounterString = $"Runde: {RoundCounter}/\u221e";
                 }
@@ -333,16 +336,16 @@ public class GameViewModel : ViewModelBase
                     CurrentPlayer--;
                     if (IsSkip)
                     {
-                        if (CurrentPlayer == 0) CurrentPlayer = GameLogic.players.Count - 1;
+                        if (CurrentPlayer == 0) CurrentPlayer = GameLogic.Players.Count - 1;
                         IsSkip = false;
                     }
 
-                    if (CurrentPlayer == 0) NextPlayer = GameLogic.players.Count - 1;
+                    if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
                 }
             }
             else if (!IsReverse)
             {
-                if (CurrentPlayer == GameLogic.players.Count - 1)
+                if (CurrentPlayer == GameLogic.Players.Count - 1)
                 {
                     CurrentPlayer = 0;
                     if (IsSkip)
@@ -353,7 +356,7 @@ public class GameViewModel : ViewModelBase
 
                     NextPlayer = CurrentPlayer + 1;
 
-                    logger.Info("Neue Runde hat begonnen.");
+                    _logger.Info("Neue Runde hat begonnen.");
                     RoundCounter++;
                     RoundCounterString = $"Runde: {RoundCounter}/\u221e";
                 }
@@ -362,11 +365,11 @@ public class GameViewModel : ViewModelBase
                     CurrentPlayer++;
                     if (IsSkip)
                     {
-                        if (CurrentPlayer == GameLogic.players.Count - 1) CurrentPlayer = 0;
+                        if (CurrentPlayer == GameLogic.Players.Count - 1) CurrentPlayer = 0;
                         IsSkip = false;
                     }
 
-                    if (CurrentPlayer == GameLogic.players.Count - 1)
+                    if (CurrentPlayer == GameLogic.Players.Count - 1)
                     {
                         NextPlayer = 0;
                     }
@@ -378,22 +381,22 @@ public class GameViewModel : ViewModelBase
             }
 
             SetCurrentHand();
-            CurrentPlayerName = GameLogic.players[CurrentPlayer].PlayerName + " (" + CurrentPlayer + ")";
+            CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
         }
     }
 
     private void UnoCommandMethod()
     {
-        if (GameLogic.players[CurrentPlayer].Uno == false)
+        if (GameLogic.Players[CurrentPlayer].Uno == false)
         {
-            if (GameLogic.players[CurrentPlayer].Hand.Count <= 1)
+            if (GameLogic.Players[CurrentPlayer].Hand.Count <= 1)
             {
-                logger.Info("UNO wurde gerufen!");
-                GameLogic.players[CurrentPlayer].Uno = true;
+                _logger.Info("UNO wurde gerufen!");
+                GameLogic.Players[CurrentPlayer].Uno = true;
             }
             else
             {
-                logger.Info("Uno wurde gedrückt, ohne das diese Person 1 Karte hatte.");
+                _logger.Info("Uno wurde gedrückt, ohne das diese Person 1 Karte hatte.");
             }
         }
     }
@@ -405,14 +408,14 @@ public class GameViewModel : ViewModelBase
 
     public void SetCurrentHand()
     {
-        logger.Info("CurrentHand wurde gesetzt.");
-        if (GameLogic.players.Count != 0)
+        _logger.Info("CurrentHand wurde gesetzt.");
+        if (GameLogic.Players.Count != 0)
         {
             CurrentHand.Clear();
-            foreach (var card in GameLogic.players[CurrentPlayer].Hand) CurrentHand.Add(card);
+            foreach (var card in GameLogic.Players[CurrentPlayer].Hand) CurrentHand.Add(card);
         }
 
-        CurrentPlayerName = GameLogic.players[CurrentPlayer].PlayerName + " (" + CurrentPlayer + ")";
+        CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
     }
 
     private void ExitConfirmCommandMethod()
@@ -424,26 +427,62 @@ public class GameViewModel : ViewModelBase
         exitConfirmWindow.ShowDialog();
     }
 
+    private void CheckForDrawStack()
+    {
+        if (PlayViewModel.Cards.Count <= 5)
+        {
+            var card1 = GameLogic.Center.Last();
+            GameLogic.Center.RemoveAt(GameLogic.Center.Count - 1);
+            foreach (var card in GameLogic.Center)
+            {
+                if (card.Value == "+4")
+                {
+                    card.Color = "Draw";
+                    card.ImageUri = "pack://application:,,,/Assets/cards/+4/Draw.png";
+                }
+                else if (card.Value == "Wild")
+                {
+                    card.Color = "Wild";
+                    card.ImageUri = "pack://application:,,,/Assets/cards/Wild/Wild.png";
+                }
+
+                PlayViewModel.Cards.Add(card);
+            }
+
+            var number = PlayViewModel.Cards.Count;
+            while (number > 1)
+            {
+                number--;
+                var card = _random.Next(number + 1);
+                (PlayViewModel.Cards[card], PlayViewModel.Cards[number]) =
+                    (PlayViewModel.Cards[number], PlayViewModel.Cards[card]);
+            }
+
+            GameLogic.Center.Clear();
+            GameLogic.Center.Add(card1);
+            _logger.Info("Center wird zu Deck hinzugefügt. (Mischen)");
+        }
+    }
 
     private void CheckForWinner()
     {
-        if (GameLogic.players[CurrentPlayer].Uno == false)
+        if (GameLogic.Players[CurrentPlayer].Uno == false)
         {
-            if (GameLogic.players[CurrentPlayer].Hand.Count <= 1)
+            if (GameLogic.Players[CurrentPlayer].Hand.Count <= 1)
             {
                 var card = PlayViewModel.Cards.First();
                 PlayViewModel.Cards.RemoveAt(0);
-                GameLogic.players[CurrentPlayer].Hand.Add(card);
+                GameLogic.Players[CurrentPlayer].Hand.Add(card);
                 SetCurrentHand();
-                GameLogic.players[CurrentPlayer].Uno = true;
+                GameLogic.Players[CurrentPlayer].Uno = true;
                 _ziehen = true;
-                logger.Info($"{CurrentPlayerName} hat vergessen Uno zu drücken.");
+                _logger.Info($"{CurrentPlayerName} hat vergessen Uno zu drücken.");
             }
         }
 
-        if (GameLogic.players[CurrentPlayer].Hand.Count == 0)
+        if (GameLogic.Players[CurrentPlayer].Hand.Count == 0)
         {
-            logger.Info($"{CurrentPlayerName} hat Gewonnen!");
+            _logger.Info($"{CurrentPlayerName} hat Gewonnen!");
             WinnerName = CurrentPlayerName;
             _mainViewModel.GoToWinner();
         }
@@ -465,11 +504,18 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(7);
+        GameLogic.DealCards(1);
     }
 
     private void InitializePlayersHands()
     {
         foreach (var cards in GameLogic.cards) PlayViewModel.Cards.Add(cards);
+    }
+
+    public void ClearAllLists()
+    {
+        GameLogic.Center.Clear();
+        GameLogic.Players.Clear();
+        PlayViewModel.Cards.Clear();
     }
 }

@@ -18,11 +18,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-
-        <Border Grid.Column="1" Margin="0,20,0,0" Padding="5" BorderThickness="1" BorderBrush="Gray" Background="Gray"
-                CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock FontSize="50" FontWeight="Bold" Text="Spieler hinzufügen" />
-        </Border>
+        
+        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Margin="0,20,0,0" Foreground="White" FontSize="50" FontWeight="Bold"
+                   Text="Spieler hinzufügen" />
 
         <StackPanel Grid.Row="0" Grid.Column="2">
             <Button Click="AddPlayerClicked" Style="{StaticResource PlusButtonStyle}">
@@ -48,9 +46,9 @@
         </ItemsControl>
 
         <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom" Margin="0,0,0,200" Visibility="Hidden"
-                Background="DarkOliveGreen" FontSize="50" FontWeight="Bold" Content="   Weiter   "
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" Margin="0,0,0,200" Visibility="Hidden"
+                Background="DarkOliveGreen" Foreground="White" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Style="{StaticResource MyButtonStyle}" />
 
         <Button Command="{Binding GoToMainMenuCommand}" Grid.Column="0" Grid.Row="0" Name="Home"

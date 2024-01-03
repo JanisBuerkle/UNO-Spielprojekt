@@ -39,7 +39,7 @@ public class MainViewModel : ViewModelBase
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger);
         RulesViewModel = new RulesViewModel(this, GameViewModel, logger);
-        WinnerViewModel = new WinnerViewModel(this);
+        WinnerViewModel = new WinnerViewModel(this, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this, logger);
         MainMenuViewModel = new MainMenuViewModel(this, logger);
         MainMenuVisible = true;
@@ -109,8 +109,8 @@ public class MainViewModel : ViewModelBase
         SettingsVisible = false;
         AddPlayerVisible = false;
         ScoreboardVisible = false;
-        
     }
+
     public void GoToWinner()
     {
         WinnerVisible = true;
@@ -132,6 +132,7 @@ public class MainViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+
     public bool WinnerVisible
     {
         get => _winnerVisible;

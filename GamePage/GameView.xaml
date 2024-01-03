@@ -32,16 +32,16 @@
 
         <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
                 Command="{Binding UnoCommand}"
-                Margin="10" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold"
+                Margin="10" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" Foreground="White"
                 VerticalAlignment="Bottom" />
 
         <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom">
-            <Button Style="{StaticResource MyButtonStyle}"
-                    Background="DarkSeaGreen" Content="{Binding CurrentPlayerName}" FontSize="40" FontWeight="Bold"
+            <Button Style="{StaticResource MyButtonStyle}" Foreground="White"
+                    Background="CornflowerBlue" Content="{Binding CurrentPlayerName}" FontSize="40" FontWeight="Bold"
                     Height="100" Width="200" Margin="10"
                     Command="{Binding LegenCommand}" />
 
-            <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}"
+            <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}" Foreground="White"
                     Background="{Binding TheBackground}" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100"
                     Width="200"
                     Margin="10" />
@@ -85,7 +85,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1000" 
+        <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1000"
               Visibility="{Binding ChooseColorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:ChooseColorView ViewModel="{Binding ChooseColorViewModel}" />
         </Grid>

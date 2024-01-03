@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.GamePage;
 
@@ -25,8 +23,8 @@ public partial class GameView
         get => (Players)GetValue(PlayerProperty);
         set => SetValue(PlayerProperty, value);
     }
-    
-    public void CardButton_Click(object sender, RoutedEventArgs e)
+
+    private void CardButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button button && button.DataContext is CardViewModel card)
         {
@@ -43,6 +41,7 @@ public partial class GameView
         scrollViewer.ScrollToHorizontalOffset(scrollViewer.HorizontalOffset - e.Delta * scrollFactor);
         e.Handled = true;
     }
+
     public GameView()
     {
         InitializeComponent();
