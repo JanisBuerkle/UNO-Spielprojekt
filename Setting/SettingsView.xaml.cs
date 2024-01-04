@@ -41,8 +41,6 @@ public partial class SettingsView : UserControl
             var culture = new CultureInfo(language.LangString);
             language.LangCulture = culture;
         }
-        // Header.Text = LocalizationManager.GetLocalizedString("Header");
-        // Console.WriteLine($@"Header text: {Header.Text}");
     }
 
     private void Languages_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -76,7 +74,7 @@ public partial class SettingsView : UserControl
             }
         }
     }
-    
+
     private void ThemeModes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ThemeModes.SelectedItem is ThemeMode selectedMode)

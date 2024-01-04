@@ -37,9 +37,9 @@ public class MainViewModel : ViewModelBase
         PlayViewModel = new PlayViewModel();
         GameLogic = new GameLogic(PlayViewModel, logger);
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
-        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger);
+        WinnerViewModel = new WinnerViewModel(this);
+        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger, WinnerViewModel);
         RulesViewModel = new RulesViewModel(this, GameViewModel, logger);
-        WinnerViewModel = new WinnerViewModel(this, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this, logger);
         MainMenuViewModel = new MainMenuViewModel(this, logger);
         MainMenuVisible = true;

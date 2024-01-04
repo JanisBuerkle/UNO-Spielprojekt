@@ -7,7 +7,7 @@ namespace UNO_Spielprojekt.Setting;
 
 public class SettingsViewModel : ViewModelBase
 {
-    private readonly ILogger logger;
+    private readonly ILogger _logger;
     public List<Language> MyLangs { get; }
     public List<WindowMode> MyWindowModes { get; }
     public List<ThemeMode> MyThemeModes { get; }
@@ -15,7 +15,7 @@ public class SettingsViewModel : ViewModelBase
     
     public SettingsViewModel(MainViewModel mainViewModel, ILogger logger)
     {
-        this.logger = logger;
+        this._logger = logger;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
         MyLangs = new List<Language>
         {

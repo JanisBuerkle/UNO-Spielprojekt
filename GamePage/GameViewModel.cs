@@ -6,6 +6,7 @@ using System.Windows.Media;
 using CommunityToolkit.Mvvm.Input;
 using tt.Tools.Logging;
 using UNO_Spielprojekt.Window;
+using UNO_Spielprojekt.Winner;
 
 namespace UNO_Spielprojekt.GamePage;
 
@@ -59,6 +60,7 @@ public class GameViewModel : ViewModelBase
     private readonly ILogger _logger;
     private PlayViewModel PlayViewModel { get; }
     private GameLogic GameLogic { get; }
+    private WinnerViewModel WinnerViewModel { get; }
 
 
     private int StartingPlayer { get; set; }
@@ -67,21 +69,6 @@ public class GameViewModel : ViewModelBase
     public ObservableCollection<CardViewModel> CurrentHand { get; set; } = new();
     public int SelectedCardIndex { get; set; }
     private int RoundCounter { get; set; }
-
-    private string _winnerName;
-
-    public string WinnerName
-    {
-        get => _winnerName;
-        set
-        {
-            if (_winnerName != value)
-            {
-                _winnerName = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     private string _roundCounterString;
 
@@ -124,10 +111,12 @@ public class GameViewModel : ViewModelBase
     public RelayCommand ExitConfirmCommand { get; }
 
 
-    public GameViewModel(MainViewModel mainViewModel, PlayViewModel playViewModel, GameLogic gameLogic, ILogger logger)
+    public GameViewModel(MainViewModel mainViewModel, PlayViewModel playViewModel, GameLogic gameLogic, ILogger logger,
+        WinnerViewModel winnerViewModel)
     {
         TheBackground = Brushes.Transparent;
         GameLogic = gameLogic;
+        WinnerViewModel = winnerViewModel;
         PlayViewModel = playViewModel;
         _mainViewModel = mainViewModel;
         this._logger = logger;
@@ -325,7 +314,8 @@ public class GameViewModel : ViewModelBase
                         IsSkip = false;
                     }
 
-                    NextPlayer = CurrentPlayer - 1;
+                    if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
+
 
                     _logger.Info("Eine neue Runde hat begonnen.");
                     RoundCounter++;
@@ -340,7 +330,7 @@ public class GameViewModel : ViewModelBase
                         IsSkip = false;
                     }
 
-                    if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
+                    NextPlayer = CurrentPlayer - 1;
                 }
             }
             else if (!IsReverse)
@@ -350,11 +340,18 @@ public class GameViewModel : ViewModelBase
                     CurrentPlayer = 0;
                     if (IsSkip)
                     {
-                        CurrentPlayer = 1;
+                        CurrentPlayer += 1;
                         IsSkip = false;
                     }
 
-                    NextPlayer = CurrentPlayer + 1;
+                    if (CurrentPlayer == GameLogic.Players.Count - 1)
+                    {
+                        NextPlayer = 0;
+                    }
+                    else
+                    {
+                        NextPlayer = CurrentPlayer + 1;
+                    }
 
                     _logger.Info("Neue Runde hat begonnen.");
                     RoundCounter++;
@@ -365,7 +362,10 @@ public class GameViewModel : ViewModelBase
                     CurrentPlayer++;
                     if (IsSkip)
                     {
-                        if (CurrentPlayer == GameLogic.Players.Count - 1) CurrentPlayer = 0;
+                        if (CurrentPlayer == GameLogic.Players.Count - 1)
+                        {
+                            CurrentPlayer = 0;
+                        }
                         IsSkip = false;
                     }
 
@@ -483,7 +483,8 @@ public class GameViewModel : ViewModelBase
         if (GameLogic.Players[CurrentPlayer].Hand.Count == 0)
         {
             _logger.Info($"{CurrentPlayerName} hat Gewonnen!");
-            WinnerName = CurrentPlayerName;
+            WinnerViewModel.WinnerName = CurrentPlayerName;
+            WinnerViewModel.RoundCounter = RoundCounter.ToString();
             _mainViewModel.GoToWinner();
         }
     }
@@ -494,7 +495,16 @@ public class GameViewModel : ViewModelBase
         InitializeGameProperties();
         GameLogic.PlaceFirstCardInCenter();
 
-        MiddleCard = GameLogic.Center.FirstOrDefault();
+        MiddleCard = GameLogic.Center.First();
+        SelectedCard = MiddleCard;
+        if (MiddleCard.Color == "Wild" || MiddleCard.Color == "Draw")
+        {
+            ChooseColorViewModel = new ChooseColorViewModel();
+            ChooseColorViewModel.PropertyChanged += ColorChoosen;
+            ChooseColorVisible = true;
+            GameLogic.Center.RemoveAt(0);
+        }
+
         var middleCardPath = MiddleCard.ImageUri;
         MiddleCardPic = middleCardPath;
     }

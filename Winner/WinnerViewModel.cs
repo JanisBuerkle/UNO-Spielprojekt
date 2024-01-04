@@ -4,16 +4,40 @@ using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Winner;
 
-public class WinnerViewModel
+public class WinnerViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
-    public GameViewModel _gameViewModel { get; }
     public RelayCommand GoToMainMenuCommand { get; }
     
-    public WinnerViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel)
+    private string _winnerName;
+    public string WinnerName
+    {
+        get => _winnerName;
+        set
+        {
+            if (_winnerName != value)
+            {
+                _winnerName = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _roundCounter;
+    public string RoundCounter
+    {
+        get => _roundCounter;
+        set
+        {
+            if (_roundCounter != value)
+            {
+                _roundCounter = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public WinnerViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
-        _gameViewModel = gameViewModel;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
     }
 }
