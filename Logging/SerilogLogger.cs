@@ -1,7 +1,7 @@
 ﻿using System;
+using ILogger = tt.Tools.Logging.ILogger;
 
 namespace UNO_Spielprojekt.Logging;
-using ILogger = tt.Tools.Logging.ILogger;
 
 public class SerilogLogger : ILogger
 {

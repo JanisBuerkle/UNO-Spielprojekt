@@ -10,17 +10,17 @@ public class RulesViewModel
 {
     public RelayCommand GoToGameCommand { get; }
     private GameViewModel GameViewModel;
-    private readonly ILogger logger;
+    private readonly ILogger _logger;
     public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel, ILogger logger)
     {
-        this.logger = logger;
+        this._logger = logger;
         GameViewModel = gameViewModel;
         GoToGameCommand = new RelayCommand(GoToGameMethod);
     }
 
     private void GoToGameMethod()
     {
-        logger.Info("Spiel wird gestartet.");
+        _logger.Info("Spiel wird gestartet.");
         GameViewModel.InitializeGame();
         GameViewModel.SetCurrentHand();
         GameViewModel.Game();

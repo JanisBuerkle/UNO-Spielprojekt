@@ -128,6 +128,7 @@ public class GameViewModel : ViewModelBase
 
         ExitConfirmCommand = new RelayCommand(ExitConfirmCommandMethod);
         RoundCounter = 1;
+        IsEnd = false;
         RoundCounterString = $"Runde: {RoundCounter}/\u221e";
     }
 
@@ -287,101 +288,111 @@ public class GameViewModel : ViewModelBase
         }
     }
 
+    public bool IsEnd { get; set; }
+
     private void FertigCommandMethod()
     {
-        if (_legen || _ziehen)
+        CheckForWinner();
+        if (IsEnd)
         {
-            CheckForWinner();
-            CheckForDrawStack();
-            _legen = false;
-            _ziehen = false;
-            TheBackground = Brushes.Transparent;
-            _logger.Info($"{CurrentPlayerName} hat seinen Zug beendet.");
-            if (GameLogic.Players[CurrentPlayer].Hand.Count <= 1)
+            
+        }
+        else
+        {
+            if (_legen || _ziehen)
             {
-                UnoCommandMethod();
-                _logger.Info("UNO wurde vergessen zu drücken.");
-            }
-
-            if (IsReverse)
-            {
-                if (CurrentPlayer == 0)
+                CheckForDrawStack();
+                _legen = false;
+                _ziehen = false;
+                TheBackground = Brushes.Transparent;
+                _logger.Info($"{CurrentPlayerName} hat seinen Zug beendet.");
+                if (GameLogic.Players[CurrentPlayer].Hand.Count <= 1)
                 {
-                    CurrentPlayer = GameLogic.Players.Count - 1;
-                    if (IsSkip)
-                    {
-                        CurrentPlayer = GameLogic.Players.Count - 2;
-                        IsSkip = false;
-                    }
-
-                    if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
-
-
-                    _logger.Info("Eine neue Runde hat begonnen.");
-                    RoundCounter++;
-                    RoundCounterString = $"Runde: {RoundCounter}/\u221e";
+                    UnoCommandMethod();
+                    _logger.Info("UNO wurde vergessen zu drücken.");
                 }
-                else
-                {
-                    CurrentPlayer--;
-                    if (IsSkip)
-                    {
-                        if (CurrentPlayer == 0) CurrentPlayer = GameLogic.Players.Count - 1;
-                        IsSkip = false;
-                    }
 
-                    NextPlayer = CurrentPlayer - 1;
-                }
-            }
-            else if (!IsReverse)
-            {
-                if (CurrentPlayer == GameLogic.Players.Count - 1)
+                if (IsReverse)
                 {
-                    CurrentPlayer = 0;
-                    if (IsSkip)
+                    if (CurrentPlayer == 0)
                     {
-                        CurrentPlayer += 1;
-                        IsSkip = false;
-                    }
+                        CurrentPlayer = GameLogic.Players.Count - 1;
+                        if (IsSkip)
+                        {
+                            CurrentPlayer = GameLogic.Players.Count - 2;
+                            IsSkip = false;
+                        }
 
-                    if (CurrentPlayer == GameLogic.Players.Count - 1)
-                    {
-                        NextPlayer = 0;
+                        if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
+
+
+                        _logger.Info("Eine neue Runde hat begonnen.");
+                        RoundCounter++;
+                        RoundCounterString = $"Runde: {RoundCounter}/\u221e";
                     }
                     else
                     {
-                        NextPlayer = CurrentPlayer + 1;
-                    }
+                        CurrentPlayer--;
+                        if (IsSkip)
+                        {
+                            if (CurrentPlayer == 0) CurrentPlayer = GameLogic.Players.Count - 1;
+                            IsSkip = false;
+                        }
 
-                    _logger.Info("Neue Runde hat begonnen.");
-                    RoundCounter++;
-                    RoundCounterString = $"Runde: {RoundCounter}/\u221e";
+                        NextPlayer = CurrentPlayer - 1;
+                    }
                 }
-                else
+                else if (!IsReverse)
                 {
-                    CurrentPlayer++;
-                    if (IsSkip)
+                    if (CurrentPlayer == GameLogic.Players.Count - 1)
                     {
+                        CurrentPlayer = 0;
+                        if (IsSkip)
+                        {
+                            CurrentPlayer += 1;
+                            IsSkip = false;
+                        }
+
                         if (CurrentPlayer == GameLogic.Players.Count - 1)
                         {
-                            CurrentPlayer = 0;
+                            NextPlayer = 0;
                         }
-                        IsSkip = false;
-                    }
+                        else
+                        {
+                            NextPlayer = CurrentPlayer + 1;
+                        }
 
-                    if (CurrentPlayer == GameLogic.Players.Count - 1)
-                    {
-                        NextPlayer = 0;
+                        _logger.Info("Neue Runde hat begonnen.");
+                        RoundCounter++;
+                        RoundCounterString = $"Runde: {RoundCounter}/\u221e";
                     }
                     else
                     {
-                        NextPlayer = CurrentPlayer + 1;
+                        CurrentPlayer++;
+                        if (IsSkip)
+                        {
+                            if (CurrentPlayer == GameLogic.Players.Count - 1)
+                            {
+                                CurrentPlayer = 0;
+                            }
+
+                            IsSkip = false;
+                        }
+
+                        if (CurrentPlayer == GameLogic.Players.Count - 1)
+                        {
+                            NextPlayer = 0;
+                        }
+                        else
+                        {
+                            NextPlayer = CurrentPlayer + 1;
+                        }
                     }
                 }
-            }
 
-            SetCurrentHand();
-            CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
+                SetCurrentHand();
+                CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
+            }
         }
     }
 
@@ -414,7 +425,7 @@ public class GameViewModel : ViewModelBase
             CurrentHand.Clear();
             foreach (var card in GameLogic.Players[CurrentPlayer].Hand) CurrentHand.Add(card);
         }
-
+        
         CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
     }
 
@@ -464,6 +475,19 @@ public class GameViewModel : ViewModelBase
         }
     }
 
+    public void ResetAllPropertys()
+    {
+        GameLogic.Center.Clear();
+        GameLogic.Players.Clear();
+        PlayViewModel.Cards.Clear();
+        CurrentHand.Clear();
+        IsReverse = false;
+        IsSkip = false;
+        _ziehen = false;
+        _legen = false;
+        RoundCounter = 0;
+    }
+
     private void CheckForWinner()
     {
         if (GameLogic.Players[CurrentPlayer].Uno == false)
@@ -486,6 +510,8 @@ public class GameViewModel : ViewModelBase
             WinnerViewModel.WinnerName = CurrentPlayerName;
             WinnerViewModel.RoundCounter = RoundCounter.ToString();
             _mainViewModel.GoToWinner();
+            IsEnd = true;
+            ResetAllPropertys();
         }
     }
 
@@ -514,18 +540,12 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(7);
+        GameLogic.DealCards(1);
+        IsEnd = false;
     }
 
     private void InitializePlayersHands()
     {
         foreach (var cards in GameLogic.cards) PlayViewModel.Cards.Add(cards);
-    }
-
-    public void ClearAllLists()
-    {
-        GameLogic.Center.Clear();
-        GameLogic.Players.Clear();
-        PlayViewModel.Cards.Clear();
     }
 }

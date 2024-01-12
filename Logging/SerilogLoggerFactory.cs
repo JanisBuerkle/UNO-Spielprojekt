@@ -1,5 +1,4 @@
-﻿namespace UNO_Spielprojekt.Logging;
-using System;
+﻿using System;
 using System.IO;
 
 using Serilog;
@@ -7,6 +6,8 @@ using Serilog.Core;
 using Serilog.Core.Enrichers;
 using ILogger = tt.Tools.Logging.ILogger;
 using ILoggerFactory = tt.Tools.Logging.ILoggerFactory;
+
+namespace UNO_Spielprojekt.Logging;
 
 public class SerilogLoggerFactory : ILoggerFactory
 {
@@ -34,7 +35,7 @@ public class SerilogLoggerFactory : ILoggerFactory
         return CreateLogger(name);
     }
 
-    public static Logger CreateSerilogLogger(string name)
+    private static Logger CreateSerilogLogger(string name)
     {
         var logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
