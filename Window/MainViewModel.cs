@@ -33,9 +33,9 @@ public class MainViewModel : ViewModelBase
     {
         var loggerFactory = new SerilogLoggerFactory();
         var logger = loggerFactory.CreateLogger("Uno-Spielprojekt");
-        ScoreboardViewModel = new ScoreboardViewModel(this);
         PlayViewModel = new PlayViewModel();
         GameLogic = new GameLogic(PlayViewModel, logger);
+        ScoreboardViewModel = new ScoreboardViewModel(this, GameLogic);
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         WinnerViewModel = new WinnerViewModel(this);
         GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger, WinnerViewModel);

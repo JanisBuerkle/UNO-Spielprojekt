@@ -30,8 +30,7 @@
                    FontSize="90" Margin="0,10,0,0" FontWeight="Bold" />
 
         <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ComboBox" FontSize="48"
-                  SelectionChanged="Languages_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}"
-                  ItemsSource="{Binding MyLangs}">
+                  SelectionChanged="Languages_SelectionChanged" SelectedItem="{Binding Lang, Mode=TwoWay}" ItemsSource="{Binding MyLangs}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

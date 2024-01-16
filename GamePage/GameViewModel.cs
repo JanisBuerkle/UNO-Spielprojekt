@@ -184,6 +184,11 @@ public class GameViewModel : ViewModelBase
 
                 for (var i = 0; i < 4; i++)
                 {
+                    if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                    {
+                        Console.Write("FEHLER!");
+                    }
+
                     GameLogic.Players[NextPlayer].Hand.Add(PlayViewModel.Cards[0]);
                     PlayViewModel.Cards.RemoveAt(0);
                 }
@@ -322,23 +327,42 @@ public class GameViewModel : ViewModelBase
                             IsSkip = false;
                         }
 
-                        if (CurrentPlayer == 0) NextPlayer = GameLogic.Players.Count - 1;
+                        if (CurrentPlayer == 0)
+                        {
+                            NextPlayer = GameLogic.Players.Count - 1;
+                        }
+                        else
+                        {
+                            NextPlayer = CurrentPlayer - 1;
+                        }
 
 
                         _logger.Info("Eine neue Runde hat begonnen.");
                         RoundCounter++;
                         RoundCounterString = $"Runde: {RoundCounter}/\u221e";
+
+                        if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                        {
+                            Console.Write("FEHLER! t");
+                        }
                     }
                     else
                     {
                         CurrentPlayer--;
                         if (IsSkip)
                         {
-                            if (CurrentPlayer == 0) CurrentPlayer = GameLogic.Players.Count - 1;
+                            if (CurrentPlayer == 0)
+                            {
+                                CurrentPlayer = GameLogic.Players.Count - 1;
+                            }
+
                             IsSkip = false;
                         }
 
-                        NextPlayer = CurrentPlayer - 1;
+                        if (CurrentPlayer == 0)
+                        {
+                            NextPlayer = GameLogic.Players.Count - 1;
+                        }
                     }
                 }
                 else if (!IsReverse)
@@ -355,10 +379,18 @@ public class GameViewModel : ViewModelBase
                         if (CurrentPlayer == GameLogic.Players.Count - 1)
                         {
                             NextPlayer = 0;
+                            if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                            {
+                                Console.Write("FEHLER! 3");
+                            }
                         }
                         else
                         {
                             NextPlayer = CurrentPlayer + 1;
+                            if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                            {
+                                Console.Write("FEHLER! 4");
+                            }
                         }
 
                         _logger.Info("Neue Runde hat begonnen.");
@@ -381,10 +413,18 @@ public class GameViewModel : ViewModelBase
                         if (CurrentPlayer == GameLogic.Players.Count - 1)
                         {
                             NextPlayer = 0;
+                            if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                            {
+                                Console.Write("FEHLER! 5");
+                            }
                         }
                         else
                         {
                             NextPlayer = CurrentPlayer + 1;
+                            if (NextPlayer < 0 || NextPlayer >= GameLogic.Players.Count)
+                            {
+                                Console.Write("FEHLER! 6");
+                            }
                         }
                     }
                 }
@@ -510,6 +550,7 @@ public class GameViewModel : ViewModelBase
             WinnerViewModel.RoundCounter = RoundCounter.ToString();
             _mainViewModel.GoToWinner();
             IsEnd = true;
+            //ToDo: Gewinner zum Scoreboard hinzufügen 
             ResetAllPropertys();
         }
     }
@@ -539,7 +580,7 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(1);
+        GameLogic.DealCards(7);
         IsEnd = false;
     }
 

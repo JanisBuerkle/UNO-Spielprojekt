@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using CommunityToolkit.Mvvm.Input;
+using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Scoreboard;
@@ -11,8 +12,11 @@ namespace UNO_Spielprojekt.Scoreboard;
 public class ScoreboardViewModel
 {
     private readonly MainViewModel _mainViewModel;
+    private readonly GameLogic _gameLogic;
     public RelayCommand GoToMainMenuCommand { get; }
-    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers = new();
+
+    public ObservableCollection<string> ScoreboardPlayerName { get; set; }
+    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers;
 
     public ObservableCollection<ScoreboardPlayer> ScoreboardPlayers
     {
@@ -23,24 +27,27 @@ public class ScoreboardViewModel
         }
     }
 
-    public ScoreboardViewModel(MainViewModel mainViewModel)
+    public ScoreboardViewModel(MainViewModel mainViewModel, GameLogic gameLogic)
     {
         _mainViewModel = mainViewModel;
+        _gameLogic = gameLogic;
         GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
+    }
+
+    private void Test()
+    {
         if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            for (var i = 0; i < 10; i++)
+            foreach (var name in ScoreboardPlayerName)
             {
-                var random = new Random();
                 var player = new ScoreboardPlayer
                 {
-                    PlayerScoreboardName = $"Player {i}",
-                    PlayerScoreboardScore = random.Next(1, 100)
+                    PlayerScoreboardName = name,
+                    PlayerScoreboardScore = 1
                 };
                 ScoreboardPlayers.Add(player);
             }
 
-        var sortedList =
-            ScoreboardPlayers.OrderByDescending(ScoreboardPlayer => ScoreboardPlayer.PlayerScoreboardScore).ToList();
+        var sortedList = ScoreboardPlayers.OrderByDescending(ScoreboardPlayer => ScoreboardPlayer.PlayerScoreboardScore).ToList();
         scoreboardPlayers.Clear();
         foreach (var player in sortedList) scoreboardPlayers.Add(player);
     }
