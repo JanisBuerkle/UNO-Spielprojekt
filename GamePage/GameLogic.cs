@@ -15,6 +15,7 @@ public class GameLogic
 
     public readonly ObservableCollection<CardViewModel> Center = new();
     private readonly Random _random = new();
+
     public GameLogic(PlayViewModel playViewModel, ILogger logger)
     {
         this._logger = logger;
@@ -41,7 +42,7 @@ public class GameLogic
 
     public readonly List<CardViewModel> Draw4Cards = new List<CardViewModel>()
     {
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/red.png" },
         new CardViewModel
             { Color = "Blue", Value = "+4", ImageUri = "pack://application:,,,/Assets/cards/+4/blue.png" },
@@ -53,41 +54,41 @@ public class GameLogic
 
     public readonly List<CardViewModel> cards = new List<CardViewModel>()
     {
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "2", ImageUri = "pack://application:,,,/Assets/cards/2/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "2", ImageUri = "pack://application:,,,/Assets/cards/2/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "3", ImageUri = "pack://application:,,,/Assets/cards/3/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "3", ImageUri = "pack://application:,,,/Assets/cards/3/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "4", ImageUri = "pack://application:,,,/Assets/cards/4/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "4", ImageUri = "pack://application:,,,/Assets/cards/4/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "5", ImageUri = "pack://application:,,,/Assets/cards/5/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "5", ImageUri = "pack://application:,,,/Assets/cards/5/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "6", ImageUri = "pack://application:,,,/Assets/cards/6/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "6", ImageUri = "pack://application:,,,/Assets/cards/6/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "7", ImageUri = "pack://application:,,,/Assets/cards/7/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "7", ImageUri = "pack://application:,,,/Assets/cards/7/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "8", ImageUri = "pack://application:,,,/Assets/cards/8/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "8", ImageUri = "pack://application:,,,/Assets/cards/8/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "9", ImageUri = "pack://application:,,,/Assets/cards/9/Blue.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Blue", Value = "9", ImageUri = "pack://application:,,,/Assets/cards/9/Blue.png" },
         new CardViewModel
             { Color = "Blue", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Blue.png" },
@@ -151,41 +152,41 @@ public class GameLogic
         new CardViewModel
             { Color = "Green", Value = "+2", ImageUri = "pack://application:,,,/Assets/cards/+2/Green.png" },
 
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "1", ImageUri = "pack://application:,,,/Assets/cards/1/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "2", ImageUri = "pack://application:,,,/Assets/cards/2/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "2", ImageUri = "pack://application:,,,/Assets/cards/2/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "3", ImageUri = "pack://application:,,,/Assets/cards/3/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "3", ImageUri = "pack://application:,,,/Assets/cards/3/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "4", ImageUri = "pack://application:,,,/Assets/cards/4/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "4", ImageUri = "pack://application:,,,/Assets/cards/4/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "5", ImageUri = "pack://application:,,,/Assets/cards/5/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "5", ImageUri = "pack://application:,,,/Assets/cards/5/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "6", ImageUri = "pack://application:,,,/Assets/cards/6/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "6", ImageUri = "pack://application:,,,/Assets/cards/6/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "7", ImageUri = "pack://application:,,,/Assets/cards/7/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "7", ImageUri = "pack://application:,,,/Assets/cards/7/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "8", ImageUri = "pack://application:,,,/Assets/cards/8/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "8", ImageUri = "pack://application:,,,/Assets/cards/8/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "9", ImageUri = "pack://application:,,,/Assets/cards/9/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "9", ImageUri = "pack://application:,,,/Assets/cards/9/Red.png" },
         new CardViewModel
             { Color = "Red", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Red.png" },
@@ -195,9 +196,9 @@ public class GameLogic
             { Color = "Red", Value = "Skip", ImageUri = "pack://application:,,,/Assets/cards/skip/Red.png" },
         new CardViewModel
             { Color = "Red", Value = "Skip", ImageUri = "pack://application:,,,/Assets/cards/skip/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "+2", ImageUri = "pack://application:,,,/Assets/cards/+2/Red.png" },
-        new CardViewModel 
+        new CardViewModel
             { Color = "Red", Value = "+2", ImageUri = "pack://application:,,,/Assets/cards/+2/Red.png" },
 
         new CardViewModel
@@ -237,9 +238,13 @@ public class GameLogic
         new CardViewModel
             { Color = "Yellow", Value = "9", ImageUri = "pack://application:,,,/Assets/cards/9/Yellow.png" },
         new CardViewModel
-            { Color = "Yellow", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Yellow.png" },
+        {
+            Color = "Yellow", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Yellow.png"
+        },
         new CardViewModel
-            { Color = "Yellow", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Yellow.png" },
+        {
+            Color = "Yellow", Value = "Reverse", ImageUri = "pack://application:,,,/Assets/cards/reverse/Yellow.png"
+        },
         new CardViewModel
             { Color = "Yellow", Value = "Skip", ImageUri = "pack://application:,,,/Assets/cards/skip/Yellow.png" },
         new CardViewModel

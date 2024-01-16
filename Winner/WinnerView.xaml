@@ -30,7 +30,7 @@
             <Run Text="{Binding RoundCounter}" Foreground="White"></Run>
             <Run Text=" Runden gespielt." Foreground="Gray"></Run>
         </TextBlock>
-        
+
         <Button Grid.Row="0" Grid.Column="0" Command="{Binding GoToMainMenuCommand}"
                 Style="{StaticResource HomeButtonStyle}" />
     </Grid>

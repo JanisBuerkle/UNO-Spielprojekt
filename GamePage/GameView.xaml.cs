@@ -29,7 +29,7 @@ public partial class GameView
         if (sender is Button button && button.DataContext is CardViewModel card)
         {
             int selectedIndex = ViewModel.CurrentHand.IndexOf(card);
-            ViewModel.SelectedCardIndex = selectedIndex; 
+            ViewModel.SelectedCardIndex = selectedIndex;
             ViewModel.LegenCommandMethod();
         }
     }

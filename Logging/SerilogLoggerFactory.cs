@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-
 using Serilog;
 using Serilog.Core;
 using Serilog.Core.Enrichers;

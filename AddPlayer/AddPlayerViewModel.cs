@@ -19,6 +19,7 @@ public class AddPlayerViewModel : INotifyPropertyChanged
     public RelayCommand WeiterButtonCommand { get; }
 
     private readonly ILogger _logger;
+
     public AddPlayerViewModel(MainViewModel mainViewModel, GameLogic gameLogic, ILogger logger)
     {
         this._logger = logger;
@@ -35,6 +36,7 @@ public class AddPlayerViewModel : INotifyPropertyChanged
         _logger.Info("MainMenu wurde geöffnet.");
         _mainViewModel.GoToMainMenu();
     }
+
     private void WeiterButtonCommandMethod()
     {
         foreach (var t in PlayerNames)
@@ -42,6 +44,7 @@ public class AddPlayerViewModel : INotifyPropertyChanged
             _logger.Info($"Neuer Spieler: {t.Name} wurde hinzugefügt.");
             GameLogic.Players.Add(new Players { PlayerName = t.Name });
         }
+
         _logger.Info("Rules Seite wurde geöffnet.");
         _mainViewModel.GoToRules();
     }

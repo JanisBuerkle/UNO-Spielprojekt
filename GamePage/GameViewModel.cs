@@ -288,14 +288,13 @@ public class GameViewModel : ViewModelBase
         }
     }
 
-    public bool IsEnd { get; set; }
+    private bool IsEnd { get; set; }
 
     private void FertigCommandMethod()
     {
         CheckForWinner();
         if (IsEnd)
         {
-            
         }
         else
         {
@@ -425,7 +424,7 @@ public class GameViewModel : ViewModelBase
             CurrentHand.Clear();
             foreach (var card in GameLogic.Players[CurrentPlayer].Hand) CurrentHand.Add(card);
         }
-        
+
         CurrentPlayerName = GameLogic.Players[CurrentPlayer].PlayerName;
     }
 
@@ -475,7 +474,7 @@ public class GameViewModel : ViewModelBase
         }
     }
 
-    public void ResetAllPropertys()
+    private void ResetAllPropertys()
     {
         GameLogic.Center.Clear();
         GameLogic.Players.Clear();

@@ -29,16 +29,19 @@ public class MainMenuViewModel : ViewModelBase
         logger.Info("AddPlayer Seite wurde geöffnet.");
         _mainViewModel.GoToAddPlayer();
     }
+
     private void GoToScoreboardCommandMethod()
     {
         logger.Info("Scoreboard Seite wurde geöffnet.");
         _mainViewModel.GoToScoreboard();
     }
+
     private void GoToSettingsCommandMethod()
     {
         logger.Info("Settings Seite wurde geöffnet.");
         _mainViewModel.GoToSettings();
     }
+
     private void ExitApplication()
     {
         logger.Info("Program wird mit dem 'Exit' Button beendet.");

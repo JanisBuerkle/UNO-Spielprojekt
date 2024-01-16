@@ -18,8 +18,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
-        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Margin="0,20,0,0" Foreground="White" FontSize="50" FontWeight="Bold"
+
+        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Margin="0,20,0,0" Foreground="White" FontSize="50"
+                   FontWeight="Bold"
                    Text="Spieler hinzufügen" />
 
         <StackPanel Grid.Row="0" Grid.Column="2">
@@ -46,7 +47,7 @@
         </ItemsControl>
 
         <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1"
-                HorizontalAlignment="Center" 
+                HorizontalAlignment="Center"
                 VerticalAlignment="Top" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" Foreground="White" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Style="{StaticResource MyButtonStyle}" />

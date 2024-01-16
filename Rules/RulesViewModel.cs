@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-
 using tt.Tools.Logging;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
@@ -11,6 +10,7 @@ public class RulesViewModel
     public RelayCommand GoToGameCommand { get; }
     private GameViewModel GameViewModel;
     private readonly ILogger _logger;
+
     public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel, ILogger logger)
     {
         this._logger = logger;

@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 namespace UNO_Spielprojekt.GamePage;
 
 public class Players
-{    
+{
     public string PlayerName { get; set; }
-    public ObservableCollection<CardViewModel> Hand = new ();
+    public ObservableCollection<CardViewModel> Hand = new();
     public bool Uno { get; set; }
-    
+
     // public int Player { get; set; }
     // public int CountOfPlayers { get; set; }
     // public List<string> Deck { get; set; }

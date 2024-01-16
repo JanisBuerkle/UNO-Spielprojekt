@@ -34,14 +34,17 @@ public class ChooseColorViewModel : ViewModelBase
     {
         ChoosenColor = (int)Color.Red;
     }
+
     private void ChooseBlueCommandMethod()
     {
         ChoosenColor = (int)Color.Blue;
     }
+
     private void ChooseYellowCommandMethod()
     {
         ChoosenColor = (int)Color.Yellow;
     }
+
     private void ChooseGreenCommandMethod()
     {
         ChoosenColor = (int)Color.Green;

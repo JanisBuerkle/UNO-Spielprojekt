@@ -6,15 +6,16 @@ namespace UNO_Spielprojekt.GamePage;
 public partial class ExitConfirmWindow : System.Windows.Window
 {
     public static readonly DependencyProperty GameViewModelProperty = DependencyProperty.Register(
-        nameof(GameViewModel), typeof(GameViewModel), typeof(ExitConfirmWindow), new PropertyMetadata(default(GameViewModel)));
+        nameof(GameViewModel), typeof(GameViewModel), typeof(ExitConfirmWindow),
+        new PropertyMetadata(default(GameViewModel)));
 
     public GameViewModel GameViewModel
     {
-        get => (GameViewModel)GetValue(GameViewModelProperty); 
-        set => SetValue(GameViewModelProperty, value); 
+        get => (GameViewModel)GetValue(GameViewModelProperty);
+        set => SetValue(GameViewModelProperty, value);
     }
-    
-    
+
+
     public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
         nameof(ViewModel), typeof(ExitConfirmViewModel), typeof(ExitConfirmWindow),
         new PropertyMetadata(default(ExitConfirmViewModel)));
@@ -43,6 +44,5 @@ public partial class ExitConfirmWindow : System.Windows.Window
     {
         Close();
         ViewModel.ConfirmButtonCommandMethod();
-        
     }
 }

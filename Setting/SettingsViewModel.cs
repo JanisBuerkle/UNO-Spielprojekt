@@ -12,7 +12,7 @@ public class SettingsViewModel : ViewModelBase
     public List<WindowMode> MyWindowModes { get; }
     public List<ThemeMode> MyThemeModes { get; }
     public RelayCommand GoToMainMenuCommand { get; }
-    
+
     public SettingsViewModel(MainViewModel mainViewModel, ILogger logger)
     {
         this._logger = logger;

@@ -5,7 +5,8 @@ namespace UNO_Spielprojekt.GamePage;
 public class PlayViewModel : ViewModelBase
 {
     private ObservableCollection<CardViewModel> _cards = new();
-    public ObservableCollection<CardViewModel> Cards 
+
+    public ObservableCollection<CardViewModel> Cards
     {
         get => _cards;
         set

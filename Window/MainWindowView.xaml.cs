@@ -11,6 +11,7 @@ public partial class MainWindowView : System.Windows.Window
         InitializeComponent();
         Instance = this;
     }
+
     private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ChangedButton == MouseButton.Left)

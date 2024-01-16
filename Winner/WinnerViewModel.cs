@@ -8,8 +8,9 @@ public class WinnerViewModel : ViewModelBase
 {
     private readonly MainViewModel _mainViewModel;
     public RelayCommand GoToMainMenuCommand { get; }
-    
+
     private string _winnerName;
+
     public string WinnerName
     {
         get => _winnerName;
@@ -22,7 +23,9 @@ public class WinnerViewModel : ViewModelBase
             }
         }
     }
+
     private string _roundCounter;
+
     public string RoundCounter
     {
         get => _roundCounter;
@@ -35,6 +38,7 @@ public class WinnerViewModel : ViewModelBase
             }
         }
     }
+
     public WinnerViewModel(MainViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
