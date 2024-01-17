@@ -39,7 +39,7 @@
                                     <StackPanel Grid.Column="2" Orientation="Horizontal">
                                         <TextBlock Text="{Binding PlayerScoreboardScore}" Foreground="White"
                                                    FontSize="20" Padding="5" />
-                                        <TextBlock Text="Punkte" Foreground="White" FontSize="20"
+                                        <TextBlock Text="Wins" Foreground="White" FontSize="20"
                                                    Padding="0 5 5 5" />
                                     </StackPanel>
                                 </Grid>

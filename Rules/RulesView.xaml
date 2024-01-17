@@ -28,7 +28,7 @@
             <TextBlock Foreground="White" FontWeight="DemiBold" FontSize="14" TextWrapping="Wrap">
                 Die Originalen UNO-Spielregeln: <LineBreak />
             </TextBlock>
-            <TextBlock Foreground="White" FontWeight="DemiBold" FontSize="12" TextWrapping="Wrap">
+            <TextBlock Foreground="White" FontWeight="DemiBold" FontSize="7" TextWrapping="Wrap">
                 Karten: <LineBreak />
                 108 Karten  <LineBreak />
                 19 blaue Karten  <LineBreak />

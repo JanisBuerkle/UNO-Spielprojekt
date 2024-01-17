@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Media;
+using System.Xml;
+using System.Xml.Serialization;
 using CommunityToolkit.Mvvm.Input;
 using tt.Tools.Logging;
+using UNO_Spielprojekt.Scoreboard;
 using UNO_Spielprojekt.Window;
 using UNO_Spielprojekt.Winner;
 
@@ -13,8 +17,8 @@ namespace UNO_Spielprojekt.GamePage;
 public class GameViewModel : ViewModelBase
 {
     private readonly Random _random = new();
+    
     private Brush _theBackground;
-
     public Brush TheBackground
     {
         get => _theBackground;
@@ -54,15 +58,14 @@ public class GameViewModel : ViewModelBase
             }
         }
     }
-
-
+    
     private readonly MainViewModel _mainViewModel;
     private readonly ILogger _logger;
     private PlayViewModel PlayViewModel { get; }
     private GameLogic GameLogic { get; }
     private WinnerViewModel WinnerViewModel { get; }
 
-
+    public ScoreboardViewModel _scoreboardViewModel;
     private int StartingPlayer { get; set; }
     private int CurrentPlayer { get; set; }
     private int NextPlayer { get; set; }
@@ -112,8 +115,9 @@ public class GameViewModel : ViewModelBase
 
 
     public GameViewModel(MainViewModel mainViewModel, PlayViewModel playViewModel, GameLogic gameLogic, ILogger logger,
-        WinnerViewModel winnerViewModel)
+        WinnerViewModel winnerViewModel, ScoreboardViewModel scoreboardViewModel)
     {
+        _scoreboardViewModel = scoreboardViewModel;
         TheBackground = Brushes.Transparent;
         GameLogic = gameLogic;
         WinnerViewModel = winnerViewModel;
@@ -130,6 +134,7 @@ public class GameViewModel : ViewModelBase
         RoundCounter = 1;
         IsEnd = false;
         RoundCounterString = $"Runde: {RoundCounter}/\u221e";
+        
     }
 
     private bool _legen;
@@ -550,7 +555,25 @@ public class GameViewModel : ViewModelBase
             WinnerViewModel.RoundCounter = RoundCounter.ToString();
             _mainViewModel.GoToWinner();
             IsEnd = true;
-            //ToDo: Gewinner zum Scoreboard hinzufügen 
+
+            bool playerFound = false;
+            if (_scoreboardViewModel.ScoreboardPlayers != null)
+            {
+                foreach (var test in _scoreboardViewModel.ScoreboardPlayers)
+                {
+                    if (test.PlayerScoreboardName == CurrentPlayerName)
+                    {
+                        test.PlayerScoreboardScore++;
+                        playerFound = true;
+                    }
+                }
+            }
+            if (!playerFound)
+            {
+                _scoreboardViewModel.ScoreboardPlayers.Add(new ScoreboardPlayer() { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
+            }
+            playerFound = false;
+            SaveGameData();
             ResetAllPropertys();
         }
     }
@@ -580,10 +603,20 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(7);
+        GameLogic.DealCards(1);
         IsEnd = false;
     }
+    private void SaveGameData()
+    {
+        using (var writer = new StreamWriter("GameData.xml"))
+        {
+            var serializer = new XmlSerializer(typeof(ScoreboardViewModel));
+            serializer.Serialize(writer, _scoreboardViewModel);
+        }
+    }
+    
 
+    
     private void InitializePlayersHands()
     {
         foreach (var cards in GameLogic.cards) PlayViewModel.Cards.Add(cards);

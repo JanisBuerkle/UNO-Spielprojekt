@@ -1,54 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
+using System.IO;
+using System.Xml.Serialization;
 using CommunityToolkit.Mvvm.Input;
-using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Scoreboard;
 
-public class ScoreboardViewModel
+[Serializable]
+public class ScoreboardViewModel : ViewModelBase
 {
+
     private readonly MainViewModel _mainViewModel;
-    private readonly GameLogic _gameLogic;
-    public RelayCommand GoToMainMenuCommand { get; }
-
-    public ObservableCollection<string> ScoreboardPlayerName { get; set; }
-    private ObservableCollection<ScoreboardPlayer> scoreboardPlayers;
-
+    
+    private ObservableCollection<ScoreboardPlayer> _scoreboardPlayers = new ObservableCollection<ScoreboardPlayer>();
     public ObservableCollection<ScoreboardPlayer> ScoreboardPlayers
     {
-        get => scoreboardPlayers;
+        get => _scoreboardPlayers;
         set
         {
-            if (scoreboardPlayers != value) scoreboardPlayers = value;
+            if (_scoreboardPlayers != value)
+            {
+                _scoreboardPlayers = value;
+            }
         }
     }
-
-    public ScoreboardViewModel(MainViewModel mainViewModel, GameLogic gameLogic)
+    public RelayCommand GoToMainMenuCommand { get; }
+    public ScoreboardViewModel _scoreboardViewModel;
+    public ScoreboardViewModel(MainViewModel mainViewModel)
     {
+        _scoreboardViewModel = this;
         _mainViewModel = mainViewModel;
-        _gameLogic = gameLogic;
-        GoToMainMenuCommand = new RelayCommand(mainViewModel.GoToMainMenu);
+        GoToMainMenuCommand = new RelayCommand(Test);
+        LoadGameData();
+        ScoreboardPlayers = _scoreboardViewModel.ScoreboardPlayers;
     }
-
-    private void Test()
+    
+    private void LoadGameData()
     {
-        if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            foreach (var name in ScoreboardPlayerName)
+        if (File.Exists("GameData.xml"))
+        {
+            using (var reader = new StreamReader("GameData.xml"))
             {
-                var player = new ScoreboardPlayer
-                {
-                    PlayerScoreboardName = name,
-                    PlayerScoreboardScore = 1
-                };
-                ScoreboardPlayers.Add(player);
+                var serializer = new XmlSerializer(typeof(ScoreboardViewModel));
+                _scoreboardViewModel = (ScoreboardViewModel)serializer.Deserialize(reader);
             }
-
-        var sortedList = ScoreboardPlayers.OrderByDescending(ScoreboardPlayer => ScoreboardPlayer.PlayerScoreboardScore).ToList();
-        scoreboardPlayers.Clear();
-        foreach (var player in sortedList) scoreboardPlayers.Add(player);
+        }
+    } 
+    public void Test()
+    {
+        _mainViewModel.GoToMainMenu();
+    }
+    public ScoreboardViewModel()
+    {
+        
     }
 }

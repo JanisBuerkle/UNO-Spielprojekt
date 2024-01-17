@@ -1,4 +1,5 @@
-﻿using UNO_Spielprojekt.AddPlayer;
+﻿using System.Reflection.Metadata.Ecma335;
+using UNO_Spielprojekt.AddPlayer;
 using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Logging;
 using UNO_Spielprojekt.MainMenu;
@@ -19,6 +20,7 @@ public class MainViewModel : ViewModelBase
     private bool _addPlayerVisible;
     private bool _rulesVisible;
 
+    public GameData GameData { get; set; }
     public AddPlayerViewModel AddPlayerViewModel { get; set; }
     public MainMenuViewModel MainMenuViewModel { get; set; }
     public RulesViewModel RulesViewModel { get; set; }
@@ -33,12 +35,13 @@ public class MainViewModel : ViewModelBase
     {
         var loggerFactory = new SerilogLoggerFactory();
         var logger = loggerFactory.CreateLogger("Uno-Spielprojekt");
+        GameData = new GameData();
         PlayViewModel = new PlayViewModel();
         GameLogic = new GameLogic(PlayViewModel, logger);
-        ScoreboardViewModel = new ScoreboardViewModel(this, GameLogic);
+        ScoreboardViewModel = new ScoreboardViewModel(this);
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         WinnerViewModel = new WinnerViewModel(this);
-        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger, WinnerViewModel);
+        GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger, WinnerViewModel, ScoreboardViewModel);
         RulesViewModel = new RulesViewModel(this, GameViewModel, logger);
         SettingsViewModel = new SettingsViewModel(this, logger);
         MainMenuViewModel = new MainMenuViewModel(this, logger);
