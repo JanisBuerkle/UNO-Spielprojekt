@@ -34,7 +34,7 @@ public class SerilogLoggerFactory : ILoggerFactory
         return CreateLogger(name);
     }
 
-    private static Logger CreateSerilogLogger(string name)
+    private Logger CreateSerilogLogger(string name)
     {
         var logger = new LoggerConfiguration()
             .Enrich.FromLogContext()

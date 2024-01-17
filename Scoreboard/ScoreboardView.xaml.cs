@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using tt.Tools.Logging;
+using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Scoreboard;
 

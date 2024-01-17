@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Media;
-using System.Xml;
 using System.Xml.Serialization;
 using CommunityToolkit.Mvvm.Input;
 using tt.Tools.Logging;
@@ -556,26 +556,73 @@ public class GameViewModel : ViewModelBase
             _mainViewModel.GoToWinner();
             IsEnd = true;
 
-            bool playerFound = false;
-            if (_scoreboardViewModel.ScoreboardPlayers != null)
+            if (File.Exists("GameData.xml"))
             {
-                foreach (var test in _scoreboardViewModel.ScoreboardPlayers)
+                List<ScoreboardPlayer> players = LoadPlayersFromXml("GameData.xml");
+                ScoreboardPlayer existingPlayers =
+                    players.Find(player => player.PlayerScoreboardName == CurrentPlayerName)!;
+
+                if (existingPlayers != null)
                 {
-                    if (test.PlayerScoreboardName == CurrentPlayerName)
-                    {
-                        test.PlayerScoreboardScore++;
-                        playerFound = true;
-                    }
+                    existingPlayers.PlayerScoreboardScore++;
                 }
+                else
+                {
+                    players.Add(new ScoreboardPlayer(){PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1});
+                }
+                SavePlayerToXml(players);
             }
-            if (!playerFound)
+            else
             {
-                _scoreboardViewModel.ScoreboardPlayers.Add(new ScoreboardPlayer() { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
+                List<ScoreboardPlayer> players = new List<ScoreboardPlayer>();
+                players.Add(new ScoreboardPlayer(){PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1});
+                SavePlayerToXml(players);
             }
-            playerFound = false;
-            SaveGameData();
-            ResetAllPropertys();
+            
+            
+            // bool found = false;
+            // if (_scoreboardViewModel.ScoreboardPlayers == null)
+            // {
+            //     
+            // }
+            // else
+            // {
+            //     foreach (var test in _scoreboardViewModel.ScoreboardPlayers)
+            //     {
+            //         if (test.PlayerScoreboardName == CurrentPlayerName)
+            //         {
+            //             test.PlayerScoreboardScore++;
+            //             found = true;
+            //         }
+            //     }
+            // }
+            // if (!found)
+            // {
+            //     _scoreboardViewModel.ScoreboardPlayers.Add(new ScoreboardPlayer() { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
+            // }
+            // found = false;
+            // SaveGameData();
+            // ResetAllPropertys();
         }
+    }
+
+    private void SavePlayerToXml(List<ScoreboardPlayer> players)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ScoreboardPlayer>));
+        using (TextWriter writer = new StreamWriter("GameData.xml"))
+        {
+            serializer.Serialize(writer, players);
+            writer.Close();
+        }
+    }
+    
+    public List<ScoreboardPlayer> LoadPlayersFromXml(string path)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ScoreboardPlayer>));
+        FileStream fileStream = new FileStream(System.IO.Path.Combine(path), FileMode.Open);
+        var x = (List<ScoreboardPlayer>)serializer.Deserialize(fileStream)!;
+        fileStream.Close();
+        return x;
     }
 
     public void InitializeGame()
@@ -603,7 +650,7 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(1);
+        GameLogic.DealCards(7);
         IsEnd = false;
     }
     private void SaveGameData()
