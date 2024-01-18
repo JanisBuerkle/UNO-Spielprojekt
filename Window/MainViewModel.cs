@@ -45,7 +45,7 @@ public class MainViewModel : ViewModelBase
         RulesViewModel = new RulesViewModel(this, logger);
         GameData = new GameData(ScoreboardViewModel, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this, logger);
-        MainMenuViewModel = new MainMenuViewModel(this, logger);
+        MainMenuViewModel = new MainMenuViewModel(this, logger, GameData);
         AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         MainMenuVisible = true;
     }
@@ -103,6 +103,7 @@ public class MainViewModel : ViewModelBase
         MainMenuVisible = false;
         SettingsVisible = false;
         AddPlayerVisible = false;
+        GameData.Load();
     }
 
     public void GoToRules()

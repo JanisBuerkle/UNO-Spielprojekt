@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using tt.Tools.Logging;
-using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Scoreboard;

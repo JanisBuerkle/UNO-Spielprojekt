@@ -582,8 +582,7 @@ public class GameViewModel : ViewModelBase
                 SavePlayerToXml(players);
             }
             ResetAllPropertys();
-            _scoreboardViewModel.ScoreboardPlayers = LoadPlayersFromXml("GameData.xml");
-            _scoreboardViewModel.LoadGameData();
+            _mainViewModel.GameData.Load();
         }
     }
 

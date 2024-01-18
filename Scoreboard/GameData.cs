@@ -12,7 +12,7 @@ public class GameData : ViewModelBase
         Load();
     }
 
-    private void Load()
+    public void Load()
     {
         _scoreboardViewModel.ScoreboardPlayers = _gameViewModel.LoadPlayersFromXml("GameData.xml");
         _scoreboardViewModel.LoadGameData();
