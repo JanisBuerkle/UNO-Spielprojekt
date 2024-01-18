@@ -28,34 +28,37 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
+        <!-- Home Button -->
         <Button Command="{Binding ExitConfirmCommand}" Style="{StaticResource HomeButtonStyle}" />
 
+        <!-- UNO Button -->
         <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource MyButtonStyle}" Height="100" Width="200"
                 Command="{Binding UnoCommand}"
                 Margin="10" Background="IndianRed" Content="UNO" FontSize="40" FontWeight="Bold" Foreground="White"
                 VerticalAlignment="Bottom" />
 
+        <!-- Fertig und der Spielername -->
         <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom">
             <Button Style="{StaticResource MyButtonStyle}" Foreground="White"
-                    Background="CornflowerBlue" Content="{Binding CurrentPlayerName}" FontSize="40" FontWeight="Bold"
-                    Height="100" Width="200" Margin="10"
-                    Command="{Binding LegenCommand}" />
+                    Background="CornflowerBlue" Content="{Binding CurrentPlayerName}" 
+                    FontSize="40" FontWeight="Bold" Height="100" Width="200" Margin="10"/>
 
             <Button Style="{StaticResource MyButtonStyle}" Command="{Binding FertigCommand}" Foreground="White"
-                    Background="{Binding TheBackground}" Content="Fertig" FontSize="40" FontWeight="Bold" Height="100"
-                    Width="200"
-                    Margin="10" />
+                    Background="{Binding TheBackground}" Content="Fertig" 
+                    FontSize="40" FontWeight="Bold" Height="100" Width="200" Margin="10" />
         </StackPanel>
 
+        <!-- Rundenanzeige -->
         <Label Margin="0,20,0,0" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" FontSize="20"
                Content="{Binding RoundCounterString}" Foreground="Wheat">
         </Label>
 
+        <!-- Ziehstapel und Ablagestapel -->
         <StackPanel Grid.RowSpan="3" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top"
                     HorizontalAlignment="Center">
             <Button Width="150" Height="225" Style="{StaticResource CardStyle}" Command="{Binding ZiehenCommand}">
                 <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Assets/Logos/card_back.png" Stretch="Fill" />
+                    <ImageBrush ImageSource="pack://application:,,,/Assets/cards/card_back.png" Stretch="Fill" />
                 </Button.Background>
             </Button>
 
@@ -66,6 +69,7 @@
             </Button>
         </StackPanel>
 
+        <!-- Spielerhand -->
         <ScrollViewer Grid.Row="3" Grid.Column="1"
                       VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto"
                       PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
@@ -77,14 +81,15 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type local:CardViewModel}">
-                        <Button Click="CardButton_Click"
-                                CommandParameter="{Binding}">
+                        <Button Click="CardButton_Click">
                             <Image Source="{Binding ImageUri}" />
                         </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        
+        <!-- Für die extra Fenster -->
         <Grid Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1000"
               Visibility="{Binding ChooseColorVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <local:ChooseColorView ViewModel="{Binding ChooseColorViewModel}" />

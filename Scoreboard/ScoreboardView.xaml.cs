@@ -1,12 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using tt.Tools.Logging;
+using UNO_Spielprojekt.GamePage;
 using UNO_Spielprojekt.Window;
 
 namespace UNO_Spielprojekt.Scoreboard;
 
 public partial class ScoreboardView : UserControl
 {
+    
     public static readonly DependencyProperty GameDataProperty = DependencyProperty.Register(
         nameof(GameData), typeof(GameData), typeof(ScoreboardView), new PropertyMetadata(default(GameData)));
 

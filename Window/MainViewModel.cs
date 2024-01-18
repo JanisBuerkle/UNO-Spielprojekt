@@ -31,23 +31,25 @@ public class MainViewModel : ViewModelBase
     public ScoreboardViewModel ScoreboardViewModel { get; }
     public WinnerViewModel WinnerViewModel { get; }
 
+
     public MainViewModel()
     {
         var loggerFactory = new SerilogLoggerFactory();
         var logger = loggerFactory.CreateLogger("Uno-Spielprojekt");
-        GameData = new GameData();
+        
         PlayViewModel = new PlayViewModel();
-        GameLogic = new GameLogic(PlayViewModel, logger);
-        AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         WinnerViewModel = new WinnerViewModel(this);
+        GameLogic = new GameLogic(PlayViewModel, logger);
         ScoreboardViewModel = new ScoreboardViewModel(this, logger);
         GameViewModel = new GameViewModel(this, PlayViewModel, GameLogic, logger, WinnerViewModel, ScoreboardViewModel);
-        RulesViewModel = new RulesViewModel(this, GameViewModel, logger);
+        RulesViewModel = new RulesViewModel(this, logger);
+        GameData = new GameData(ScoreboardViewModel, GameViewModel);
         SettingsViewModel = new SettingsViewModel(this, logger);
         MainMenuViewModel = new MainMenuViewModel(this, logger);
+        AddPlayerViewModel = new AddPlayerViewModel(this, GameLogic, logger);
         MainMenuVisible = true;
     }
-
+    
     public void GoToMainMenu()
     {
         MainMenuVisible = true;

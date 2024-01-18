@@ -19,17 +19,19 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
+        <!-- Überschrift -->
         <TextBlock HorizontalAlignment="Center" Grid.Column="1" Margin="0,20,0,0" Foreground="White" FontSize="50"
                    FontWeight="Bold"
                    Text="Spieler hinzufügen" />
 
+        <!-- Plus und Minuszeichen -->
         <StackPanel Grid.Row="0" Grid.Column="2">
             <Button Click="AddPlayerClicked" Style="{StaticResource PlusButtonStyle}">
                 <Button.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/plus.png" Stretch="Fill" />
                 </Button.Background>
             </Button>
-
+            
             <Button Click="RemovePlayerClicked" Style="{StaticResource PlusButtonStyle}">
                 <Button.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/minus.png" Stretch="Fill" />
@@ -37,6 +39,7 @@
             </Button>
         </StackPanel>
 
+        <!-- Spielernamen -->
         <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding PlayerNames}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -46,12 +49,14 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <!-- Weiter Button -->
         <Button Command="{Binding WeiterButtonCommand}" Name="ContinueButton" Grid.Row="2" Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top" Margin="0,0,0,200" Visibility="Hidden"
                 Background="DarkOliveGreen" Foreground="White" FontSize="50" FontWeight="Bold" Content="   Weiter   "
                 Style="{StaticResource MyButtonStyle}" />
 
+        <!-- Home Button -->
         <Button Command="{Binding GoToMainMenuCommand}" Grid.Column="0" Grid.Row="0" Name="Home"
                 Click="HomeButtonClicked" Style="{StaticResource HomeButtonStyle}" />
     </Grid>

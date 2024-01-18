@@ -104,6 +104,7 @@
       <None Remove="Assets\Red0.png" />
       <None Remove="Assets\settings.png" />
       <None Remove="Assets\cards\reverse\blue.png" />
+      <Resource Include="Assets\cards\card_back.png" />
       <Resource Include="Assets\cards\reverse\blue.png" />
       <None Remove="Assets\cards\reverse\green.png" />
       <Resource Include="Assets\cards\reverse\green.png" />
@@ -229,9 +230,9 @@
       <Resource Include="Assets\cards\+2\yellow.png" />
       <Resource Include="Assets\Languages\english.png" />
       <Resource Include="Assets\Languages\germany.png" />
-      <Resource Include="Assets\Symbols\home.png" />
+      <Resource Include="Assets\Symbols\home_white.png" />
       <Resource Include="Assets\Symbols\plus.png" />
-      <Resource Include="Assets\Symbols\settings.png" />
+      <Resource Include="Assets\Symbols\settings_black.png" />
       <None Remove="Assets\Symbols\minus.png" />
       <Resource Include="Assets\Symbols\minus.png" />
       <None Remove="Assets\Symbols\fullscreen.png" />
@@ -251,7 +252,10 @@
       <None Remove="Assets\Logos\uno_icon.png" />
       <Resource Include="Assets\Logos\uno_icon.png" />
       <None Remove="Assets\Logos\card_back.png" />
-      <Resource Include="Assets\Logos\card_back.png" />
+      <None Remove="Assets\Symbols\settings_white.png" />
+      <Resource Include="Assets\Symbols\settings_white.png" />
+      <None Remove="Assets\Symbols\home_black.png" />
+      <Resource Include="Assets\Symbols\home_black.png" />
     </ItemGroup>
 
     <ItemGroup>

@@ -81,12 +81,13 @@ public partial class SettingsView : UserControl
         {
             if (selectedMode == ThemeMode.Dark)
             {
-                Console.Write("Dark");
+                ViewModel.ThemeModeDark();
             }
             else if (selectedMode == ThemeMode.Bright)
             {
-                Console.Write("Bright");
+                ViewModel.ThemeModeBright();
             }
         }
+        
     }
 }

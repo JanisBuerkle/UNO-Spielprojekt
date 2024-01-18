@@ -87,7 +87,7 @@
         <Setter Property="Margin" Value="10,10,0,0" />
         <Setter Property="Background">
             <Setter.Value>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/settings.png" />
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/settings_white.png" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -148,7 +148,7 @@
         <Setter Property="Margin" Value="10,10,0,0" />
         <Setter Property="Background">
             <Setter.Value>
-                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home.png" />
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Symbols/home_white.png" />
             </Setter.Value>
         </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />

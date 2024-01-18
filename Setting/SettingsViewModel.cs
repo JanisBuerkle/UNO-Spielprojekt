@@ -44,4 +44,14 @@ public class SettingsViewModel : ViewModelBase
             ThemeMode.Bright
         };
     }
+
+    public void ThemeModeDark()
+    {
+
+    }
+    
+    public void ThemeModeBright()
+    {
+
+    }
 }

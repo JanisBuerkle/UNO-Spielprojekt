@@ -28,6 +28,4 @@ public partial class MainMenuView : UserControl
     {
         LocalizationManager.SetLanguage(culture);
     }
-    // GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Hans" });
-    // GameLogic.prop.Players.Add(new Propertys() { PlayerName = "Peter" });
 }

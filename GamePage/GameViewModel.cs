@@ -17,8 +17,9 @@ namespace UNO_Spielprojekt.GamePage;
 public class GameViewModel : ViewModelBase
 {
     private readonly Random _random = new();
-    
+
     private Brush _theBackground;
+
     public Brush TheBackground
     {
         get => _theBackground;
@@ -58,7 +59,7 @@ public class GameViewModel : ViewModelBase
             }
         }
     }
-    
+
     private readonly MainViewModel _mainViewModel;
     private readonly ILogger _logger;
     private PlayViewModel PlayViewModel { get; }
@@ -134,7 +135,6 @@ public class GameViewModel : ViewModelBase
         RoundCounter = 1;
         IsEnd = false;
         RoundCounterString = $"Runde: {RoundCounter}/\u221e";
-        
     }
 
     private bool _legen;
@@ -568,41 +568,22 @@ public class GameViewModel : ViewModelBase
                 }
                 else
                 {
-                    players.Add(new ScoreboardPlayer(){PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1});
+                    players.Add(new ScoreboardPlayer()
+                        { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
                 }
+
                 SavePlayerToXml(players);
             }
             else
             {
                 List<ScoreboardPlayer> players = new List<ScoreboardPlayer>();
-                players.Add(new ScoreboardPlayer(){PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1});
+                players.Add(new ScoreboardPlayer()
+                    { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
                 SavePlayerToXml(players);
             }
-            
-            
-            // bool found = false;
-            // if (_scoreboardViewModel.ScoreboardPlayers == null)
-            // {
-            //     
-            // }
-            // else
-            // {
-            //     foreach (var test in _scoreboardViewModel.ScoreboardPlayers)
-            //     {
-            //         if (test.PlayerScoreboardName == CurrentPlayerName)
-            //         {
-            //             test.PlayerScoreboardScore++;
-            //             found = true;
-            //         }
-            //     }
-            // }
-            // if (!found)
-            // {
-            //     _scoreboardViewModel.ScoreboardPlayers.Add(new ScoreboardPlayer() { PlayerScoreboardName = CurrentPlayerName, PlayerScoreboardScore = 1 });
-            // }
-            // found = false;
-            // SaveGameData();
-            // ResetAllPropertys();
+            ResetAllPropertys();
+            _scoreboardViewModel.ScoreboardPlayers = LoadPlayersFromXml("GameData.xml");
+            _scoreboardViewModel.LoadGameData();
         }
     }
 
@@ -615,7 +596,7 @@ public class GameViewModel : ViewModelBase
             writer.Close();
         }
     }
-    
+
     public List<ScoreboardPlayer> LoadPlayersFromXml(string path)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(List<ScoreboardPlayer>));
@@ -623,6 +604,7 @@ public class GameViewModel : ViewModelBase
         var x = (List<ScoreboardPlayer>)serializer.Deserialize(fileStream)!;
         fileStream.Close();
         return x;
+        
     }
 
     public void InitializeGame()
@@ -650,22 +632,15 @@ public class GameViewModel : ViewModelBase
         StartingPlayer = GameLogic.ChooseStartingPlayer();
         CurrentPlayer = StartingPlayer;
         GameLogic.ShuffleDeck();
-        GameLogic.DealCards(7);
+        GameLogic.DealCards(1);
         IsEnd = false;
     }
-    private void SaveGameData()
-    {
-        using (var writer = new StreamWriter("GameData.xml"))
-        {
-            var serializer = new XmlSerializer(typeof(ScoreboardViewModel));
-            serializer.Serialize(writer, _scoreboardViewModel);
-        }
-    }
-    
 
-    
     private void InitializePlayersHands()
     {
-        foreach (var cards in GameLogic.cards) PlayViewModel.Cards.Add(cards);
+        foreach (var cards in GameLogic.cards)
+        {
+            PlayViewModel.Cards.Add(cards);
+        }
     }
 }

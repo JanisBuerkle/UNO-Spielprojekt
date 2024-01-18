@@ -17,21 +17,26 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!-- Überschrift -->
         <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                    Foreground="White" FontSize="80" FontWeight="Bold" Text="Winner" />
 
+        <!-- Text und Spielername -->
         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="25">
             <Run Text="Der Gewinner ist: " Foreground="Gray"></Run>
             <Run Text="{Binding WinnerName}" Foreground="White"></Run>
         </TextBlock>
 
+        <!-- Text mit Rundenanzahl -->
         <TextBlock Grid.Row="2" Grid.Column="1" FontSize="25">
             <Run Text="Ihr habt " Foreground="Gray"></Run>
             <Run Text="{Binding RoundCounter}" Foreground="White"></Run>
             <Run Text=" Runden gespielt." Foreground="Gray"></Run>
         </TextBlock>
 
+        <!-- Home Button -->
         <Button Grid.Row="0" Grid.Column="0" Command="{Binding GoToMainMenuCommand}"
                 Style="{StaticResource HomeButtonStyle}" />
+        
     </Grid>
 </UserControl>

@@ -21,12 +21,12 @@
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Foreground="Black"
+            <Label HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Foreground="White" 
                    FontWeight="DemiBold" FontSize="20" Content="Wähle eine Farbe!" />
 
+            <!-- Karten -->
             <StackPanel HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Margin="0,0,0,30"
                         Orientation="Horizontal">
-
                 <Button Style="{StaticResource CardStyle}" Height="200" Width="125"
                         Command="{Binding ChooseRedCommand}">
                     <Button.Background>
@@ -54,8 +54,8 @@
                         <ImageBrush ImageSource="pack://application:,,,/Assets/cards/wild/green.png" Stretch="Fill" />
                     </Button.Background>
                 </Button>
-
             </StackPanel>
+
         </Grid>
     </Border>
 </UserControl>

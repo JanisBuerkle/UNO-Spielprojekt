@@ -8,7 +8,10 @@
              Name="Control">
 
     <Grid DataContext="{Binding ElementName=Control, Path=ViewModel}">
+        <!-- Einstellungen Button -->
         <Button Command="{Binding GoToSettings}" Style="{StaticResource SettingsButtonStyle}" />
+
+        <!-- Play, Scoreboard und Exit Button -->
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Foreground="White" Command="{Binding GoToAddPlayerCommand}"
                     Style="{StaticResource MainMenuButtonStyle}"
@@ -20,5 +23,6 @@
                     Style="{StaticResource MainMenuButtonStyle}"
                     Content="{x:Static resources:Resource.Exit}" />
         </StackPanel>
+
     </Grid>
 </UserControl>

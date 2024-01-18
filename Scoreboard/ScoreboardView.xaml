@@ -17,9 +17,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" Background="Gray" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Text="Scoreboard" />
+        <!-- Überschrift -->
+        <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" FontSize="80" Foreground="White" FontWeight="Bold" Text="Scoreboard" />
 
+        <!-- Spieler -->
         <StackPanel Grid.Column="1" Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <ItemsControl ItemsSource="{Binding ScoreboardPlayers}">
@@ -50,7 +52,9 @@
             </ScrollViewer>
         </StackPanel>
 
-        <Button Command="{Binding GoToMainMenuCommand}"
+        <!-- Home Button -->
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding GoToMainMenuCommand}"
                 Style="{StaticResource HomeButtonStyle}" />
+        
     </Grid>
 </UserControl>

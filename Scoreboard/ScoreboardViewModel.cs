@@ -29,22 +29,19 @@ public class ScoreboardViewModel : ViewModelBase
 
     
     public RelayCommand GoToMainMenuCommand { get; }
-    private GameViewModel _gameViewModel;
     private ScoreboardViewModel _scoreboardViewModel;
     private readonly ILogger _logger;
+    public bool Start { get; set; }
     public ScoreboardViewModel(MainViewModel mainViewModel, ILogger logger)
     {
         _logger = logger;
         _scoreboardViewModel = this;
         _mainViewModel = mainViewModel;
         GoToMainMenuCommand = new RelayCommand(Test);
-        LoadGameData();
-    }
-    
-    private void LoadGameData()
-    {
-        ScoreboardPlayers = _gameViewModel.LoadPlayersFromXml("GameData.xml");
 
+    }
+    public void LoadGameData()
+    {
         List<ScoreboardPlayer> sortedList = ScoreboardPlayers.OrderByDescending(ScoreboardPlayer => ScoreboardPlayer.PlayerScoreboardScore).ToList();
         ScoreboardPlayers.Clear();
         foreach (var player in sortedList)

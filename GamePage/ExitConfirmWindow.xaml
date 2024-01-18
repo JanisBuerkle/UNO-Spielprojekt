@@ -20,15 +20,21 @@
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Foreground="Black"
-                   FontWeight="DemiBold" FontSize="20" Content="Bist du dir sicher, das du das Spiel verlassen willst?" />
+
+            <!-- Text -->
+            <Label HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
+                   FontWeight="DemiBold" FontSize="20" Foreground="White"
+                   Content="Bist du dir sicher, das du das Spiel verlassen willst?" />
+
+            <!-- Ja und Nein Buttons -->
             <StackPanel HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,0,10"
                         Orientation="Horizontal">
                 <Button Click="ConfirmButtonClicked" Style="{StaticResource MyButtonStyle}" FontWeight="DemiBold"
-                        FontSize="20" Content="Accept" Background="SeaGreen" Width="120" Height="50" />
+                        Foreground="White" FontSize="20" Content="Accept" Background="SeaGreen" Width="120" Height="50" />
                 <Button Click="CloseExitConfirmWindow" Style="{StaticResource MyButtonStyle}" FontWeight="DemiBold"
-                        FontSize="20" Content="Cancel" Background="DarkRed" Width="120" Height="50" />
+                        Foreground="White" FontSize="20" Content="Cancel" Background="DarkRed" Width="120" Height="50" />
             </StackPanel>
+
         </Grid>
     </Border>
 </Window>

@@ -11,10 +11,10 @@ public class RulesViewModel
     private GameViewModel GameViewModel;
     private readonly ILogger _logger;
 
-    public RulesViewModel(MainViewModel mainViewModel, GameViewModel gameViewModel, ILogger logger)
+    public RulesViewModel(MainViewModel mainViewModel, ILogger logger)
     {
-        this._logger = logger;
-        GameViewModel = gameViewModel;
+        _logger = logger;
+        GameViewModel = mainViewModel.GameViewModel;
         GoToGameCommand = new RelayCommand(GoToGameMethod);
     }
 
